@@ -1,11 +1,11 @@
-# terraform-modules
+# terraform-aws-modules
 
-A collection of Terraform modules
+A collection of Terraform modules for AWS.
 
 ## Table of Contents
 <!-- TOC orderedList:false -->
 
-- [terraform-modules](#terraform-modules)
+- [terraform-aws-modules](#terraform-aws-modules)
   - [Table of Contents](#table-of-contents)
 
 <!-- /TOC -->
