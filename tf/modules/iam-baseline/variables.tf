@@ -1,0 +1,11 @@
+variable "project" {
+  description = "Project tag value"
+}
+
+variable "prefix" {
+  description = "Prefix for AWS resources"
+}
+
+variable "account_id" {
+  description = "AWS account ID"
+}
