@@ -9,3 +9,7 @@ variable "prefix" {
 variable "account_id" {
   description = "AWS account ID"
 }
+
+variable "account_alias" {
+  description = "AWS account alias"
+}
