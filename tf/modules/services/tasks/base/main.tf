@@ -10,6 +10,8 @@ data "template_file" "definition" {
     container_name        = "${var.container_name}"
     container_port        = "${var.container_port}"
     docker_image          = "${var.docker_image}"
+    cpu_reservation       = "${var.cpu_reservation}"
+    memory_reservation    = "${var.memory_reservation}"
   }
 }
 
