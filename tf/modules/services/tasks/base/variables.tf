@@ -22,6 +22,14 @@ variable "family" {
   description = "Task Definition family name"
 }
 
+variable "container_port" {
+  description = "Port that the container is expecting to receive traffic on"
+}
+
+variable "container_name" {
+  description = "Name of the container"
+}
+
 variable "environment_variables" {
   description = "Map of environment variables"
   type        = "map"
