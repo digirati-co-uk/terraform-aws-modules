@@ -30,6 +30,16 @@ variable "container_name" {
   description = "Name of the container"
 }
 
+variable "cpu_reservation" {
+  description = "Amount of CPU to reserve for task"
+  default     = 0
+}
+
+variable "memory_reservation" {
+  description = "Amount of memory to reserve for task"
+  default     = 128
+}
+
 variable "environment_variables" {
   description = "Map of environment variables"
   type        = "map"
