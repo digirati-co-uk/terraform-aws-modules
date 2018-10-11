@@ -11,6 +11,11 @@ data "template_file" "definition" {
   }
 }
 
+resource "aws_ecs_task_definition" "task" {
+  family                = "${var.family}"
+  container_definitions = "${data.template_file.definition.rendered}"
+}
+
 module "env_vars" {
   source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment_variables/"
 

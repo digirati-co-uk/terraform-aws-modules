@@ -18,6 +18,10 @@ variable "docker_image" {
   description = "URL of Docker image to use"
 }
 
+variable "family" {
+  description = "Task Definition family name"
+}
+
 variable "environment_variables" {
   description = "Map of environment variables"
   type        = "map"
