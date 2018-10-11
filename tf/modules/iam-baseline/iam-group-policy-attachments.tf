@@ -6,7 +6,7 @@ resource "aws_iam_group_policy_attachment" "force_mfa_admins" {
 }
 
 data "aws_iam_policy" "administrator_access" {
-  arn = "arn:aws:iam:::policy/AdministratorAccess"
+  arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 resource "aws_iam_group_policy_attachment" "administrator_access" {
