@@ -7,7 +7,7 @@
         "protocol": "tcp"
       }
     ],
-    ${command}
+    "command": ${command},
     "essential": true,
     "name": "${container_name}",
     "environment": ${environment_variables},
