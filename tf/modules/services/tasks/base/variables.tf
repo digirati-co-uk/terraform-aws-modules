@@ -24,10 +24,12 @@ variable "family" {
 
 variable "container_port" {
   description = "Port that the container is expecting to receive traffic on"
+  default     = ""
 }
 
 variable "container_name" {
   description = "Name of the container"
+  default     = ""
 }
 
 variable "cpu_reservation" {
