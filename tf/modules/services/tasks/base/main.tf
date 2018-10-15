@@ -1,5 +1,5 @@
 locals {
-  command_string = "${var.command == "" ? "" : "\"command\": " + var.command}"
+  command_string = "${var.command == "" ? "" : format("\"command\": \"%s\",", var.command)}"
 }
 
 data "template_file" "definition" {
