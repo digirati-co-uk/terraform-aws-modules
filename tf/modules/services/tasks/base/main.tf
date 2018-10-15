@@ -1,3 +1,7 @@
+locals {
+  command_string = "${var.command == "" ? "" : "\"command\": " + var.command}"
+}
+
 data "template_file" "definition" {
   template = "${var.container_port == "" ? file("${path.module}/files/task_definition.jsontemplate") : file("${path.module}/files/task_definition_worker.jsontemplate")}"
 
@@ -12,6 +16,7 @@ data "template_file" "definition" {
     docker_image          = "${var.docker_image}"
     cpu_reservation       = "${var.cpu_reservation}"
     memory_reservation    = "${var.memory_reservation}"
+    command               = "${local.command_string}"
   }
 }
 
