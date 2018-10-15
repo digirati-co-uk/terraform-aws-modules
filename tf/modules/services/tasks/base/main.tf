@@ -23,6 +23,7 @@ data "template_file" "definition" {
 resource "aws_ecs_task_definition" "task" {
   family                = "${var.family}"
   container_definitions = "${data.template_file.definition.rendered}"
+  task_role_arn         = "${aws_iam_role.task.arn}"
 }
 
 module "env_vars" {
