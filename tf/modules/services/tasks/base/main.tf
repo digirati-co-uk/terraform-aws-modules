@@ -1,5 +1,5 @@
 data "template_file" "definition" {
-  template = "${file("${path.module}/files/task_definition.jsontemplate")}"
+  template = "${var.container_port == "" ? file("${path.module}/files/task_definition.jsontemplate") : file("${path.module}/files/task_definition_worker.jsontemplate")}"
 
   vars {
     prefix                = "${var.prefix}"

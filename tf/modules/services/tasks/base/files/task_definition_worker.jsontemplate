@@ -1,0 +1,18 @@
+[
+  {
+    "essential": true,
+    "name": "${container_name}",
+    "environment": ${environment_variables},
+    "image": "${docker_image}",
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "cpu": ${cpu_reservation},
+    "memoryReservation": ${memory_reservation}
+  }
+]
