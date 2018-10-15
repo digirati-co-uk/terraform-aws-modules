@@ -55,5 +55,6 @@ variable "environment_variables_length" {
 
 variable "command" {
   description = "Override for container command"
-  default     = ""
+  type        = "list"
+  default     = []
 }

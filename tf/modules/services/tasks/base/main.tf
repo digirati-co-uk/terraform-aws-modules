@@ -1,5 +1,5 @@
 locals {
-  command_string = "${var.command == "" ? "" : format("\"command\": \"%s\",", var.command)}"
+  command = "${jsonencode(var.command)}"
 }
 
 data "template_file" "definition" {
@@ -16,7 +16,7 @@ data "template_file" "definition" {
     docker_image          = "${var.docker_image}"
     cpu_reservation       = "${var.cpu_reservation}"
     memory_reservation    = "${var.memory_reservation}"
-    command               = "${local.command_string}"
+    command               = "${local.command}"
   }
 }
 
