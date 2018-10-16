@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 module "env_vars" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment_variables/"
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment-variables/"
 
   env_vars        = "${var.environment_variables}"
   env_vars_length = "${var.environment_variables_length}"
