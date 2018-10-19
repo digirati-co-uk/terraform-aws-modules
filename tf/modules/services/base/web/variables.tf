@@ -52,8 +52,8 @@ variable "elb_ssl_policy" {
   default     = "ELBSecurityPolicy-2016-08"
 }
 
-variable "external_zone_id" {
-  description = "ID for the external Hosted Zone"
+variable "zone_id" {
+  description = "ID for the Hosted Zone"
 }
 
 variable "ip_whitelist" {
