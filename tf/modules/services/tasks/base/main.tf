@@ -1,5 +1,6 @@
 locals {
-  command = "${jsonencode(var.command)}"
+  command      = "${jsonencode(var.command)}"
+  mount_points = "${jsonencode(var.mount_points)}"
 }
 
 data "template_file" "definition" {
@@ -17,6 +18,7 @@ data "template_file" "definition" {
     cpu_reservation       = "${var.cpu_reservation}"
     memory_reservation    = "${var.memory_reservation}"
     command               = "${local.command}"
+    mount_points          = "${local.mount_points}"
   }
 }
 
