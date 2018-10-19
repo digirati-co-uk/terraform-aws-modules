@@ -251,7 +251,7 @@ resource "aws_alb_listener_rule" "https" {
 #######
 
 resource "aws_route53_record" "service" {
-  zone_id = "${var.external_zone_id}"
+  zone_id = "${var.zone_id}"
   name    = "${var.hostname}.${var.domain}"
   type    = "A"
 
