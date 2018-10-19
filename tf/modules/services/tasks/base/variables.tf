@@ -58,3 +58,9 @@ variable "command" {
   type        = "list"
   default     = []
 }
+
+variable "mount_points" {
+  description = "List of mount points"
+  type        = "list"
+  default     = []
+}
