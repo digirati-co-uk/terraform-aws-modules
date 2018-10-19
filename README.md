@@ -17,6 +17,9 @@ A collection of Terraform modules for AWS.
   - [load-balancing](#load-balancing)
     - [wildcard-alb](#wildcard-alb)
   - [logging](#logging)
+  - [messaging](#messaging)
+    - [sns](#sns)
+    - [sqs](#sqs)
   - [services](#services)
     - [base web](#base-web)
     - [base worker](#base-worker)
@@ -46,6 +49,12 @@ Using Terraform 0.11.8
 ### wildcard-alb
 
 ## logging
+
+## messaging
+
+### sns
+
+### sqs
 
 ## services
 
