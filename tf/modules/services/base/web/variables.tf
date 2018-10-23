@@ -123,3 +123,28 @@ variable "health_check_path" {
   description = "Path to test HTTP status for health check"
   default     = "/"
 }
+
+variable "health_check_timeout" {
+  description = "Timeout for health check (seconds)"
+  default     = 30
+}
+
+variable "health_check_healthy_threshold" {
+  description = "Threshold for number of healthy checks"
+  default     = 2
+}
+
+variable "health_check_unhealthy_threshold" {
+  description = "Threshold for number of unhealthy checks"
+  default     = 2
+}
+
+variable "health_check_interval" {
+  description = "Interval between health checks (seconds)"
+  default     = 30
+}
+
+variable "deregistration_delay" {
+  description = "Target group deregistration delay (seconds)"
+  default     = 30
+}

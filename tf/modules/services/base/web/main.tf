@@ -152,14 +152,14 @@ resource "aws_alb_target_group" "service" {
   port                 = 80
   protocol             = "HTTP"
   vpc_id               = "${var.vpc}"
-  deregistration_delay = 30
+  deregistration_delay = "${var.deregistration_delay}"
 
   health_check {
     path                = "${var.health_check_path}"
-    timeout             = 30
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    interval            = 60
+    timeout             = "${var.health_check_timeout}"
+    healthy_threshold   = "${var.health_check_healthy_threshold}"
+    unhealthy_threshold = "${var.health_check_unhealthy_threshold}"
+    interval            = "${var.health_check_interval}"
     matcher             = "${var.health_check_matcher}"
   }
 }

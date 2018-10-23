@@ -22,7 +22,9 @@ data "template_file" "definition" {
   }
 }
 
+# produce a task definition as long as there are no mount points - services that need mount points will have to define their own resource outside of the module
 resource "aws_ecs_task_definition" "task" {
+  count                 = "${length(var.mount_points) == 0 ? 1 : 0}"
   family                = "${var.family}"
   container_definitions = "${data.template_file.definition.rendered}"
   task_role_arn         = "${aws_iam_role.task.arn}"
