@@ -126,7 +126,7 @@ variable "health_check_path" {
 
 variable "health_check_timeout" {
   description = "Timeout for health check (seconds)"
-  default     = 30
+  default     = 10
 }
 
 variable "health_check_healthy_threshold" {
