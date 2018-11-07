@@ -1,0 +1,45 @@
+[
+  {
+    "portMappings": [
+      {
+        "hostPort": 0,
+        "containerPort": ${container_port},
+        "protocol": "tcp"
+      }
+    ],
+    "command": ${command_main},
+    "essential": true,
+    "name": "${container_name_main}",
+    "mountPoints": ${mount_points_main},
+    "environment": ${environment_variables_main},
+    "image": "${docker_image_main}",
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "cpu": ${cpu_reservation_main},
+    "memoryReservation": ${memory_reservation_main}
+  },
+    {
+    "command": ${command_sidecar},
+    "essential": true,
+    "name": "${container_name_sidecar}",
+    "mountPoints": ${mount_points_sidecar},
+    "environment": ${environment_variables_sidecar},
+    "image": "${docker_image_sidecar}",
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "cpu": ${cpu_reservation_sidecar},
+    "memoryReservation": ${memory_reservation_sidecar}
+  }
+]
