@@ -106,3 +106,15 @@ variable "mount_points_sidecar" {
   type        = "list"
   default     = []
 }
+
+variable "links_main" {
+  description = "List of links for main container"
+  type        = "list"
+  default     = []
+}
+
+variable "links_sidecar" {
+  description = "List of links for sidecar container"
+  type        = "list"
+  default     = []
+}
