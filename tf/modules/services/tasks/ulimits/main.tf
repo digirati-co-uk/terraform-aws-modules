@@ -3,7 +3,7 @@
 data "template_file" "name_val_pair" {
   count = "${var.ulimits_length}"
 
-  template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${jsonencode(value1)}, \"softLimit\": $${jsonencode(value2)}}"
+  template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
 
   vars {
     key    = "${element(keys(var.ulimits), count.index)}"
