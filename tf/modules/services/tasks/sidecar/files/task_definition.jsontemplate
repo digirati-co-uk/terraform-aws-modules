@@ -22,6 +22,7 @@
         "awslogs-stream-prefix": "${log_prefix}"
       }
     },
+    "ulimits": ${ulimits_main}
     "cpu": ${cpu_reservation_main},
     "memoryReservation": ${memory_reservation_main}
   },
@@ -41,6 +42,7 @@
         "awslogs-stream-prefix": "${log_prefix}"
       }
     },
+    "ulimits": ${ulimits_sidecar},
     "cpu": ${cpu_reservation_sidecar},
     "memoryReservation": ${memory_reservation_sidecar}
   }

@@ -19,6 +19,7 @@ data "template_file" "definition" {
     memory_reservation    = "${var.memory_reservation}"
     command               = "${local.command}"
     mount_points          = "${local.mount_points}"
+    ulimits               = "${module.ulimits.ulimits_string}"
   }
 }
 
@@ -35,4 +36,11 @@ module "env_vars" {
 
   env_vars        = "${var.environment_variables}"
   env_vars_length = "${var.environment_variables_length}"
+}
+
+module "ulimits" {
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+
+  ulimits        = "${var.ulimits}"
+  ulimits_length = "${var.ulimits_length}"
 }
