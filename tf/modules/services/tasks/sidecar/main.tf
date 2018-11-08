@@ -3,6 +3,8 @@ locals {
   mount_points_main    = "${jsonencode(var.mount_points_main)}"
   command_sidecar      = "${jsonencode(var.command_sidecar)}"
   mount_points_sidecar = "${jsonencode(var.mount_points_sidecar)}"
+  links_main           = "${jsonencode(var.links_main)}"
+  links_sidecar        = "${jsonencode(var.links_sidecar)}"
 }
 
 data "template_file" "definition" {
@@ -28,6 +30,8 @@ data "template_file" "definition" {
     command_sidecar               = "${local.command_sidecar}"
     mount_points_main             = "${local.mount_points_main}"
     mount_points_sidecar          = "${local.mount_points_sidecar}"
+    links_main                    = "${local.links_main}"
+    links_sidecar                 = "${local.links_sidecar}"
   }
 }
 

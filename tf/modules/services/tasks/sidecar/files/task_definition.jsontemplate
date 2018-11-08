@@ -13,6 +13,7 @@
     "mountPoints": ${mount_points_main},
     "environment": ${environment_variables_main},
     "image": "${docker_image_main}",
+    "links": ${links_main},
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -24,13 +25,14 @@
     "cpu": ${cpu_reservation_main},
     "memoryReservation": ${memory_reservation_main}
   },
-    {
+  {
     "command": ${command_sidecar},
     "essential": true,
     "name": "${container_name_sidecar}",
     "mountPoints": ${mount_points_sidecar},
     "environment": ${environment_variables_sidecar},
     "image": "${docker_image_sidecar}",
+    "links": ${links_sidecar},
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
