@@ -14,6 +14,7 @@
         "awslogs-stream-prefix": "${log_prefix}"
       }
     },
+    "ulimits": ${ulimits},
     "cpu": ${cpu_reservation},
     "memoryReservation": ${memory_reservation}
   }

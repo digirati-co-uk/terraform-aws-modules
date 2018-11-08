@@ -118,3 +118,25 @@ variable "links_sidecar" {
   type        = "list"
   default     = []
 }
+
+variable "ulimits_main" {
+  description = "Map of ulimits for main container"
+  type        = "map"
+  default     = {}
+}
+
+variable "ulimits_main_length" {
+  description = "Length of ulimits map for main container (required)"
+  default     = 0
+}
+
+variable "ulimits_sidecar" {
+  description = "Map of ulimits for sidecar container"
+  type        = "map"
+  default     = {}
+}
+
+variable "ulimits_sidecar_length" {
+  description = "Length of ulimits map for sidecar container (required)"
+  default     = 0
+}

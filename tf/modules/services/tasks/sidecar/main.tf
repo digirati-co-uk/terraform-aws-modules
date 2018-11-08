@@ -32,6 +32,9 @@ data "template_file" "definition" {
     mount_points_sidecar          = "${local.mount_points_sidecar}"
     links_main                    = "${local.links_main}"
     links_sidecar                 = "${local.links_sidecar}"
+
+    ulimits_main    = "${module.ulimits_main.ulimits_string}"
+    ulimits_sidecar = "${module.ulimits_sidecar.ulimits_string}"
   }
 }
 
@@ -55,4 +58,18 @@ module "env_vars_sidecar" {
 
   env_vars        = "${var.environment_variables_sidecar}"
   env_vars_length = "${var.environment_variables_sidecar_length}"
+}
+
+module "ulimits_main" {
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+
+  ulimits        = "${var.ulimits_main}"
+  ulimits_length = "${var.ulimits_main_length}"
+}
+
+module "ulimits_sidecar" {
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+
+  ulimits        = "${var.ulimits_sidecar}"
+  ulimits_length = "${var.ulimits_sidecar_length}"
 }

@@ -64,3 +64,14 @@ variable "mount_points" {
   type        = "list"
   default     = []
 }
+
+variable "ulimits" {
+  description = "Map of ulimits"
+  type        = "map"
+  default     = {}
+}
+
+variable "ulimits_length" {
+  description = "Length of ulimits map (required)"
+  default     = 0
+}
