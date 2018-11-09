@@ -49,3 +49,7 @@ output "subnet_private_1_az" {
 output "subnet_private_2_az" {
   value = "${var.subnet_private_2_az}"
 }
+
+output "nat_public_ip" {
+  value = "${aws_nat_gateway.gw.public_ip}"
+}

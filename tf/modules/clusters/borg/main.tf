@@ -210,7 +210,6 @@ until [ $n -ge 5 ]
     fi
   done
 
-
 # make swap
 fallocate -l ${var.swap_size_gb}G /swap
 mkswap /swap
