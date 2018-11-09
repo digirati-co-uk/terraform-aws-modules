@@ -210,10 +210,6 @@ until [ $n -ge 5 ]
     fi
   done
 
-mkdir -p ${var.mount_point_data}/elasticsearch
-chmod -R g+rwx ${var.mount_point_data}/elasticsearch
-chgrp -R 1000 ${var.mount_point_data}/elasticsearch
-
 # make swap
 fallocate -l ${var.swap_size_gb}G /swap
 mkswap /swap
