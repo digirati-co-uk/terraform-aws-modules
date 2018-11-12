@@ -14,6 +14,7 @@ data "template_file" "definition" {
     environment_variables = "${module.env_vars.env_vars_string}"
     container_name        = "${var.container_name}"
     container_port        = "${var.container_port}"
+    host_port             = "${var.host_port}"
     docker_image          = "${var.docker_image}"
     cpu_reservation       = "${var.cpu_reservation}"
     memory_reservation    = "${var.memory_reservation}"

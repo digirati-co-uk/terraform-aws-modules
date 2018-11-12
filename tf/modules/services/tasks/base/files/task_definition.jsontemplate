@@ -2,7 +2,7 @@
   {
     "portMappings": [
       {
-        "hostPort": 0,
+        "hostPort": ${host_port},
         "containerPort": ${container_port},
         "protocol": "tcp"
       }
