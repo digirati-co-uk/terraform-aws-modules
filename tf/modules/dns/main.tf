@@ -5,8 +5,8 @@ data "aws_route53_zone" "external" {
 }
 
 resource "aws_route53_zone" "internal" {
-  name   = "${var.prefix}.${var.region}.internal"
-  vpc_id = "${var.vpc}"
+  name = "${var.prefix}.${var.region}.internal"
+  vpc  = "${var.vpc}"
 
   tags {
     "Project" = "${var.project}"
