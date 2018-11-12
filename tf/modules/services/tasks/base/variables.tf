@@ -22,6 +22,11 @@ variable "family" {
   description = "Task Definition family name"
 }
 
+variable "host_port" {
+  description = "Optional - Port that the host will receive traffic on"
+  default     = "0"
+}
+
 variable "container_port" {
   description = "Port that the container is expecting to receive traffic on"
   default     = ""
