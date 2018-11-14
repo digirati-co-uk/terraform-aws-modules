@@ -12,4 +12,5 @@ variable "account_id" {
 
 variable "account_alias" {
   description = "AWS account alias"
+  default     = ""
 }
