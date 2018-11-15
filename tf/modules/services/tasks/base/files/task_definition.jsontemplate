@@ -1,12 +1,6 @@
 [
   {
-    "portMappings": [
-      {
-        "hostPort": ${host_port},
-        "containerPort": ${container_port},
-        "protocol": "tcp"
-      }
-    ],
+    "portMappings": ${portmappings},
     "command": ${command},
     "essential": true,
     "name": "${container_name}",
