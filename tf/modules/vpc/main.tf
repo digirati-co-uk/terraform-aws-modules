@@ -80,11 +80,21 @@ resource "aws_route" "public_2_internet_access" {
 
 resource "aws_eip" "nat" {
   vpc = true
+
+  tags {
+    "Name"    = "${var.prefix}-nat"
+    "Project" = "${var.project}"
+  }
 }
 
 resource "aws_nat_gateway" "gw" {
   allocation_id = "${aws_eip.nat.id}"
   subnet_id     = "${aws_subnet.public_1.id}"
+
+  tags {
+    "Name"    = "${var.prefix}-nat"
+    "Project" = "${var.project}"
+  }
 
   depends_on = ["aws_internet_gateway.main"]
 }
