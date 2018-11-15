@@ -1,6 +1,7 @@
 locals {
-  command      = "${jsonencode(var.command)}"
-  mount_points = "${jsonencode(var.mount_points)}"
+  command       = "${jsonencode(var.command)}"
+  mount_points  = "${jsonencode(var.mount_points)}"
+  port_mappings = "${var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"}"
 }
 
 data "template_file" "definition" {
@@ -21,7 +22,7 @@ data "template_file" "definition" {
     command               = "${local.command}"
     mount_points          = "${local.mount_points}"
     ulimits               = "${module.ulimits.ulimits_string}"
-    port_mappings         = "${module.port_mappings.port_mappings_string}"
+    port_mappings         = "${local.port_mappings}"
   }
 }
 
