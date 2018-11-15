@@ -148,3 +148,8 @@ variable "deregistration_delay" {
   description = "Target group deregistration delay (seconds)"
   default     = 30
 }
+
+variable "health_check_grace_period_seconds" {
+  description = "Grace period for health check (seconds)"
+  default     = 0
+}
