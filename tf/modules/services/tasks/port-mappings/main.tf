@@ -3,7 +3,7 @@
 data "template_file" "name_val_pair" {
   count = "${var.port_mappings_length}"
 
-  template = "{\"hostPort\": $${key}, \"containerPort\": $${value1}, \"protocol\": \"tcp\""
+  template = "{\"hostPort\": $${key}, \"containerPort\": $${value1}, \"protocol\": \"tcp\"}"
 
   vars {
     key    = "${element(keys(var.port_mappings), count.index)}"
