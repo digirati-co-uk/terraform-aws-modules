@@ -1,6 +1,6 @@
 [
   {
-    "portMappings": ${portmappings},
+    "portMappings": ${port_mappings},
     "command": ${command},
     "essential": true,
     "name": "${container_name}",
