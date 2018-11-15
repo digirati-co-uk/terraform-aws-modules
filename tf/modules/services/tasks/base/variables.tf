@@ -80,3 +80,14 @@ variable "ulimits_length" {
   description = "Length of ulimits map (required)"
   default     = 0
 }
+
+variable "port_mappings" {
+  description = "Map of port_mappings"
+  type        = "map"
+  default     = {}
+}
+
+variable "port_mappings_length" {
+  description = "Length of port_mappings map (required)"
+  default     = 0
+}

@@ -21,6 +21,7 @@ data "template_file" "definition" {
     command               = "${local.command}"
     mount_points          = "${local.mount_points}"
     ulimits               = "${module.ulimits.ulimits_string}"
+    port_mappings         = "${module.port_mappings.port_mappings_string}"
   }
 }
 
@@ -44,4 +45,11 @@ module "ulimits" {
 
   ulimits        = "${var.ulimits}"
   ulimits_length = "${var.ulimits_length}"
+}
+
+module "port_mappings" {
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/port-mappings/"
+
+  port_mappings        = "${var.port_mappings}"
+  port_mappings_length = "${var.port_mappings_length}"
 }
