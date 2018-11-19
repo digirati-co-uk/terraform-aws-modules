@@ -23,14 +23,12 @@ resource "aws_s3_bucket_object" "dockerhub_credentials" {
   bucket  = "${var.bootstrap_objects_bucket}"
   key     = "${aws_ecs_cluster.borg.name}/dockerhub_credentials"
   content = "${data.template_file.dockerhub_credentials.rendered}"
-  etag    = "${md5(data.template_file.dockerhub_credentials.rendered)}"
 }
 
 resource "aws_s3_bucket_object" "samba_configuration" {
   bucket  = "${var.bootstrap_objects_bucket}"
   key     = "${aws_ecs_cluster.borg.name}/borg-smb.conf"
   content = "${data.template_file.samba_configuration.rendered}"
-  etag    = "${md5(data.template_file.samba_configuration.rendered)}"
 }
 
 resource "aws_iam_role" "borg" {
