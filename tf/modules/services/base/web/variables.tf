@@ -153,3 +153,8 @@ variable "health_check_grace_period_seconds" {
   description = "Grace period for health check (seconds)"
   default     = 0
 }
+
+variable "create_route53_entry" {
+  description = "Whether to create a Route53 entry for the service"
+  default     = true
+}
