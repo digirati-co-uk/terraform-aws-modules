@@ -240,7 +240,7 @@ resource "aws_alb_listener_rule" "https" {
 
   condition {
     field  = "host-header"
-    values = ["${var.hostname}.${var.domain}"]
+    values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
   }
 
   lifecycle {
@@ -255,7 +255,7 @@ resource "aws_alb_listener_rule" "https" {
 resource "aws_route53_record" "service" {
   count   = "${var.create_route53_entry ? 1 : 0}"
   zone_id = "${var.zone_id}"
-  name    = "${var.hostname}.${var.domain}"
+  name    = "${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"
   type    = "A"
 
   alias {
