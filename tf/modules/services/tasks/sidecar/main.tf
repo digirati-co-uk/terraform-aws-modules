@@ -1,12 +1,11 @@
 locals {
-  command_main          = "${jsonencode(var.command_main)}"
-  mount_points_main     = "${jsonencode(var.mount_points_main)}"
-  command_sidecar       = "${jsonencode(var.command_sidecar)}"
-  mount_points_sidecar  = "${jsonencode(var.mount_points_sidecar)}"
-  links_main            = "${jsonencode(var.links_main)}"
-  links_sidecar         = "${jsonencode(var.links_sidecar)}"
-  port_mappings_main    = "${var.port_mappings_length_main > 0 ? module.port_mappings_main.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"}"
-  port_mappings_sidecar = "${var.port_mappings_length_sidecar > 0 ? module.port_mappings_sidecar.port_mappings_string : "[]"}"
+  command_main         = "${jsonencode(var.command_main)}"
+  mount_points_main    = "${jsonencode(var.mount_points_main)}"
+  command_sidecar      = "${jsonencode(var.command_sidecar)}"
+  mount_points_sidecar = "${jsonencode(var.mount_points_sidecar)}"
+  links_main           = "${jsonencode(var.links_main)}"
+  links_sidecar        = "${jsonencode(var.links_sidecar)}"
+  port_mappings        = "${var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"}"
 }
 
 data "template_file" "definition" {
@@ -38,8 +37,7 @@ data "template_file" "definition" {
     ulimits_main    = "${module.ulimits_main.ulimits_string}"
     ulimits_sidecar = "${module.ulimits_sidecar.ulimits_string}"
 
-    port_mappings_main    = "${local.port_mappings_main}"
-    port_mappings_sidecar = "${local.port_mappings_sidecar}"
+    port_mappings = "${local.port_mappings}"
   }
 }
 
@@ -79,16 +77,9 @@ module "ulimits_sidecar" {
   ulimits_length = "${var.ulimits_sidecar_length}"
 }
 
-module "port_mappings_main" {
+module "port_mappings" {
   source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/port-mappings/"
 
-  port_mappings        = "${var.port_mappings_main}"
-  port_mappings_length = "${var.port_mappings_length_main}"
-}
-
-module "port_mappings_sidecar" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/port-mappings/"
-
-  port_mappings        = "${var.port_mappings_sidecar}"
-  port_mappings_length = "${var.port_mappings_length_sidecar}"
+  port_mappings        = "${var.port_mappings}"
+  port_mappings_length = "${var.port_mappings_length}"
 }
