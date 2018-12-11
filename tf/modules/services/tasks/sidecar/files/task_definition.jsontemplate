@@ -1,12 +1,6 @@
 [
   {
-    "portMappings": [
-      {
-        "hostPort": 0,
-        "containerPort": ${container_port},
-        "protocol": "tcp"
-      }
-    ],
+    "portMappings": ${port_mappings_main},
     "command": ${command_main},
     "essential": true,
     "name": "${container_name_main}",
@@ -27,6 +21,7 @@
     "memoryReservation": ${memory_reservation_main}
   },
   {
+    "portMappings": ${port_mappings_sidecar},
     "command": ${command_sidecar},
     "essential": true,
     "name": "${container_name_sidecar}",
