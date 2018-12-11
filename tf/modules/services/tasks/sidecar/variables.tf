@@ -41,6 +41,11 @@ variable "container_name_sidecar" {
   default     = ""
 }
 
+variable "host_port" {
+  description = "Optional - Port that the host will receive traffic on"
+  default     = "0"
+}
+
 variable "cpu_reservation_main" {
   description = "Amount of CPU to reserve for task in main container"
   default     = 0
@@ -141,24 +146,13 @@ variable "ulimits_sidecar_length" {
   default     = 0
 }
 
-variable "port_mappings_main" {
+variable "port_mappings" {
   description = "Map of port_mappings"
   type        = "map"
   default     = {}
 }
 
-variable "port_mappings_length_main" {
-  description = "Length of port_mappings map (required)"
-  default     = 0
-}
-
-variable "port_mappings_sidecar" {
-  description = "Map of port_mappings"
-  type        = "map"
-  default     = {}
-}
-
-variable "port_mappings_length_sidecar" {
+variable "port_mappings_length" {
   description = "Length of port_mappings map (required)"
   default     = 0
 }
