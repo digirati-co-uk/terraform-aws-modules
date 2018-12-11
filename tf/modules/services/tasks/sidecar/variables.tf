@@ -46,11 +46,6 @@ variable "host_port" {
   default     = "0"
 }
 
-variable "container_port" {
-  description = "Port that the container is expecting to receive traffic on"
-  default     = ""
-}
-
 variable "cpu_reservation_main" {
   description = "Amount of CPU to reserve for task in main container"
   default     = 0
