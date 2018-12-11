@@ -73,12 +73,12 @@ variable "environment_variables_sidecar" {
   default     = {}
 }
 
-variable "environment_variables_main_length" {
+variable "environment_variables_length_main" {
   description = "Length of environment variable map for main container (required)"
   default     = 0
 }
 
-variable "environment_variables_sidecar_length" {
+variable "environment_variables_length_sidecar" {
   description = "Length of environment variable map for sidecar container (required)"
   default     = 0
 }
@@ -138,5 +138,27 @@ variable "ulimits_sidecar" {
 
 variable "ulimits_sidecar_length" {
   description = "Length of ulimits map for sidecar container (required)"
+  default     = 0
+}
+
+variable "port_mappings_main" {
+  description = "Map of port_mappings"
+  type        = "map"
+  default     = {}
+}
+
+variable "port_mappings_length_main" {
+  description = "Length of port_mappings map (required)"
+  default     = 0
+}
+
+variable "port_mappings_sidecar" {
+  description = "Map of port_mappings"
+  type        = "map"
+  default     = {}
+}
+
+variable "port_mappings_length_sidecar" {
+  description = "Length of port_mappings map (required)"
   default     = 0
 }
