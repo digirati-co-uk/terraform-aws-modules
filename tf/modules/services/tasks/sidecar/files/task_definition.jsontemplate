@@ -8,6 +8,7 @@
     "environment": ${environment_variables_main},
     "image": "${docker_image_main}",
     "links": ${links_main},
+    "user": ${user_main},
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -28,6 +29,7 @@
     "environment": ${environment_variables_sidecar},
     "image": "${docker_image_sidecar}",
     "links": ${links_sidecar},
+    "user": ${user_sidecar},
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

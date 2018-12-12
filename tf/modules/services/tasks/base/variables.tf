@@ -91,3 +91,8 @@ variable "port_mappings_length" {
   description = "Length of port_mappings map (required)"
   default     = 0
 }
+
+variable "user" {
+  description = "User to set for container"
+  default     = ""
+}

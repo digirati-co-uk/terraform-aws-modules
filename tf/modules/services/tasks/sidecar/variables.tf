@@ -156,3 +156,13 @@ variable "port_mappings_length" {
   description = "Length of port_mappings map (required)"
   default     = 0
 }
+
+variable "user_main" {
+  description = "User to set for main container"
+  default     = ""
+}
+
+variable "user_sidecar" {
+  description = "User to set for sidecar container"
+  default     = ""
+}
