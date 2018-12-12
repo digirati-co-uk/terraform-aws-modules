@@ -6,6 +6,8 @@ locals {
   links_main           = "${jsonencode(var.links_main)}"
   links_sidecar        = "${jsonencode(var.links_sidecar)}"
   port_mappings        = "${var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"}"
+  user_main            = "${length(var.user_main) > 0 ? "\"${var.user_main}\"" : "null"}"
+  user_sidecar         = "${length(var.user_sidecar) > 0 ? "\"${var.user_sidecar}\"" : "null"}"
 }
 
 data "template_file" "definition" {
@@ -33,6 +35,8 @@ data "template_file" "definition" {
     mount_points_sidecar          = "${local.mount_points_sidecar}"
     links_main                    = "${local.links_main}"
     links_sidecar                 = "${local.links_sidecar}"
+    user_main                     = "${local.user_main}"
+    user_sidecar                  = "${local.user_sidecar}"
 
     ulimits_main    = "${module.ulimits_main.ulimits_string}"
     ulimits_sidecar = "${module.ulimits_sidecar.ulimits_string}"
