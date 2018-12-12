@@ -7,7 +7,7 @@
     "mountPoints": ${mount_points},
     "environment": ${environment_variables},
     "image": "${docker_image}",
-    "user": "${user},
+    "user": ${user},
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

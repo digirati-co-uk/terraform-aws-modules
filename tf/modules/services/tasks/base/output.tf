@@ -17,3 +17,8 @@ output "role_name" {
   description = "Name of the task role"
   value       = "${aws_iam_role.task.name}"
 }
+
+output "container_port" {
+  description = "Port that the container uses (avoids repetition of value)"
+  value       = "${var.container_port}"
+}
