@@ -289,6 +289,8 @@ resource "aws_autoscaling_group" "borg" {
   min_size            = "${var.min_size}"
   vpc_zone_identifier = ["${var.subnets}"]
 
+  default_cooldown = 0
+
   lifecycle {
     create_before_destroy = true
   }
