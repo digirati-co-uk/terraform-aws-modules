@@ -92,7 +92,7 @@ yum install -q -y jq
 yum remove ecs-init
 
 # Route53 update
-LOCALIP=$(curl -s "http://169.254.169.254/latest/meta-data/local-ipv4")
+LOCALIP=$(curl -s "http://169.254.169.254/latest/meta-data/public-ipv4")
 DOMAIN="bastion.${var.domain}"
 HOSTEDZONEID="${var.dns_zone}"
 cat > /tmp/route53-record.txt <<EOFCAT
