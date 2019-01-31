@@ -208,6 +208,13 @@ until [ $n -ge 5 ]
     fi
   done
 
+# mount the EBS volume and add to fstab so it mounts at boot
+
+mkdir -p ${var.mount_point_data_ebs}
+mkfs -t ext4 /dev/xvdf
+mount /dev/xvdf ${var.mount_point_data_ebs}
+echo "/dev/xvdf ${var.mount_point_data_ebs} ext4 defaults,nofail" >> /etc/fstab
+
 # make swap
 fallocate -l ${var.swap_size_gb}G /swap
 mkswap /swap
@@ -274,6 +281,14 @@ EOF
     volume_size           = "${var.docker_size}"
     volume_type           = "gp2"
     delete_on_termination = true
+  }
+
+  # data-ebs
+  ebs_block_device {
+    device_name           = "/dev/xvdf"
+    volume_size           = "${var.data_ebs_size}"
+    volume_type           = "gp2"
+    delete_on_termination = false
   }
 
   lifecycle {

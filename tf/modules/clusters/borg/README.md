@@ -4,11 +4,12 @@ This is an ECS cluster with a particular volume configuration.
 
 It provides:
 
-| Name   | Description        | Default size |
-|--------|--------------------|--------------|
-| root   | Root volume size   | 40gb         |
-| data   | General workspace  | EFS          |
-| docker | Docker volume size | 40gb         |
+| Name     | Description        | Default size |
+|----------|--------------------|--------------|
+| root     | Root volume size   | 40gb         |
+| data     | General workspace  | EFS          |
+| data-ebs | EBS workspace      | 100gb        |
+| docker   | Docker volume size | 40gb         |
 
 ## Parameters
 The following parameters are available:
@@ -32,9 +33,17 @@ The following parameters are available:
 | max_size                 | Maximum number of instances for the cluster  | string | 1         |
 | root_size                | Size in GB for the root partition            | string | 40        |
 | docker_size              | Size in GB of the Docker volume              | string | 40        |
+| data_ebs_size            | Size in GB of the EBS volume                 | string | 100       |
 | bootstrap_objects_bucket | S3 bucket where config is stored             | string |           |
+| mount_point_data         | Name of mount point to mount EFS volume data | string | /data     |
+| mount_point_data_ebs     | Name of mount point to mount EBS volume data | string | /data-ebs |
+| data_ebs_size            | Size in GB of the data EBS volume            | string | 100       |
+| peered_vpc_cidr          | Optional peered VPC CIDR block               | string |           |
+| peered_vpc_port_from     | Optional peered VPC port lower range         | string |           |
+| peered_vpc_port_to       | Optional peered VPC port upper range         | string |           |
 
 ## Outputs
-| Parameter  | Description               | Type   |
-|------------|---------------------------|--------|
-| cluster_id | ID of the created cluster | string |
+| Parameter    | Description                 | Type   |
+|--------------|-----------------------------|--------|
+| cluster_id   | ARN of the created cluster  | string |
+| cluster_name | Name of the created cluster | string |

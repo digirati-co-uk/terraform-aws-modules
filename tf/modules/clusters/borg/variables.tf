@@ -80,8 +80,20 @@ variable "docker_size" {
 # EFS volume data
 
 variable "mount_point_data" {
-  description = "Name of mount point to mount EBS volume data"
+  description = "Name of mount point to mount EFS volume data"
   default     = "/data"
+}
+
+# EBS volume data
+
+variable "mount_point_data_ebs" {
+  description = "Name of mount point to mount EBS volume data"
+  default     = "/data-ebs"
+}
+
+variable "data_ebs_size" {
+  description = "Size in GB of the data EBS volume"
+  default     = 100
 }
 
 # VPC Peering section
