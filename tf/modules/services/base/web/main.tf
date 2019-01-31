@@ -243,6 +243,11 @@ resource "aws_alb_listener_rule" "https" {
     values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
   }
 
+  condition {
+    field  = "path-pattern"
+    values = ["${var.path_pattern}"]
+  }
+
   lifecycle {
     ignore_changes = ["priority"]
   }

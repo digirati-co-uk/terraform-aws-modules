@@ -47,6 +47,11 @@ variable "domain" {
   description = "Apex domain to use (e.g. dlcs.io)"
 }
 
+variable "path_pattern" {
+  description = "Path pattern to match in ALB"
+  default     = "/"
+}
+
 variable "elb_ssl_policy" {
   description = "SSL policy to use on load balancer"
   default     = "ELBSecurityPolicy-2016-08"
