@@ -118,6 +118,10 @@ EOFCAT
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/route53-record.txt
 
 EOF
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_group" "bastion" {
