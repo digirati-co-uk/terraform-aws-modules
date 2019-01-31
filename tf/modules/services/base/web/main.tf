@@ -236,7 +236,7 @@ resource "aws_alb_listener_rule" "http" {
 resource "aws_alb_listener_rule" "https" {
   count        = "${var.load_balancer_https_listener_arn == "" ? 0 : length(var.path_patterns)}"
   listener_arn = "${var.load_balancer_https_listener_arn}"
-  priority     = "${var.service_number_https}"
+  priority     = "${var.service_number_https + count.index}"
 
   action {
     type             = "forward"
