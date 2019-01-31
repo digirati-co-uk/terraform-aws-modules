@@ -28,8 +28,9 @@ variable "key_name" {
   description = "EC2 key pair name to use"
 }
 
-variable "subnet" {
-  description = "VPC subnet to launch in"
+variable "subnets" {
+  description = "VPC subnets to cover with autoscaling group"
+  type        = "list"
 }
 
 variable "dns_zone" {
