@@ -209,7 +209,7 @@ resource "aws_alb_listener" "https_existing_cert" {
 }
 
 resource "aws_alb_listener_rule" "http" {
-  count        = "${var.load_balancer_http_listener_arn == "" ? 0 : 1}"
+  count        = "${var.load_balancer_http_listener_arn == "" ? 0 : length(var.path_patterns)}"
   listener_arn = "${var.load_balancer_http_listener_arn}"
   priority     = "${var.service_number_http}"
 
@@ -223,13 +223,18 @@ resource "aws_alb_listener_rule" "http" {
     values = ["${var.hostname}.${var.domain}"]
   }
 
+  condition {
+    field  = "path-pattern"
+    values = ["${element(var.path_patterns, count.index)}"]
+  }
+
   lifecycle {
     ignore_changes = ["priority"]
   }
 }
 
 resource "aws_alb_listener_rule" "https" {
-  count        = "${var.load_balancer_https_listener_arn == "" ? 0 : 1}"
+  count        = "${var.load_balancer_https_listener_arn == "" ? 0 : length(var.path_patterns)}"
   listener_arn = "${var.load_balancer_https_listener_arn}"
   priority     = "${var.service_number_https}"
 
@@ -245,7 +250,7 @@ resource "aws_alb_listener_rule" "https" {
 
   condition {
     field  = "path-pattern"
-    values = ["${var.path_pattern}"]
+    values = ["${element(var.path_patterns, count.index)}"]
   }
 
   lifecycle {

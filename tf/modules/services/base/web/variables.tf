@@ -47,9 +47,13 @@ variable "domain" {
   description = "Apex domain to use (e.g. dlcs.io)"
 }
 
-variable "path_pattern" {
-  description = "Path pattern to match in ALB"
-  default     = "/"
+variable "path_patterns" {
+  description = "Path patterns to match in ALB"
+  type        = "list"
+
+  default = [
+    "/",
+  ]
 }
 
 variable "elb_ssl_policy" {
