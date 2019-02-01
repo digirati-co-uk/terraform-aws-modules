@@ -52,7 +52,7 @@ variable "path_patterns" {
   type        = "list"
 
   default = [
-    "/",
+    "/*",
   ]
 }
 
