@@ -266,7 +266,7 @@ docker system prune -a -f
 EOFCAT
 
 chmod +x /etc/cron.daily/docker-cleanup.sh
-
+${var.additional_config}
 EOF
 
   root_block_device {

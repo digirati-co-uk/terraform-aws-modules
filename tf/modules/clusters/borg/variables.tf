@@ -112,3 +112,8 @@ variable "peered_vpc_port_to" {
   description = "Optional peered VPC port upper range"
   default     = ""
 }
+
+variable "additional_config" {
+  description = "Additional configuration for User Data"
+  default     = ""
+}
