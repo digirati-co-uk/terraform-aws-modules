@@ -229,11 +229,8 @@ aws s3 cp s3://${var.bootstrap_objects_bucket}/${aws_s3_bucket_object.samba_conf
 useradd -M nas-user
 echo -ne "nas\nnas\n" | smbpasswd -a -s nas-user
 
-mkdir -p ${var.mount_point_data}/scratch
-mkdir -p ${var.mount_point_data}/efs
-
-ln -s ${var.mount_point_data}/scratch /scratch
-ln -s ${var.mount_point_data}/efs /efs
+mkdir -p ${var.mount_point_data_ebs}/scratch
+mkdir -p ${var.mount_point_data_ebs}/efs
 
 mkdir -p /scratch/tizer
 mkdir -p /scratch/engine
