@@ -71,8 +71,8 @@ resource "aws_alb_target_group" "default" {
   }
 }
 
-resource "aws_alb_listener" "http_default" {
-  count = "${var.redirect_http_to_https ? 1 : 0}"
+resource "aws_alb_listener" "http" {
+  count = "${var.redirect_http_to_https ? 0 : 1}"
 
   load_balancer_arn = "${aws_alb.lb.id}"
   port              = 80
@@ -84,8 +84,8 @@ resource "aws_alb_listener" "http_default" {
   }
 }
 
-resource "aws_alb_listener" "http_default_redirect" {
-  count = "${var.redirect_http_to_https ? 0 : 1}"
+resource "aws_alb_listener" "http_redirect" {
+  count = "${var.redirect_http_to_https ? 1 : 0}"
 
   load_balancer_arn = "${aws_alb.lb.id}"
   port              = 80
