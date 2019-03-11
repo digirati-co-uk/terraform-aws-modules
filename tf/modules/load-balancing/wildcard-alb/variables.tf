@@ -42,3 +42,8 @@ variable "ip_whitelist" {
     "0.0.0.0/0",
   ]
 }
+
+variable "redirect_http_to_https" {
+  description = "Enable default behaviour to redirect http to https"
+  default     = false
+}

@@ -71,7 +71,9 @@ resource "aws_alb_target_group" "default" {
   }
 }
 
-resource "aws_alb_listener" "http" {
+resource "aws_alb_listener" "http_default" {
+  count = "${var.redirect_http_to_https ? 1 : 0}"
+
   load_balancer_arn = "${aws_alb.lb.id}"
   port              = 80
   protocol          = "HTTP"
@@ -79,6 +81,24 @@ resource "aws_alb_listener" "http" {
   default_action {
     target_group_arn = "${aws_alb_target_group.default.id}"
     type             = "forward"
+  }
+}
+
+resource "aws_alb_listener" "http_default_redirect" {
+  count = "${var.redirect_http_to_https ? 0 : 1}"
+
+  load_balancer_arn = "${aws_alb.lb.id}"
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_302"
+    }
   }
 }
 
