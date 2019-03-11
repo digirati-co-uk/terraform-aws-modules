@@ -15,7 +15,7 @@ output "lb_zone_id" {
 
 output "lb_http_listener_arn" {
   description = "ARN of load balancer HTTP listener"
-  value       = "${var.redirect_http_to_https ? join("", aws_alb_listener.http_default_redirect.*.arn) : join("", aws_alb_listener.http_default.*.arn)}"
+  value       = "${var.redirect_http_to_https ? join("", aws_alb_listener.http_redirect.*.arn) : join("", aws_alb_listener.http.*.arn)}"
 }
 
 output "lb_https_listener_arn" {
