@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "write_to_queue" {
+data "aws_iam_policy_document" "sns_write_to_queue" {
   statement {
     sid    = "es-sns-to-sqs-policy"
     effect = "Allow"
