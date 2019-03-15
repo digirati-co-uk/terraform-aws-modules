@@ -13,6 +13,11 @@ output "read_policy" {
   value       = "${data.aws_iam_policy_document.read_from_queue.json}"
 }
 
+output "write_policy" {
+  description = "Policy that allows writing to the created SQS queue"
+  value       = "${data.aws_iam_policy_document.write_to_queue.json}"
+}
+
 output "name" {
   description = "Name of the created SQS queue"
   value       = "${aws_sqs_queue.q.name}"

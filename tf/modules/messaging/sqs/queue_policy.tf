@@ -38,3 +38,18 @@ data "aws_iam_policy_document" "read_from_queue" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "write_to_queue" {
+  statement {
+    actions = [
+      "sqs:GetQueueAttributes",
+      "sqs:GetQueueUrl",
+      "sqs:ListQueues",
+      "sqs:SendMessage",
+    ]
+
+    resources = [
+      "${aws_sqs_queue.q.arn}",
+    ]
+  }
+}
