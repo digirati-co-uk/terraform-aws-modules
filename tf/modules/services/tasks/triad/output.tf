@@ -1,6 +1,6 @@
 output "task_definition_arn" {
   description = "ARN of the task definition"
-  value       = "${length(var.mount_points_main) == 0 && length(var.mount_points_sidecar) == 0 ? join("", aws_ecs_task_definition.task.*.arn) : ""}"
+  value       = "${length(var.mount_points_main) == 0 && length(var.mount_points_sidecar_1) == 0 && length(var.mount_points_sidecar_2) == 0 ? join("", aws_ecs_task_definition.task.*.arn) : ""}"
 }
 
 output "task_definition_json" {

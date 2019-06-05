@@ -102,6 +102,13 @@ module "env_vars_sidecar_2" {
   env_vars_length = "${var.environment_variables_length_sidecar_2}"
 }
 
+module "env_vars_sidecar_3" {
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment-variables/"
+
+  env_vars        = "${var.environment_variables_sidecar_3}"
+  env_vars_length = "${var.environment_variables_length_sidecar_3}"
+}
+
 module "ulimits_main" {
   source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
 
@@ -121,6 +128,13 @@ module "ulimits_sidecar_2" {
 
   ulimits        = "${var.ulimits_sidecar_2}"
   ulimits_length = "${var.ulimits_sidecar_2_length}"
+}
+
+module "ulimits_sidecar_3" {
+  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+
+  ulimits        = "${var.ulimits_sidecar_3}"
+  ulimits_length = "${var.ulimits_sidecar_3_length}"
 }
 
 module "port_mappings" {
