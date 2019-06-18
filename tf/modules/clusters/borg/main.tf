@@ -186,14 +186,14 @@ mkdir -p ${var.mount_point_data_ebs}/efs
 ln -s ${var.mount_point_data_ebs}/scratch /scratch
 ln -s ${var.mount_point_data_ebs}/efs /efs
 
-mkdir -p /scratch/tizer
-mkdir -p /scratch/engine
-mkdir -p /scratch/fireball
+mkdir -p ${var.mount_point_data_ebs}/scratch/tizer
+mkdir -p ${var.mount_point_data_ebs}/scratch/engine
+mkdir -p ${var.mount_point_data_ebs}/scratch/fireball
 
-chmod -R 775 /scratch
-chmod -R 775 /efs
-chown -R root:nas-user /scratch
-chown -R root:nas-user /efs
+chmod -R 775 ${var.mount_point_data_ebs}/scratch
+chmod -R 775 ${var.mount_point_data_ebs}/efs
+chown -R root:nas-user ${var.mount_point_data_ebs}/scratch
+chown -R root:nas-user ${var.mount_point_data_ebs}/efs
 
 /etc/init.d/smb restart
 EOFSAMBA
