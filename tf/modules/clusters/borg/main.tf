@@ -167,6 +167,51 @@ resource "aws_iam_instance_profile" "borg" {
   role = "${aws_iam_role.borg.name}"
 }
 
+locals {
+  samba_config_string = <<EOFSAMBA
+# set up Samba
+
+# install packages
+
+yum install -q -y samba samba-client samba-common
+
+aws s3 cp s3://${var.bootstrap_objects_bucket}/${aws_s3_bucket_object.samba_configuration.key} /etc/samba/smb.conf
+
+useradd -M nas-user
+echo -ne "nas\nnas\n" | smbpasswd -a -s nas-user
+
+mkdir -p ${var.mount_point_data_ebs}/scratch
+mkdir -p ${var.mount_point_data_ebs}/efs
+
+ln -s ${var.mount_point_data_ebs}/scratch /scratch
+ln -s ${var.mount_point_data_ebs}/efs /efs
+
+mkdir -p /scratch/tizer
+mkdir -p /scratch/engine
+mkdir -p /scratch/fireball
+
+chmod -R 775 /scratch
+chmod -R 775 /efs
+chown -R root:nas-user /scratch
+chown -R root:nas-user /efs
+
+/etc/init.d/smb restart
+EOFSAMBA
+
+  samba_config = "${var.enable_samba == 1 ? local.samba_config_string : ""}"
+
+  elasticsearch_config_string = <<EOFELASTICSEARCH
+# system parameters for ElasticSearch 5 and above
+sysctl -w vm.max_map_count=262144
+sysctl -w fs.file-max=65536
+# make permanent
+echo "vm.max_map_count=262144" >> /etc/sysctl.conf
+echo "fs.file-max=65536" >> /etc/sysctl.conf
+EOFELASTICSEARCH
+
+  elasticsearch_config = "${var.enable_elasticsearch == 1 ? local.elasticsearch_config_string : ""}"
+}
+
 resource "aws_launch_configuration" "borg" {
   name_prefix          = "${var.cluster_name}-"
   image_id             = "${var.ami}"
@@ -185,7 +230,7 @@ yum update -q -y
 
 # install packages
 
-yum install -q -y jq aws-cli amazon-efs-utils wget samba samba-client samba-common
+yum install -q -y jq aws-cli amazon-efs-utils wget
 
 # mount the EFS volume and add to fstab so it mounts at boot
 
@@ -222,33 +267,9 @@ chmod 0600 /swap
 swapon /swap
 echo "/swap    swap   swap   defaults  0 0" >> /etc/fstab
 
-# set up Samba
+${local.samba_config}
 
-aws s3 cp s3://${var.bootstrap_objects_bucket}/${aws_s3_bucket_object.samba_configuration.key} /etc/samba/smb.conf
-
-useradd -M nas-user
-echo -ne "nas\nnas\n" | smbpasswd -a -s nas-user
-
-mkdir -p ${var.mount_point_data_ebs}/scratch
-mkdir -p ${var.mount_point_data_ebs}/efs
-
-mkdir -p /scratch/tizer
-mkdir -p /scratch/engine
-mkdir -p /scratch/fireball
-
-chmod -R 775 /scratch
-chmod -R 775 /efs
-chown -R root:nas-user /scratch
-chown -R root:nas-user /efs
-
-/etc/init.d/smb restart
-
-# system parameters for ElasticSearch 5 and above
-sysctl -w vm.max_map_count=262144
-sysctl -w fs.file-max=65536
-# make permanent
-echo "vm.max_map_count=262144" >> /etc/sysctl.conf
-echo "fs.file-max=65536" >> /etc/sysctl.conf
+${local.elasticsearch_config}
 
 echo "Setting up ecs-agent"
 aws s3 cp s3://${var.bootstrap_objects_bucket}/${aws_s3_bucket_object.dockerhub_credentials.key} /etc/ecs/ecs.config

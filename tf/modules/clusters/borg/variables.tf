@@ -117,3 +117,11 @@ variable "additional_config" {
   description = "Additional configuration for User Data"
   default     = ""
 }
+
+variable "enable_samba" {
+  default = "1"
+}
+
+variable "enable_elasticsearch" {
+  default = "1"
+}
