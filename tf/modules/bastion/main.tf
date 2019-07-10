@@ -1,5 +1,10 @@
 # Bastion module
 
+data "aws_security_group" "default" {
+  vpc_id = "${var.vpc}"
+  name   = "default"
+}
+
 resource "aws_security_group" "bastion" {
   name        = "${var.prefix}-bastion"
   description = "SSH access"
@@ -79,6 +84,7 @@ resource "aws_launch_configuration" "bastion" {
   key_name             = "${var.key_name}"
 
   security_groups = [
+    "${data.aws_security_group.default.id}",
     "${aws_security_group.bastion.id}",
   ]
 
