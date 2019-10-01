@@ -17,3 +17,8 @@ output "role_name" {
   description = "Name of the task role"
   value       = "${aws_iam_role.task.name}"
 }
+
+output "role_unique_id" {
+  description = "Unique ID of the task role"
+  value       = "${aws_iam_role.task.unique_id}"
+}
