@@ -70,6 +70,12 @@ variable "mount_points" {
   default     = []
 }
 
+variable "volumes_from" {
+  description = "List of volumesFrom entries"
+  type        = "list"
+  default     = []
+}
+
 variable "ulimits" {
   description = "Map of ulimits"
   type        = "map"

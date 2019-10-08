@@ -5,6 +5,7 @@
     "essential": true,
     "name": "${container_name}",
     "mountPoints": ${mount_points},
+    "volumesFrom": ${volumes_from},
     "environment": ${environment_variables},
     "image": "${docker_image}",
     "user": ${user},

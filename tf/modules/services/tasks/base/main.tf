@@ -1,6 +1,7 @@
 locals {
   command       = "${jsonencode(var.command)}"
   mount_points  = "${jsonencode(var.mount_points)}"
+  volumes_from  = "${jsonencode(var.volumes_from)}"
   port_mappings = "${var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"}"
   user          = "${length(var.user) > 0 ? "\"${var.user}\"" : "null"}"
 }
@@ -22,6 +23,7 @@ data "template_file" "definition" {
     memory_reservation    = "${var.memory_reservation}"
     command               = "${local.command}"
     mount_points          = "${local.mount_points}"
+    volumes_from          = "${local.volumes_from}"
     ulimits               = "${module.ulimits.ulimits_string}"
     port_mappings         = "${local.port_mappings}"
     user                  = "${local.user}"

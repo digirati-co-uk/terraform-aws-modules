@@ -112,6 +112,18 @@ variable "mount_points_sidecar" {
   default     = []
 }
 
+variable "volumes_from_main" {
+  description = "List of main container volumesFrom entries"
+  type        = "list"
+  default     = []
+}
+
+variable "volumes_from_sidecar" {
+  description = "List of sidecar container volumesFrom entries"
+  type        = "list"
+  default     = []
+}
+
 variable "links_main" {
   description = "List of links for main container"
   type        = "list"
