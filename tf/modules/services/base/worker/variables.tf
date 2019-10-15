@@ -22,3 +22,8 @@ variable "desired_count" {
 variable "task_definition_arn" {
   description = "ARN of the ECS Task Definition"
 }
+
+variable "scheduling_strategy" {
+  description = "Use REPLICA or DAEMON scheduling strategy"
+  default     = "REPLICA"
+}

@@ -167,3 +167,8 @@ variable "create_route53_entry" {
   description = "Whether to create a Route53 entry for the service"
   default     = true
 }
+
+variable "scheduling_strategy" {
+  description = "Use REPLICA or DAEMON scheduling strategy"
+  default     = "REPLICA"
+}
