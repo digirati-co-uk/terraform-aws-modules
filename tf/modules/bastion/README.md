@@ -23,4 +23,3 @@ The following parameters are available:
 | Parameter              | Description                        | Type   |
 |------------------------|------------------------------------|--------|
 | bastion_security_group | ID of the bastion's security group | string |
-| bastion_ip             | Public IP of the bastion server    | string |
