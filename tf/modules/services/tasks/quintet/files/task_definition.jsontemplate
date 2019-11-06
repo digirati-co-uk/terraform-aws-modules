@@ -1,0 +1,113 @@
+[
+  {
+    "portMappings": ${port_mappings},
+    "command": ${command_main},
+    "essential": true,
+    "name": "${container_name_main}",
+    "mountPoints": ${mount_points_main},
+    "volumesFrom": ${volumes_from_main},
+    "environment": ${environment_variables_main},
+    "image": "${docker_image_main}",
+    "links": ${links_main},
+    "user": ${user_main},
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "ulimits": ${ulimits_main},
+    "cpu": ${cpu_reservation_main},
+    "memoryReservation": ${memory_reservation_main}
+  },
+  {
+    "command": ${command_sidecar_1},
+    "essential": true,
+    "name": "${container_name_sidecar_1}",
+    "mountPoints": ${mount_points_sidecar_1},
+    "volumesFrom": ${volumes_from_sidecar_1},
+    "environment": ${environment_variables_sidecar_1},
+    "image": "${docker_image_sidecar_1}",
+    "links": ${links_sidecar_1},
+    "user": ${user_sidecar_1},
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "ulimits": ${ulimits_sidecar_1},
+    "cpu": ${cpu_reservation_sidecar_1},
+    "memoryReservation": ${memory_reservation_sidecar_1}
+  },
+  {
+    "command": ${command_sidecar_2},
+    "essential": true,
+    "name": "${container_name_sidecar_2}",
+    "mountPoints": ${mount_points_sidecar_2},
+    "volumesFrom": ${volumes_from_sidecar_2},
+    "environment": ${environment_variables_sidecar_2},
+    "image": "${docker_image_sidecar_2}",
+    "links": ${links_sidecar_2},
+    "user": ${user_sidecar_2},
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "ulimits": ${ulimits_sidecar_2},
+    "cpu": ${cpu_reservation_sidecar_2},
+    "memoryReservation": ${memory_reservation_sidecar_2}
+  },
+  {
+    "command": ${command_sidecar_3},
+    "essential": true,
+    "name": "${container_name_sidecar_3}",
+    "mountPoints": ${mount_points_sidecar_3},
+    "volumesFrom": ${volumes_from_sidecar_3},
+    "environment": ${environment_variables_sidecar_3},
+    "image": "${docker_image_sidecar_3}",
+    "links": ${links_sidecar_3},
+    "user": ${user_sidecar_3},
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "ulimits": ${ulimits_sidecar_3},
+    "cpu": ${cpu_reservation_sidecar_3},
+    "memoryReservation": ${memory_reservation_sidecar_3}
+  },
+  {
+    "command": ${command_sidecar_4},
+    "essential": true,
+    "name": "${container_name_sidecar_4}",
+    "mountPoints": ${mount_points_sidecar_4},
+    "volumesFrom": ${volumes_from_sidecar_4},
+    "environment": ${environment_variables_sidecar_4},
+    "image": "${docker_image_sidecar_4}",
+    "links": ${links_sidecar_4},
+    "user": ${user_sidecar_4},
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${log_group_region}",
+        "awslogs-stream-prefix": "${log_prefix}"
+      }
+    },
+    "ulimits": ${ulimits_sidecar_4},
+    "cpu": ${cpu_reservation_sidecar_4},
+    "memoryReservation": ${memory_reservation_sidecar_4}
+  }
+]
