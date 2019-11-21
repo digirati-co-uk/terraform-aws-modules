@@ -169,7 +169,7 @@ EOFECS
 
   ecs_config_string = <<EOFECS
 echo "Setting up ecs-agent"
-echo "ECS_CLUSTER=${cluster_id}" > /etc/ecs/ecs.config
+echo "ECS_CLUSTER=${var.cluster_name}" > /etc/ecs/ecs.config
 EOFECS
 
   ecs_config = "${var.dockerhub_username == "" ? local.ecs_config_string : local.dockerhub_ecs_config_string}"
