@@ -162,12 +162,17 @@ EOFELASTICSEARCH
 
   elasticsearch_config = "${var.enable_elasticsearch == 1 ? local.elasticsearch_config_string : ""}"
 
-  ecs_config_string = <<EOFECS
+  dockerhub_ecs_config_string = <<EOFECS
 echo "Setting up ecs-agent"
 aws s3 cp s3://${var.bootstrap_objects_bucket}/${join("", aws_s3_bucket_object.dockerhub_credentials.*.key)} /etc/ecs/ecs.config
 EOFECS
 
-  ecs_config = "${var.dockerhub_username == "" ? "" : local.ecs_config_string}"
+  ecs_config_string = <<EOFECS
+echo "Setting up ecs-agent"
+echo "ECS_CLUSTER=${cluster_id}" > /etc/ecs/ecs.config
+EOFECS
+
+  ecs_config = "${var.dockerhub_username == "" ? local.ecs_config_string : local.dockerhub_ecs_config_string}"
 }
 
 resource "aws_launch_configuration" "basic" {
