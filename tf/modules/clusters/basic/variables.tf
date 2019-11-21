@@ -73,6 +73,7 @@ variable "root_size" {
 
 variable "bootstrap_objects_bucket" {
   description = "S3 bucket where config is stored"
+  default     = ""
 }
 
 variable "docker_size" {
