@@ -49,6 +49,7 @@ resource "aws_iam_role_policy_attachment" "basic_ec2" {
 }
 
 resource "aws_iam_policy" "basic_abilities" {
+  count       = "${var.bootstrap_objects_bucket == "" ? 0 : 1}"
   name        = "${var.cluster_name}"
   description = "Cluster userdata abilities (route53, s3 access)"
 
@@ -77,7 +78,8 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "basic_abilities" {
-  role = "${aws_iam_role.basic.name}"
+  count = "${var.bootstrap_objects_bucket == "" ? 0 : 1}"
+  role  = "${aws_iam_role.basic.name}"
 
   policy_arn = "${aws_iam_policy.basic_abilities.arn}"
 }
@@ -162,7 +164,7 @@ EOFELASTICSEARCH
 
   ecs_config_string = <<EOFECS
 echo "Setting up ecs-agent"
-aws s3 cp s3://${var.bootstrap_objects_bucket}/${aws_s3_bucket_object.dockerhub_credentials.key} /etc/ecs/ecs.config
+aws s3 cp s3://${var.bootstrap_objects_bucket}/${join("", aws_s3_bucket_object.dockerhub_credentials.*.key)} /etc/ecs/ecs.config
 EOFECS
 
   ecs_config = "${var.dockerhub_username == "" ? "" : local.ecs_config_string}"
