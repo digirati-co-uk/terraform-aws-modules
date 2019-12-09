@@ -21,6 +21,7 @@ variable "vpc" {
 
 variable "hostname" {
   description = "(Optional) Hostname to register in Route53"
+  default     = ""
 }
 
 variable "domain" {
