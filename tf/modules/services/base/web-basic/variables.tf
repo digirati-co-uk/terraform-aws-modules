@@ -37,22 +37,19 @@ variable "path_patterns" {
 }
 
 variable "zone_id" {
-  description = "ID for the Hosted Zone"
+  description = "ID for the Route53 Hosted Zone"
 }
 
 variable "load_balancer_arn" {
-  description = "Optional ARN of ALB to attach to"
-  default     = ""
+  description = "ARN of ALB to attach to"
 }
 
 variable "load_balancer_fqdn" {
-  description = "Optional FQDN of ALB to attach to"
-  default     = ""
+  description = "FQDN of ALB to attach to"
 }
 
 variable "load_balancer_zone_id" {
-  description = "Optional Zone ID of ALB to attach to"
-  default     = ""
+  description = "Zone ID of ALB to attach to"
 }
 
 variable "service_number_http" {
