@@ -106,8 +106,8 @@ resource "aws_route53_record" "service" {
   type    = "A"
 
   alias {
-    name                   = "${var.load_balancer_fqdn == "" ? join("", aws_alb.service.*.dns_name) : var.load_balancer_fqdn}"
-    zone_id                = "${var.load_balancer_zone_id == "" ? join("", aws_alb.service.*.zone_id) : var.load_balancer_zone_id}"
+    name                   = "${var.load_balancer_fqdn}"
+    zone_id                = "${var.load_balancer_zone_id}"
     evaluate_target_health = false
   }
 }
