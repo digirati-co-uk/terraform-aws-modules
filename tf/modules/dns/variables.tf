@@ -17,3 +17,8 @@ variable "region" {
 variable "vpc" {
   description = "VPC to join"
 }
+
+variable "suffix" {
+  description = "suffix of domain"
+  default     = "internal"
+}
