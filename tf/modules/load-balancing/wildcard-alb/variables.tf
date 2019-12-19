@@ -47,3 +47,8 @@ variable "redirect_http_to_https" {
   description = "Enable default behaviour to redirect http to https"
   default     = false
 }
+
+variable "idle_timeout_seconds" {
+  description = "Load Balancer idle timeout (seconds)"
+  default     = "60"
+}

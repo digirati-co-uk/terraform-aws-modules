@@ -49,6 +49,8 @@ resource "aws_alb" "lb" {
     "${aws_security_group.web.id}",
   ]
 
+  idle_timeout = "${var.idle_timeout_seconds}"
+
   tags {
     Project = "${var.project}"
   }
