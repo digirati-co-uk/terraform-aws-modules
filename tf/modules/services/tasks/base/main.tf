@@ -39,21 +39,21 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 module "env_vars" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment-variables/"
+  source = "../environment-variables/"
 
   env_vars        = "${var.environment_variables}"
   env_vars_length = "${var.environment_variables_length}"
 }
 
 module "ulimits" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+  source = "../ulimits/"
 
   ulimits        = "${var.ulimits}"
   ulimits_length = "${var.ulimits_length}"
 }
 
 module "port_mappings" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/port-mappings/"
+  source = "../port-mappings/"
 
   port_mappings        = "${var.port_mappings}"
   port_mappings_length = "${var.port_mappings_length}"

@@ -58,35 +58,35 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 module "env_vars_main" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment-variables/"
+  source = "../environment-variables/"
 
   env_vars        = "${var.environment_variables_main}"
   env_vars_length = "${var.environment_variables_length_main}"
 }
 
 module "env_vars_sidecar" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/environment-variables/"
+  source = "../environment-variables/"
 
   env_vars        = "${var.environment_variables_sidecar}"
   env_vars_length = "${var.environment_variables_length_sidecar}"
 }
 
 module "ulimits_main" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+  source = "../ulimits/"
 
   ulimits        = "${var.ulimits_main}"
   ulimits_length = "${var.ulimits_main_length}"
 }
 
 module "ulimits_sidecar" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/ulimits/"
+  source = "../ulimits/"
 
   ulimits        = "${var.ulimits_sidecar}"
   ulimits_length = "${var.ulimits_sidecar_length}"
 }
 
 module "port_mappings" {
-  source = "git::https://github.com/digirati-co-uk/terraform-aws-modules.git//tf/modules/services/tasks/port-mappings/"
+  source = "../port-mappings/"
 
   port_mappings        = "${var.port_mappings}"
   port_mappings_length = "${var.port_mappings_length}"
