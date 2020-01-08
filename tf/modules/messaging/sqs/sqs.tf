@@ -18,7 +18,7 @@ resource "aws_sqs_queue" "q" {
 resource "aws_sqs_queue" "dlq" {
   name = "${var.queue_name}_dlq"
 
-  tags {
+  tags = {
     "Project" = var.project
   }
 }
