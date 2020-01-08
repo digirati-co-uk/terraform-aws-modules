@@ -24,7 +24,7 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     "Project" = "${var.project}"
   }
 }
