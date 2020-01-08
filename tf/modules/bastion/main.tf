@@ -25,7 +25,7 @@ resource "aws_security_group" "bastion" {
   }
 
   tags {
-    "Project" = var.project
+    Project = var.project
   }
 }
 
