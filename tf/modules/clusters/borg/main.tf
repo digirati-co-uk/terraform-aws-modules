@@ -213,7 +213,7 @@ EOFELASTICSEARCH
 }
 
 resource "aws_launch_configuration" "borg" {
-  name_prefix          = var.cluster_name}
+  name_prefix          = var.cluster_name
   image_id             = var.ami
   instance_type        = var.instance_type
   iam_instance_profile = aws_iam_instance_profile.borg.name
