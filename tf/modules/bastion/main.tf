@@ -152,7 +152,7 @@ resource "aws_autoscaling_group" "bastion" {
 
   tag {
     key                 = "Project"
-    value               = "${var.project}"
+    value               = var.project
     propagate_at_launch = true
   }
 }
