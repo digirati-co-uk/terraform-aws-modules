@@ -29,7 +29,7 @@ variable "key_name" {
 
 variable "subnets" {
   description = "List of VPC subnets to spread cluster across"
-  type        = "list"
+  type        = list
 }
 
 variable "vpc" {
