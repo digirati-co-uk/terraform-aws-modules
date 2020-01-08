@@ -96,7 +96,7 @@ resource "aws_nat_gateway" "gw" {
     "Project" = var.project
   }
 
-  depends_on = ["aws_internet_gateway.main"]
+  depends_on = [aws_internet_gateway.main]
 }
 
 resource "aws_subnet" "private_1" {
@@ -158,7 +158,7 @@ resource "aws_route" "private_1_internet_access" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.gw.id
 
-  depends_on = ["aws_nat_gateway.gw"]
+  depends_on = [aws_nat_gateway.gw]
 }
 
 resource "aws_route" "private_2_internet_access" {
@@ -166,5 +166,5 @@ resource "aws_route" "private_2_internet_access" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.gw.id
 
-  depends_on = ["aws_nat_gateway.gw"]
+  depends_on = [aws_nat_gateway.gw]
 }
