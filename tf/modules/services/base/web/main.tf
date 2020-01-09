@@ -109,14 +109,18 @@ resource "aws_security_group" "web" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["${var.ip_whitelist}"]
+    cidr_blocks = [
+      flatten(var.ip_whitelist)
+    ]
   }
 
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["${var.ip_whitelist}"]
+    cidr_blocks = [
+      flatten(var.ip_whitelist)
+    ]
   }
 
   # outbound internet access
@@ -139,7 +143,9 @@ resource "aws_security_group" "web" {
 resource "aws_alb" "service" {
   count   = var.load_balancer_arn == "" ? 1 : 0
   name    = var.name
-  subnets = ["${var.subnets}"]
+  subnets = [
+    flatten(var.subnets)
+  ]
 
   security_groups = [
     "${aws_security_group.web.id}",
