@@ -30,7 +30,7 @@ locals {
 data "template_file" "definition" {
   template = "${file("${path.module}/files/task_definition.jsontemplate")}"
 
-  vars {
+  vars = {
     prefix                          = "${var.prefix}"
     log_group_name                  = "${var.log_group_name}"
     log_group_region                = "${var.log_group_region}"

@@ -5,7 +5,7 @@ data "template_file" "name_val_pair" {
 
   template = "{\"hostPort\": $${key}, \"containerPort\": $${value1}, \"protocol\": \"tcp\"}"
 
-  vars {
+  vars = {
     key    = element(keys(var.port_mappings), count.index)
     value1 = element(values(var.port_mappings), count.index)
   }

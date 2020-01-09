@@ -5,7 +5,7 @@ data "template_file" "name_val_pair" {
 
   template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
 
-  vars {
+  vars = {
     key    = element(keys(var.ulimits), count.index)
     value1 = element(split(":", element(values(var.ulimits), count.index)), 0)
     value2 = element(split(":", element(values(var.ulimits), count.index)), 1)
