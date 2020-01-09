@@ -46,13 +46,15 @@ resource "aws_security_group" "web" {
 
 resource "aws_alb" "lb" {
   name    = "${var.prefix}-${var.name}"
+
   subnets = [
-    var.subnets
+    flatten(var.subnets)
   ]
 
   security_groups = [
-    var.security_groups,
-    aws_security_group.web.id
+    flatten([
+      var.security_groups,
+      aws_security_group.web.id])
   ]
 
   idle_timeout = var.idle_timeout_seconds
