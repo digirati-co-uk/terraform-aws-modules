@@ -48,7 +48,7 @@ module "env_vars" {
 module "ulimits" {
   source = "../ulimits/"
 
-  ulimits {
+  ulimits = {
     var.ulimits
   }
 
