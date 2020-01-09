@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "assume_role_policy_ec2" {
       "sts:AssumeRole",
     ]
 
-    principals = {
+    principals {
       type        = "Service"
       identifiers = ["ec2.amazonaws.com"]
     }
@@ -50,7 +50,7 @@ resource "aws_iam_role" "bastion" {
 }
 
 data "aws_iam_policy_document" "bastion_abilities" {
-  statement = {
+  statement {
     actions = [
       "route53:GetHostedZone",
       "route53:ListResourceRecordSets",
