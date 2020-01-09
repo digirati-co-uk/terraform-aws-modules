@@ -216,8 +216,12 @@ resource "aws_alb_listener" "https_existing_cert" {
   }
 }
 
+locals {
+  use_http_listener = var.load_balancer_http_listener_arn == ""
+}
+
 resource "aws_alb_listener_rule" "http" {
-  count        = var.load_balancer_http_listener_arn == "" ? 0 : length(var.path_patterns)
+  count        = local.use_http_listener ? 0 : length(var.path_patterns)
   listener_arn = var.load_balancer_http_listener_arn
   priority     = var.service_number_http + count.index
 
