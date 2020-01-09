@@ -231,7 +231,9 @@ resource "aws_alb_listener_rule" "http" {
   }
 
   lifecycle {
-    ignore_changes = ["priority"]
+    ignore_changes = [
+      priority
+    ]
   }
 }
 
@@ -256,7 +258,9 @@ resource "aws_alb_listener_rule" "https" {
   }
 
   lifecycle {
-    ignore_changes = ["priority"]
+    ignore_changes = [
+      priority
+    ]
   }
 }
 
