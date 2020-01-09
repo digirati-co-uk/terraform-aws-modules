@@ -1,9 +1,22 @@
+data "template_file" "name_val_pair" {
+  count = var.ulimits_length
+
+  template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
+
+  vars = {
+    key    = element(keys(var.ulimits), count.index)
+    value1 = element(split(":", element(values(var.ulimits), count.index)), 0)
+    value2 = element(split(":", element(values(var.ulimits), count.index)), 1)
+  }
+}
+
 locals {
   command       = jsonencode(var.command)
   mount_points  = jsonencode(var.mount_points)
   volumes_from  = jsonencode(var.volumes_from)
   port_mappings = var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"
   user          = length(var.user) > 0 ? "\"${var.user}\"" : "null"
+  ulimits_string = "[${join(", ", "${data.template_file.name_val_pair.*.rendered}")}]"
 }
 
 data "template_file" "definition" {
@@ -24,7 +37,7 @@ data "template_file" "definition" {
     command               = "${local.command}"
     mount_points          = "${local.mount_points}"
     volumes_from          = "${local.volumes_from}"
-    ulimits               = "${module.ulimits.ulimits_string}"
+    ulimits               = "${local.ulimits_string}"
     port_mappings         = "${local.port_mappings}"
     user                  = "${local.user}"
   }
@@ -43,16 +56,6 @@ module "env_vars" {
 
   env_vars        = var.environment_variables
   env_vars_length = var.environment_variables_length
-}
-
-module "ulimits" {
-  source = "../ulimits/"
-
-  ulimits = {
-    var.ulimits
-  }
-
-  ulimits_length = var.ulimits_length
 }
 
 module "port_mappings" {
