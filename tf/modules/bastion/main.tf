@@ -138,7 +138,9 @@ resource "aws_autoscaling_group" "bastion" {
 
   max_size            = "1"
   min_size            = "1"
-  vpc_zone_identifier = ["${var.subnets}"]
+  vpc_zone_identifier = [
+    flatten(var.subnets)
+  ]
 
   default_cooldown = 0
 

@@ -7,7 +7,7 @@ resource "aws_ecs_cluster" "borg" {
 data "template_file" "dockerhub_credentials" {
   template = "${file("${path.module}/files/s3-objects/bootstrap-objects/dockerhub_credentials.template")}"
 
-  vars {
+  vars = {
     cluster_id         = "${aws_ecs_cluster.borg.name}"
     dockerhub_username = "${var.dockerhub_username}"
     dockerhub_password = "${var.dockerhub_password}"
