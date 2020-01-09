@@ -176,7 +176,7 @@ resource "aws_alb_target_group" "service" {
 
 resource "aws_alb_listener" "http" {
   count             = var.load_balancer_arn == "" ? 1 : 0
-  load_balancer_arn = aws_alb.service.id
+  load_balancer_arn = join("", aws_alb.service.*.id)
   port              = 80
   protocol          = "HTTP"
 
@@ -188,7 +188,7 @@ resource "aws_alb_listener" "http" {
 
 resource "aws_alb_listener" "https_new_cert" {
   count             = var.load_balancer_arn == ""  && var.certificate_arn == "" ? 1 : 0
-  load_balancer_arn = aws_alb.service.id
+  load_balancer_arn = join("", aws_alb.service.*.id)
   port              = 443
   protocol          = "HTTPS"
 
@@ -203,7 +203,7 @@ resource "aws_alb_listener" "https_new_cert" {
 
 resource "aws_alb_listener" "https_existing_cert" {
   count             = var.load_balancer_arn == "" && var.certificate_arn != "" ? 1 : 0
-  load_balancer_arn = aws_alb.service.id
+  load_balancer_arn = join("", aws_alb.service.*.id)
   port              = 443
   protocol          = "HTTPS"
 
