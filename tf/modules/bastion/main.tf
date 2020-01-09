@@ -14,7 +14,9 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.ip_whitelist}"]
+    cidr_blocks = [
+      flatten(var.ip_whitelist)
+    ]
   }
 
   egress {
@@ -25,12 +27,12 @@ resource "aws_security_group" "bastion" {
   }
 
   tags = {
-    "Project" = "${var.project}"
+    Project = "${var.project}"
   }
 }
 
 data "aws_iam_policy_document" "assume_role_policy_ec2" {
-  statement = {
+  statement {
     actions = [
       "sts:AssumeRole",
     ]
