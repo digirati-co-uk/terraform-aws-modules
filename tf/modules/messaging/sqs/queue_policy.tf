@@ -20,7 +20,9 @@ data "aws_iam_policy_document" "sns_write_to_queue" {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
 
-      values = ["${formatlist("arn:aws:sns:%s:%s:%s",var.region, var.account_id, var.topic_names)}"]
+      values = [
+        formatlist("arn:aws:sns:%s:%s:%s",var.region, var.account_id, var.topic_names)
+      ]
     }
   }
 }
