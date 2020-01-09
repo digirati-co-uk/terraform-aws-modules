@@ -12,7 +12,7 @@ variable "cluster_id" {
 
 variable "subnets" {
   description = "List of subnets to load balance"
-  type        = "list"
+  type        = list
 }
 
 variable "vpc" {
@@ -49,7 +49,7 @@ variable "domain" {
 
 variable "path_patterns" {
   description = "Path patterns to match in ALB"
-  type        = "list"
+  type        = list
 
   default = [
     "/*",
@@ -67,7 +67,7 @@ variable "zone_id" {
 
 variable "ip_whitelist" {
   description = "List of CIDR blocks to allow web access for"
-  type        = "list"
+  type        = list
   default     = ["0.0.0.0/0"]
 }
 

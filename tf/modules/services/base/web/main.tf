@@ -23,7 +23,7 @@ EOF
 
 resource "aws_iam_role_policy" "service" {
   name = "${var.name}-service-role-policy"
-  role = "${aws_iam_role.service.name}"
+  role = aws_iam_role.service.name
 
   policy = <<EOF
 {
@@ -52,21 +52,21 @@ EOF
 ###########
 
 resource "aws_ecs_service" "service" {
-  name            = "${var.name}"
-  cluster         = "${var.cluster_id}"
-  task_definition = "${var.task_definition_arn}"
-  desired_count   = "${var.desired_count}"
-  iam_role        = "${aws_iam_role.service.id}"
+  name            = var.name
+  cluster         = var.cluster_id
+  task_definition = var.task_definition_arn
+  desired_count   = var.desired_count
+  iam_role        = aws_iam_role.service.id
 
-  health_check_grace_period_seconds = "${var.health_check_grace_period_seconds}"
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   load_balancer {
-    target_group_arn = "${aws_alb_target_group.service.arn}"
-    container_name   = "${var.container_name}"
-    container_port   = "${var.container_port}"
+    target_group_arn = aws_alb_target_group.service.arn
+    container_name   = var.container_name
+    container_port   = var.container_port
   }
 
-  scheduling_strategy = "${var.scheduling_strategy}"
+  scheduling_strategy = var.scheduling_strategy
 
   depends_on = [
     "aws_iam_role_policy.service",
@@ -78,12 +78,12 @@ resource "aws_ecs_service" "service" {
 ###################
 
 resource "aws_iam_server_certificate" "service" {
-  count       = "${var.certificate_body == "" ? 0 : 1}"
+  count       = var.certificate_body == "" ? 0 : 1
   name_prefix = "${var.hostname}.${var.domain}"
 
-  certificate_body  = "${var.certificate_body}"
-  private_key       = "${var.certificate_key}"
-  certificate_chain = "${var.certificate_chain}"
+  certificate_body  = var.certificate_body
+  private_key       = var.certificate_key
+  certificate_chain = var.certificate_chain
 
   lifecycle {
     create_before_destroy = true
@@ -95,15 +95,15 @@ resource "aws_iam_server_certificate" "service" {
 ##################
 
 data "aws_security_group" "default" {
-  vpc_id = "${var.vpc}"
+  vpc_id = var.vpc
   name   = "default"
 }
 
 resource "aws_security_group" "web" {
-  count       = "${var.load_balancer_arn == "" ? 1 : 0}"
+  count       = var.load_balancer_arn == "" ? 1 : 0
   name        = "${var.name}-web"
   description = "Web access for ${var.name}"
-  vpc_id      = "${var.vpc}"
+  vpc_id      = var.vpc
 
   ingress {
     from_port   = 80
@@ -127,8 +127,8 @@ resource "aws_security_group" "web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
-    Project = "${var.project}"
+  tags = {
+    Project = var.project
   }
 }
 
@@ -137,8 +137,8 @@ resource "aws_security_group" "web" {
 #############################
 
 resource "aws_alb" "service" {
-  count   = "${var.load_balancer_arn == "" ? 1 : 0}"
-  name    = "${var.name}"
+  count   = var.load_balancer_arn == "" ? 1 : 0
+  name    = var.name
   subnets = ["${var.subnets}"]
 
   security_groups = [
@@ -146,78 +146,78 @@ resource "aws_alb" "service" {
     "${data.aws_security_group.default.id}",
   ]
 
-  tags {
-    Project = "${var.project}"
+  tags = {
+    Project = var.project
   }
 }
 
 resource "aws_alb_target_group" "service" {
-  name                 = "${var.name}"
+  name                 = var.name
   port                 = 80
   protocol             = "HTTP"
-  vpc_id               = "${var.vpc}"
-  deregistration_delay = "${var.deregistration_delay}"
+  vpc_id               = var.vpc
+  deregistration_delay = var.deregistration_delay
 
   health_check {
-    path                = "${var.health_check_path}"
-    timeout             = "${var.health_check_timeout}"
-    healthy_threshold   = "${var.health_check_healthy_threshold}"
-    unhealthy_threshold = "${var.health_check_unhealthy_threshold}"
-    interval            = "${var.health_check_interval}"
-    matcher             = "${var.health_check_matcher}"
+    path                = var.health_check_path
+    timeout             = var.health_check_timeout
+    healthy_threshold   = var.health_check_healthy_threshold
+    unhealthy_threshold = var.health_check_unhealthy_threshold
+    interval            = var.health_check_interval
+    matcher             = var.health_check_matcher
   }
 }
 
 resource "aws_alb_listener" "http" {
-  count             = "${var.load_balancer_arn == "" ? 1 : 0}"
-  load_balancer_arn = "${aws_alb.service.id}"
+  count             = var.load_balancer_arn == "" ? 1 : 0
+  load_balancer_arn = aws_alb.service.id
   port              = 80
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.service.id}"
+    target_group_arn = aws_alb_target_group.service.id
     type             = "forward"
   }
 }
 
 resource "aws_alb_listener" "https_new_cert" {
-  count             = "${var.load_balancer_arn == ""  && var.certificate_arn == "" ? 1 : 0}"
-  load_balancer_arn = "${aws_alb.service.id}"
+  count             = var.load_balancer_arn == ""  && var.certificate_arn == "" ? 1 : 0
+  load_balancer_arn = aws_alb.service.id
   port              = 443
   protocol          = "HTTPS"
 
-  ssl_policy      = "${var.elb_ssl_policy}"
-  certificate_arn = "${aws_iam_server_certificate.service.arn}"
+  ssl_policy      = var.elb_ssl_policy
+  certificate_arn = aws_iam_server_certificate.service.arn
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.service.id}"
+    target_group_arn = aws_alb_target_group.service.id
     type             = "forward"
   }
 }
 
 resource "aws_alb_listener" "https_existing_cert" {
-  count             = "${var.load_balancer_arn == "" && var.certificate_arn != "" ? 1 : 0}"
-  load_balancer_arn = "${aws_alb.service.id}"
+  count             = var.load_balancer_arn == "" && var.certificate_arn != "" ? 1 : 0
+  load_balancer_arn = aws_alb.service.id
   port              = 443
   protocol          = "HTTPS"
 
-  ssl_policy      = "${var.elb_ssl_policy}"
-  certificate_arn = "${var.certificate_arn}"
+  ssl_policy      = var.elb_ssl_policy
+  certificate_arn = var.certificate_arn
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.service.id}"
+    target_group_arn = aws_alb_target_group.service.id
     type             = "forward"
   }
 }
 
 resource "aws_alb_listener_rule" "http" {
-  count        = "${var.load_balancer_http_listener_arn == "" ? 0 : length(var.path_patterns)}"
-  listener_arn = "${var.load_balancer_http_listener_arn}"
-  priority     = "${var.service_number_http + count.index}"
+  count        = var.load_balancer_http_listener_arn == "" ? 0 : length(var.path_patterns)
+  listener_arn = var.load_balancer_http_listener_arn
+  priority     = var.service_number_http + count.index
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_alb_target_group.service.arn}"
+    target_group_arn = aws_alb_target_group.service.arn
   }
 
   condition {
@@ -236,13 +236,13 @@ resource "aws_alb_listener_rule" "http" {
 }
 
 resource "aws_alb_listener_rule" "https" {
-  count        = "${var.load_balancer_https_listener_arn == "" ? 0 : length(var.path_patterns)}"
-  listener_arn = "${var.load_balancer_https_listener_arn}"
-  priority     = "${var.service_number_https + count.index}"
+  count        = var.load_balancer_https_listener_arn == "" ? 0 : length(var.path_patterns)
+  listener_arn = var.load_balancer_https_listener_arn
+  priority     = var.service_number_https + count.index
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_alb_target_group.service.arn}"
+    target_group_arn = aws_alb_target_group.service.arn
   }
 
   condition {
@@ -265,14 +265,14 @@ resource "aws_alb_listener_rule" "https" {
 #######
 
 resource "aws_route53_record" "service" {
-  count   = "${var.create_route53_entry ? 1 : 0}"
-  zone_id = "${var.zone_id}"
-  name    = "${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"
+  count   = var.create_route53_entry ? 1 : 0
+  zone_id = var.zone_id
+  name    = var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"
   type    = "A"
 
   alias {
-    name                   = "${var.load_balancer_fqdn == "" ? join("", aws_alb.service.*.dns_name) : var.load_balancer_fqdn}"
-    zone_id                = "${var.load_balancer_zone_id == "" ? join("", aws_alb.service.*.zone_id) : var.load_balancer_zone_id}"
+    name                   = var.load_balancer_fqdn == "" ? join("", aws_alb.service.*.dns_name) : var.load_balancer_fqdn
+    zone_id                = var.load_balancer_zone_id == "" ? join("", aws_alb.service.*.zone_id) : var.load_balancer_zone_id
     evaluate_target_health = false
   }
 }

@@ -23,7 +23,7 @@ EOF
 
 resource "aws_iam_role_policy" "service" {
   name = "${var.name}-service-role-policy"
-  role = "${aws_iam_role.service.name}"
+  role = aws_iam_role.service.name
 
   policy = <<EOF
 {
