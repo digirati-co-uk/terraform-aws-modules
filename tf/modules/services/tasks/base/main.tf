@@ -49,7 +49,7 @@ module "ulimits" {
   source = "../ulimits/"
 
   ulimits {
-    "${var.ulimits}"
+    var.ulimits
   }
 
   ulimits_length = var.ulimits_length
