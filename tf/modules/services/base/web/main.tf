@@ -69,7 +69,7 @@ resource "aws_ecs_service" "service" {
   scheduling_strategy = var.scheduling_strategy
 
   depends_on = [
-    "aws_iam_role_policy.service",
+    aws_iam_role_policy.service
   ]
 }
 
