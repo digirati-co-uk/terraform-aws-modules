@@ -193,7 +193,7 @@ resource "aws_alb_listener" "https_new_cert" {
   protocol          = "HTTPS"
 
   ssl_policy      = var.elb_ssl_policy
-  certificate_arn = aws_iam_server_certificate.service.arn
+  certificate_arn = join("", aws_iam_server_certificate.service.*.arn)
 
   default_action {
     target_group_arn = aws_alb_target_group.service.id

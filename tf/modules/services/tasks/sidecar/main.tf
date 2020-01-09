@@ -1,5 +1,5 @@
 data "template_file" "ulimits_name_val_pair_main" {
-  count = var.ulimits_length_main
+  count = var.ulimits_main_length
 
   template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
 
@@ -11,7 +11,7 @@ data "template_file" "ulimits_name_val_pair_main" {
 }
 
 data "template_file" "ulimits_name_val_pair_sidecar" {
-  count = var.ulimits_length_sidecar
+  count = var.ulimits_sidecar_length
 
   template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
 
