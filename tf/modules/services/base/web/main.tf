@@ -148,8 +148,8 @@ resource "aws_alb" "service" {
   ]
 
   security_groups = [
-    "${aws_security_group.web.id}",
-    "${data.aws_security_group.default.id}",
+    join("", aws_security_group.web.*.id),
+    data.aws_security_group.default.id,
   ]
 
   tags = {
