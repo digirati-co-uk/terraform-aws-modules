@@ -13,7 +13,6 @@ resource "aws_security_group" "web" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = var.ip_whitelist
-    ]
   }
 
   # HTTPS access from anywhere
@@ -22,7 +21,6 @@ resource "aws_security_group" "web" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = var.ip_whitelist
-    ]
   }
 
   # outbound internet access
