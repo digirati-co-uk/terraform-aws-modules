@@ -43,9 +43,7 @@ resource "aws_security_group" "web" {
 resource "aws_alb" "lb" {
   name    = "${var.prefix}-${var.name}"
 
-  subnets = [
-    flatten(var.subnets)
-  ]
+  subnets = var.subnets
 
   security_groups = [
     flatten([
