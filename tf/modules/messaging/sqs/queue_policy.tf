@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "sns_write_to_queue" {
       variable = "aws:SourceArn"
 
       values = [
-        flatten(formatlist("arn:aws:sns:%s:%s:%s",var.region, var.account_id, var.topic_names))
+        var.topic_name
       ]
     }
   }
