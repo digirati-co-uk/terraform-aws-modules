@@ -45,11 +45,12 @@ resource "aws_alb" "lb" {
 
   subnets = var.subnets
 
-  security_groups = [
-    flatten([
+  security_groups = flatten(
+    [
       var.security_groups,
-      aws_security_group.web.id])
-  ]
+      aws_security_group.web.id
+    ]
+  )
 
   idle_timeout = var.idle_timeout_seconds
 
