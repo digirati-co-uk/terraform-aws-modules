@@ -119,9 +119,11 @@ variable "additional_config" {
 }
 
 variable "enable_samba" {
-  default = "1"
+  type = bool
+  default = true
 }
 
 variable "enable_elasticsearch" {
-  default = "1"
+  type = bool
+  default = true
 }

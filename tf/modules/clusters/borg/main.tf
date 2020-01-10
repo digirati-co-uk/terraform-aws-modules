@@ -198,7 +198,7 @@ chown -R root:nas-user ${var.mount_point_data_ebs}/efs
 /etc/init.d/smb restart
 EOFSAMBA
 
-  samba_config = var.enable_samba == 1 ? local.samba_config_string : ""
+  samba_config = var.enable_samba ? local.samba_config_string : ""
 
   elasticsearch_config_string = <<EOFELASTICSEARCH
 # system parameters for ElasticSearch 5 and above
@@ -209,7 +209,7 @@ echo "vm.max_map_count=262144" >> /etc/sysctl.conf
 echo "fs.file-max=65536" >> /etc/sysctl.conf
 EOFELASTICSEARCH
 
-  elasticsearch_config = var.enable_elasticsearch == 1 ? local.elasticsearch_config_string : ""
+  elasticsearch_config = var.enable_elasticsearch ? local.elasticsearch_config_string : ""
 }
 
 resource "aws_launch_configuration" "borg" {
