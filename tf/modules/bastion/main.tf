@@ -14,9 +14,7 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [
-      flatten(var.ip_whitelist)
-    ]
+    cidr_blocks = flatten(var.ip_whitelist)
   }
 
   egress {
@@ -138,9 +136,7 @@ resource "aws_autoscaling_group" "bastion" {
 
   max_size            = "1"
   min_size            = "1"
-  vpc_zone_identifier = [
-    flatten(var.subnets)
-  ]
+  vpc_zone_identifier = flatten(var.subnets)
 
   default_cooldown = 0
 
