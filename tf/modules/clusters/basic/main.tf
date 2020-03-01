@@ -108,7 +108,7 @@ resource "aws_security_group" "basic" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     "Project" = "${var.project}"
   }
 }
@@ -140,7 +140,7 @@ resource "aws_security_group" "basic_peering" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     "Project" = "${var.project}"
   }
 }

@@ -8,10 +8,10 @@ resource "aws_route53_zone" "internal" {
   name = "${var.prefix}.${var.region}.${var.suffix}"
 
   vpc {
-    vpc_id = "${var.vpc}"
+    vpc_id = var.vpc
   }
 
-  tags {
+  tags = {
     "Project" = "${var.project}"
   }
 }
