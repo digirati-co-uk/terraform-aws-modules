@@ -63,6 +63,11 @@ variable "max_size" {
   default     = 1
 }
 
+variable "desired_capacity" {
+  description = "The number of Amazon EC2 instances that should be running in the group"
+  default     = 1
+}
+
 variable "root_size" {
   description = "Size in GB for the root partition"
   default     = 40

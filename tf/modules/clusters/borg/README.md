@@ -31,6 +31,7 @@ The following parameters are available:
 | dockerhub_email          | DockerHub robot email                        | string |           |
 | min_size                 | Minimum number of instances for the cluster  | string | 1         |
 | max_size                 | Maximum number of instances for the cluster  | string | 1         |
+| desired_capacity         | Desired number of instances for the cluster  | string | 1         |
 | root_size                | Size in GB for the root partition            | string | 40        |
 | docker_size              | Size in GB of the Docker volume              | string | 40        |
 | data_ebs_size            | Size in GB of the EBS volume                 | string | 100       |

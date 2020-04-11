@@ -320,6 +320,7 @@ resource "aws_autoscaling_group" "borg" {
 
   max_size            = var.max_size
   min_size            = var.min_size
+  desired_capacity    = var.desired_capacity
   vpc_zone_identifier = flatten(var.subnets)
 
   default_cooldown = 0
