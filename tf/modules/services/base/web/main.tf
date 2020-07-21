@@ -58,6 +58,10 @@ resource "aws_ecs_service" "service" {
   desired_count   = "${var.desired_count}"
   iam_role        = "${aws_iam_role.service.id}"
 
+
+  deployment_maximum_percent         = "${var.scheduling_strategy == "DAEMON" ? 0 : var.deployment_maximum_percent}"
+  deployment_minimum_healthy_percent = "${var.scheduling_strategy == "DAEMON" ? 100 : var.deployment_minimum_healthy_percent}"
+
   health_check_grace_period_seconds = "${var.health_check_grace_period_seconds}"
 
   load_balancer {
