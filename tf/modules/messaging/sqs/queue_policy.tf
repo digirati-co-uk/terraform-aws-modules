@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "read_from_queue" {
     ]
 
     resources = [
-      "${aws_sqs_queue.q.arn}",
+      aws_sqs_queue.q.arn,
     ]
   }
 }
@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "write_to_queue" {
     ]
 
     resources = [
-      "${aws_sqs_queue.q.arn}",
+      aws_sqs_queue.q.arn,
     ]
   }
 }

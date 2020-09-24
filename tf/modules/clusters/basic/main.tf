@@ -1,29 +1,29 @@
 # Basic cluster module
 
 resource "aws_ecs_cluster" "basic" {
-  name = "${var.cluster_name}"
+  name = var.cluster_name
 }
 
 data "template_file" "dockerhub_credentials" {
   template = "${file("${path.module}/files/s3-objects/bootstrap-objects/dockerhub_credentials.template")}"
 
   vars {
-    cluster_id         = "${aws_ecs_cluster.basic.name}"
-    dockerhub_username = "${var.dockerhub_username}"
-    dockerhub_password = "${var.dockerhub_password}"
-    dockerhub_email    = "${var.dockerhub_email}"
+    cluster_id         = aws_ecs_cluster.basic.name
+    dockerhub_username = var.dockerhub_username
+    dockerhub_password = var.dockerhub_password
+    dockerhub_email    = var.dockerhub_email
   }
 }
 
 resource "aws_s3_bucket_object" "dockerhub_credentials" {
   count   = "${var.dockerhub_username == "" ? 0 : 1}"
-  bucket  = "${var.bootstrap_objects_bucket}"
+  bucket  = var.bootstrap_objects_bucket
   key     = "${aws_ecs_cluster.basic.name}/dockerhub_credentials"
-  content = "${data.template_file.dockerhub_credentials.rendered}"
+  content = data.template_file.dockerhub_credentials.rendered
 }
 
 resource "aws_iam_role" "basic" {
-  name = "${var.cluster_name}"
+  name = var.cluster_name
 
   assume_role_policy = <<EOF
 {
@@ -43,14 +43,14 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "basic_ec2" {
-  role = "${aws_iam_role.basic.name}"
+  role = aws_iam_role.basic.name
 
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
 resource "aws_iam_policy" "basic_abilities" {
   count       = "${var.bootstrap_objects_bucket == "" ? 0 : 1}"
-  name        = "${var.cluster_name}"
+  name        = var.cluster_name
   description = "Cluster userdata abilities (route53, s3 access)"
 
   policy = <<EOF
@@ -79,9 +79,9 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "basic_abilities" {
   count = "${var.bootstrap_objects_bucket == "" ? 0 : 1}"
-  role  = "${aws_iam_role.basic.name}"
+  role  = aws_iam_role.basic.name
 
-  policy_arn = "${aws_iam_policy.basic_abilities.arn}"
+  policy_arn = aws_iam_policy.basic_abilities.arn
 }
 
 data "aws_vpc" "main" {
@@ -90,15 +90,15 @@ data "aws_vpc" "main" {
 
 resource "aws_security_group" "basic" {
   count       = "${var.peered_vpc_cidr == "" ? 1 : 0}"
-  name        = "${var.cluster_name}"
+  name        = var.cluster_name
   description = "Cluster access"
-  vpc_id      = "${data.aws_vpc.main.id}"
+  vpc_id      = data.aws_vpc.main.id
 
   ingress {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_vpc.main.cidr_block}"]
+    cidr_blocks = [data.aws_vpc.main.cidr_block]
   }
 
   egress {
@@ -109,28 +109,28 @@ resource "aws_security_group" "basic" {
   }
 
   tags = {
-    "Project" = "${var.project}"
+    "Project" = var.project
   }
 }
 
 resource "aws_security_group" "basic_peering" {
   count       = "${var.peered_vpc_cidr == "" ? 0 : 1}"
-  name        = "${var.cluster_name}"
+  name        = var.cluster_name
   description = "Cluster access"
-  vpc_id      = "${data.aws_vpc.main.id}"
+  vpc_id      = data.aws_vpc.main.id
 
   ingress {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_vpc.main.cidr_block}"]
+    cidr_blocks = [data.aws_vpc.main.cidr_block]
   }
 
   ingress {
-    from_port   = "${var.peered_vpc_port_from}"
-    to_port     = "${var.peered_vpc_port_to}"
+    from_port   = var.peered_vpc_port_from
+    to_port     = var.peered_vpc_port_to
     protocol    = "tcp"
-    cidr_blocks = ["${var.peered_vpc_cidr}"]
+    cidr_blocks = [var.peered_vpc_cidr]
   }
 
   egress {
@@ -141,13 +141,13 @@ resource "aws_security_group" "basic_peering" {
   }
 
   tags = {
-    "Project" = "${var.project}"
+    "Project" = var.project
   }
 }
 
 resource "aws_iam_instance_profile" "basic" {
-  name = "${var.cluster_name}"
-  role = "${aws_iam_role.basic.name}"
+  name = var.cluster_name
+  role = aws_iam_role.basic.name
 }
 
 locals {
@@ -177,10 +177,10 @@ EOFECS
 
 resource "aws_launch_configuration" "basic" {
   name_prefix          = "${var.cluster_name}-"
-  image_id             = "${var.ami}"
-  instance_type        = "${var.instance_type}"
-  iam_instance_profile = "${aws_iam_instance_profile.basic.name}"
-  key_name             = "${var.key_name}"
+  image_id             = var.ami
+  instance_type        = var.instance_type
+  iam_instance_profile = aws_iam_instance_profile.basic.name
+  key_name             = var.key_name
 
   security_groups = [
     "${var.peered_vpc_cidr == "" ? join("", aws_security_group.basic.*.id) : join("", aws_security_group.basic_peering.*.id)}",
@@ -248,7 +248,7 @@ ${var.additional_config}
 EOF
 
   root_block_device {
-    volume_size           = "${var.root_size}"
+    volume_size           = var.root_size
     volume_type           = "gp2"
     delete_on_termination = true
   }
@@ -256,7 +256,7 @@ EOF
   # docker
   ebs_block_device {
     device_name           = "/dev/xvdcz"
-    volume_size           = "${var.docker_size}"
+    volume_size           = var.docker_size
     volume_type           = "gp2"
     delete_on_termination = true
   }
@@ -264,7 +264,7 @@ EOF
   # data-ebs
   ebs_block_device {
     device_name           = "/dev/xvdf"
-    volume_size           = "${var.data_ebs_size}"
+    volume_size           = var.data_ebs_size
     volume_type           = "gp2"
     delete_on_termination = false
   }
@@ -275,12 +275,12 @@ EOF
 }
 
 resource "aws_autoscaling_group" "basic" {
-  name                 = "${var.cluster_name}"
-  launch_configuration = "${aws_launch_configuration.basic.name}"
+  name                 = var.cluster_name
+  launch_configuration = aws_launch_configuration.basic.name
 
-  max_size            = "${var.max_size}"
-  min_size            = "${var.min_size}"
-  vpc_zone_identifier = ["${var.subnets}"]
+  max_size            = var.max_size
+  min_size            = var.min_size
+  vpc_zone_identifier = [var.subnets]
 
   default_cooldown = 0
 
@@ -290,13 +290,13 @@ resource "aws_autoscaling_group" "basic" {
 
   tag {
     key                 = "Name"
-    value               = "${var.cluster_name}"
+    value               = var.cluster_name
     propagate_at_launch = true
   }
 
   tag {
     key                 = "Project"
-    value               = "${var.project}"
+    value               = var.project
     propagate_at_launch = true
   }
 

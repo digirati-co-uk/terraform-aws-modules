@@ -11,11 +11,11 @@ data "template_file" "ulimits_name_val_pair" {
 }
 
 locals {
-  command       = jsonencode(var.command)
-  mount_points  = jsonencode(var.mount_points)
-  volumes_from  = jsonencode(var.volumes_from)
-  port_mappings = var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"
-  user          = length(var.user) > 0 ? "\"${var.user}\"" : "null"
+  command        = jsonencode(var.command)
+  mount_points   = jsonencode(var.mount_points)
+  volumes_from   = jsonencode(var.volumes_from)
+  port_mappings  = var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"
+  user           = length(var.user) > 0 ? "\"${var.user}\"" : "null"
   ulimits_string = "[${join(", ", "${data.template_file.ulimits_name_val_pair.*.rendered}")}]"
 }
 
@@ -23,23 +23,23 @@ data "template_file" "definition" {
   template = "${var.container_port != "" ? file("${path.module}/files/task_definition.jsontemplate") : file("${path.module}/files/task_definition_worker.jsontemplate")}"
 
   vars = {
-    prefix                = "${var.prefix}"
-    log_group_name        = "${var.log_group_name}"
-    log_group_region      = "${var.log_group_region}"
-    log_prefix            = "${var.log_prefix}"
-    environment_variables = "${module.env_vars.env_vars_string}"
-    container_name        = "${var.container_name}"
-    container_port        = "${var.container_port}"
-    host_port             = "${var.host_port}"
-    docker_image          = "${var.docker_image}"
-    cpu_reservation       = "${var.cpu_reservation}"
-    memory_reservation    = "${var.memory_reservation}"
-    command               = "${local.command}"
-    mount_points          = "${local.mount_points}"
-    volumes_from          = "${local.volumes_from}"
-    ulimits               = "${local.ulimits_string}"
-    port_mappings         = "${local.port_mappings}"
-    user                  = "${local.user}"
+    prefix                = var.prefix
+    log_group_name        = var.log_group_name
+    log_group_region      = var.log_group_region
+    log_prefix            = var.log_prefix
+    environment_variables = module.env_vars.env_vars_string
+    container_name        = var.container_name
+    container_port        = var.container_port
+    host_port             = var.host_port
+    docker_image          = var.docker_image
+    cpu_reservation       = var.cpu_reservation
+    memory_reservation    = var.memory_reservation
+    command               = local.command
+    mount_points          = local.mount_points
+    volumes_from          = local.volumes_from
+    ulimits               = local.ulimits_string
+    port_mappings         = local.port_mappings
+    user                  = local.user
   }
 }
 

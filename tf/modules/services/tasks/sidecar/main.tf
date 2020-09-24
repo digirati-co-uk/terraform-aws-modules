@@ -42,36 +42,36 @@ data "template_file" "definition" {
   template = "${file("${path.module}/files/task_definition.jsontemplate")}"
 
   vars = {
-    prefix                        = "${var.prefix}"
-    log_group_name                = "${var.log_group_name}"
-    log_group_region              = "${var.log_group_region}"
-    log_prefix                    = "${var.log_prefix}"
-    environment_variables_main    = "${module.env_vars_main.env_vars_string}"
-    environment_variables_sidecar = "${module.env_vars_sidecar.env_vars_string}"
-    container_name_main           = "${var.container_name_main}"
-    container_name_sidecar        = "${var.container_name_sidecar}"
-    container_port                = "${var.container_port}"
-    docker_image_main             = "${var.docker_image_main}"
-    docker_image_sidecar          = "${var.docker_image_sidecar}"
-    cpu_reservation_main          = "${var.cpu_reservation_main}"
-    cpu_reservation_sidecar       = "${var.cpu_reservation_sidecar}"
-    memory_reservation_main       = "${var.memory_reservation_main}"
-    memory_reservation_sidecar    = "${var.memory_reservation_sidecar}"
-    command_main                  = "${local.command_main}"
-    command_sidecar               = "${local.command_sidecar}"
-    mount_points_main             = "${local.mount_points_main}"
-    mount_points_sidecar          = "${local.mount_points_sidecar}"
-    volumes_from_main             = "${local.volumes_from_main}"
-    volumes_from_sidecar          = "${local.volumes_from_sidecar}"
-    links_main                    = "${local.links_main}"
-    links_sidecar                 = "${local.links_sidecar}"
-    user_main                     = "${local.user_main}"
-    user_sidecar                  = "${local.user_sidecar}"
+    prefix                        = var.prefix
+    log_group_name                = var.log_group_name
+    log_group_region              = var.log_group_region
+    log_prefix                    = var.log_prefix
+    environment_variables_main    = module.env_vars_main.env_vars_string
+    environment_variables_sidecar = module.env_vars_sidecar.env_vars_string
+    container_name_main           = var.container_name_main
+    container_name_sidecar        = var.container_name_sidecar
+    container_port                = var.container_port
+    docker_image_main             = var.docker_image_main
+    docker_image_sidecar          = var.docker_image_sidecar
+    cpu_reservation_main          = var.cpu_reservation_main
+    cpu_reservation_sidecar       = var.cpu_reservation_sidecar
+    memory_reservation_main       = var.memory_reservation_main
+    memory_reservation_sidecar    = var.memory_reservation_sidecar
+    command_main                  = local.command_main
+    command_sidecar               = local.command_sidecar
+    mount_points_main             = local.mount_points_main
+    mount_points_sidecar          = local.mount_points_sidecar
+    volumes_from_main             = local.volumes_from_main
+    volumes_from_sidecar          = local.volumes_from_sidecar
+    links_main                    = local.links_main
+    links_sidecar                 = local.links_sidecar
+    user_main                     = local.user_main
+    user_sidecar                  = local.user_sidecar
 
-    ulimits_main    = "${local.ulimits_string_main}"
-    ulimits_sidecar = "${local.ulimits_string_sidecar}"
+    ulimits_main    = local.ulimits_string_main
+    ulimits_sidecar = local.ulimits_string_sidecar
 
-    port_mappings = "${local.port_mappings}"
+    port_mappings = local.port_mappings
   }
 }
 

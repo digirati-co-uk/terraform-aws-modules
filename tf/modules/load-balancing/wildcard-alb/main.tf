@@ -41,7 +41,7 @@ resource "aws_security_group" "web" {
 #######
 
 resource "aws_alb" "lb" {
-  name    = "${var.prefix}-${var.name}"
+  name = "${var.prefix}-${var.name}"
 
   subnets = var.subnets
 

@@ -34,9 +34,9 @@ resource "aws_security_group" "mount_target" {
 }
 
 resource "aws_efs_mount_target" "data_mount_target" {
-  count           = length(var.subnets)
-  file_system_id  = aws_efs_file_system.data.id
-  subnet_id       = element(var.subnets, count.index)
+  count          = length(var.subnets)
+  file_system_id = aws_efs_file_system.data.id
+  subnet_id      = element(var.subnets, count.index)
   security_groups = [
     aws_security_group.mount_target.id
   ]

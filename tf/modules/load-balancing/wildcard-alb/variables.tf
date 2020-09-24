@@ -46,7 +46,7 @@ variable "ip_whitelist" {
 variable "redirect_http_to_https" {
   description = "Enable default behaviour to redirect http to https"
   default     = false
-  type = bool
+  type        = bool
 }
 
 variable "idle_timeout_seconds" {

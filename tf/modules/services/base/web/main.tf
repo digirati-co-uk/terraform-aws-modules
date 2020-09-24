@@ -228,7 +228,7 @@ resource "aws_alb_listener_rule" "http" {
 
   condition {
     host-header {
-      values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
     }
   }
 
@@ -257,7 +257,7 @@ resource "aws_alb_listener_rule" "https" {
 
   condition {
     host-header {
-      values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
     }
   }
 

@@ -8,10 +8,10 @@ data "template_file" "dockerhub_credentials" {
   template = "${file("${path.module}/files/s3-objects/bootstrap-objects/dockerhub_credentials.template")}"
 
   vars = {
-    cluster_id         = "${aws_ecs_cluster.borg.name}"
-    dockerhub_username = "${var.dockerhub_username}"
-    dockerhub_password = "${var.dockerhub_password}"
-    dockerhub_email    = "${var.dockerhub_email}"
+    cluster_id         = aws_ecs_cluster.borg.name
+    dockerhub_username = var.dockerhub_username
+    dockerhub_password = var.dockerhub_password
+    dockerhub_email    = var.dockerhub_email
   }
 }
 
@@ -115,7 +115,7 @@ resource "aws_security_group" "borg" {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_vpc.main.cidr_block}"]
+    cidr_blocks = [data.aws_vpc.main.cidr_block]
   }
 
   egress {
@@ -140,14 +140,14 @@ resource "aws_security_group" "borg_peering" {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_vpc.main.cidr_block}"]
+    cidr_blocks = [data.aws_vpc.main.cidr_block]
   }
 
   ingress {
     from_port   = var.peered_vpc_port_from
     to_port     = var.peered_vpc_port_to
     protocol    = "tcp"
-    cidr_blocks = ["${var.peered_vpc_cidr}"]
+    cidr_blocks = [var.peered_vpc_cidr]
   }
 
   egress {

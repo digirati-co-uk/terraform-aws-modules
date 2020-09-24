@@ -1,7 +1,7 @@
 # DNS
 
 data "aws_route53_zone" "external" {
-  name = "${var.domain}"
+  name = var.domain
 }
 
 resource "aws_route53_zone" "internal" {
@@ -12,6 +12,6 @@ resource "aws_route53_zone" "internal" {
   }
 
   tags = {
-    "Project" = "${var.project}"
+    "Project" = var.project
   }
 }
