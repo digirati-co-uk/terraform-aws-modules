@@ -56,13 +56,15 @@ resource "aws_alb_listener_rule" "http" {
   }
 
   condition {
-    field  = "host-header"
-    values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+    host-header {
+      values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+    }
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["${element(var.path_patterns, count.index)}"]
+    path-pattern {
+      values = ["${element(var.path_patterns, count.index)}"]
+    }
   }
 
   lifecycle {

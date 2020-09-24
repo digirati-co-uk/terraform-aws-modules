@@ -106,18 +106,18 @@ resource "aws_security_group" "web" {
   vpc_id      = var.vpc
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
     cidr_blocks = [
       flatten(var.ip_whitelist)
     ]
   }
 
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
     cidr_blocks = [
       flatten(var.ip_whitelist)
     ]
@@ -141,8 +141,8 @@ resource "aws_security_group" "web" {
 #############################
 
 resource "aws_alb" "service" {
-  count   = var.load_balancer_arn == "" ? 1 : 0
-  name    = var.name
+  count = var.load_balancer_arn == "" ? 1 : 0
+  name  = var.name
   subnets = [
     flatten(var.subnets)
   ]
@@ -187,7 +187,7 @@ resource "aws_alb_listener" "http" {
 }
 
 resource "aws_alb_listener" "https_new_cert" {
-  count             = var.load_balancer_arn == ""  && var.certificate_arn == "" ? 1 : 0
+  count             = var.load_balancer_arn == "" && var.certificate_arn == "" ? 1 : 0
   load_balancer_arn = join("", aws_alb.service.*.id)
   port              = 443
   protocol          = "HTTPS"
@@ -227,13 +227,15 @@ resource "aws_alb_listener_rule" "http" {
   }
 
   condition {
-    field  = "host-header"
-    values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+    host-header {
+      values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+    }
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["${element(var.path_patterns, count.index)}"]
+    path-pattern {
+      values = ["${element(var.path_patterns, count.index)}"]
+    }
   }
 
   lifecycle {
@@ -254,13 +256,15 @@ resource "aws_alb_listener_rule" "https" {
   }
 
   condition {
-    field  = "host-header"
-    values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+    host-header {
+      values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
+    }
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["${element(var.path_patterns, count.index)}"]
+    path-pattern {
+      values = ["${element(var.path_patterns, count.index)}"]
+    }
   }
 
   lifecycle {
