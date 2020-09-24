@@ -228,7 +228,7 @@ resource "aws_alb_listener_rule" "http" {
 
   condition {
     field  = "host-header"
-    values = ["${var.hostname}.${var.domain}"]
+    values = ["${var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"}"]
   }
 
   condition {
