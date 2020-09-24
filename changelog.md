@@ -21,7 +21,7 @@ condition {
 
 # to..
 condition {
-  host-header {
+  host_header {
     values = ["my-hostname"]
   }
 }

@@ -56,13 +56,13 @@ resource "aws_alb_listener_rule" "http" {
   }
 
   condition {
-    host-header {
+    host_header {
       values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
     }
   }
 
   condition {
-    path-pattern {
+    path_pattern {
       values = ["${element(var.path_patterns, count.index)}"]
     }
   }
@@ -83,13 +83,15 @@ resource "aws_alb_listener_rule" "https" {
   }
 
   condition {
-    field  = "host-header"
-    values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
+    host_header {
+      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
+    }
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["${element(var.path_patterns, count.index)}"]
+    path_pattern {
+      values = ["${element(var.path_patterns, count.index)}"]
+    }
   }
 
   lifecycle {
