@@ -172,3 +172,13 @@ variable "scheduling_strategy" {
   description = "Use REPLICA or DAEMON scheduling strategy"
   default     = "REPLICA"
 }
+
+variable "deployment_maximum_percent" {
+  description = "The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy."
+  default     = 200
+}
+
+variable "deployment_minimum_healthy_percent" {
+  description = "The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment."
+  default     = 100
+}
