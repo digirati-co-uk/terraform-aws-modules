@@ -15,7 +15,7 @@ locals {
   links_sidecar_1        = jsonencode(var.links_sidecar_1)
   links_sidecar_2        = jsonencode(var.links_sidecar_2)
   links_sidecar_3        = jsonencode(var.links_sidecar_3)
-  port_mappings          = var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : {\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"}"
+  port_mappings          = var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"
   user_main              = length(var.user_main) > 0 ? "\"${var.user_main}\"" : "null"
   user_sidecar_1         = length(var.user_sidecar_1) > 0 ? "\"${var.user_sidecar_1}\"" : "null"
   user_sidecar_2         = length(var.user_sidecar_2) > 0 ? "\"${var.user_sidecar_2}\"" : "null"
