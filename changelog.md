@@ -26,3 +26,7 @@ condition {
   }
 }
 ```
+
+## 2.2 2021-11-03
+
+Update typo in `port_mappings` for services/tasks/quartet
