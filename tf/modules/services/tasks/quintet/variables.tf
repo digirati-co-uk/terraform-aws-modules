@@ -125,31 +125,31 @@ variable "memory_reservation_sidecar_4" {
 
 variable "environment_variables_main" {
   description = "Map of environment variables for main container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "environment_variables_sidecar_1" {
   description = "Map of environment variables for sidecar 1 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "environment_variables_sidecar_2" {
   description = "Map of environment variables for sidecar 2 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "environment_variables_sidecar_3" {
   description = "Map of environment variables for sidecar 3 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "environment_variables_sidecar_4" {
   description = "Map of environment variables for sidecar 4 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
@@ -180,127 +180,127 @@ variable "environment_variables_length_sidecar_4" {
 
 variable "command_main" {
   description = "Override for main container command"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "command_sidecar_1" {
   description = "Override for sidecar 1 container command"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "command_sidecar_2" {
   description = "Override for sidecar 2 container command"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "command_sidecar_3" {
   description = "Override for sidecar 3 container command"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "command_sidecar_4" {
   description = "Override for sidecar 4 container command"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "mount_points_main" {
   description = "List of main container mount points"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "mount_points_sidecar_1" {
   description = "List of sidecar 1 container mount points"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "mount_points_sidecar_2" {
   description = "List of sidecar 2 container mount points"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "mount_points_sidecar_3" {
   description = "List of sidecar 3 container mount points"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "mount_points_sidecar_4" {
   description = "List of sidecar 4 container mount points"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "volumes_from_main" {
   description = "List of main container volumesFrom entries"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "volumes_from_sidecar_1" {
   description = "List of sidecar 1 container volumesFrom entries"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "volumes_from_sidecar_2" {
   description = "List of sidecar 2 container volumesFrom entries"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "volumes_from_sidecar_3" {
   description = "List of sidecar 3 container volumesFrom entries"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "volumes_from_sidecar_4" {
   description = "List of sidecar 4 container volumesFrom entries"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "links_main" {
   description = "List of links for main container"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "links_sidecar_1" {
   description = "List of links for sidecar 1 container"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "links_sidecar_2" {
   description = "List of links for sidecar 2 container"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "links_sidecar_3" {
   description = "List of links for sidecar 3 container"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "links_sidecar_4" {
   description = "List of links for sidecar 4 container"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "ulimits_main" {
   description = "Map of ulimits for main container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
@@ -311,25 +311,25 @@ variable "ulimits_main_length" {
 
 variable "ulimits_sidecar_1" {
   description = "Map of ulimits for sidecar 1 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "ulimits_sidecar_2" {
   description = "Map of ulimits for sidecar 2 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "ulimits_sidecar_3" {
   description = "Map of ulimits for sidecar 3 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
 variable "ulimits_sidecar_4" {
   description = "Map of ulimits for sidecar 4 container"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
@@ -355,7 +355,7 @@ variable "ulimits_sidecar_4_length" {
 
 variable "port_mappings" {
   description = "Map of port_mappings"
-  type        = "map"
+  type        = map
   default     = {}
 }
 

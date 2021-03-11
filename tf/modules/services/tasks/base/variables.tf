@@ -49,7 +49,7 @@ variable "memory_reservation" {
 
 variable "environment_variables" {
   description = "Map of environment variables"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
@@ -60,25 +60,25 @@ variable "environment_variables_length" {
 
 variable "command" {
   description = "Override for container command"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "mount_points" {
   description = "List of mount points"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "volumes_from" {
   description = "List of volumesFrom entries"
-  type        = "list"
+  type        = list
   default     = []
 }
 
 variable "ulimits" {
   description = "Map of ulimits"
-  type        = "map"
+  type        = map
   default     = {}
 }
 
@@ -89,7 +89,7 @@ variable "ulimits_length" {
 
 variable "port_mappings" {
   description = "Map of port_mappings"
-  type        = "map"
+  type        = map
   default     = {}
 }
 

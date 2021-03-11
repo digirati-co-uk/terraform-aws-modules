@@ -12,12 +12,12 @@ variable "name" {
 
 variable "subnets" {
   description = "List of subnets to associate load balancer with"
-  type        = "list"
+  type        = list
 }
 
 variable "security_groups" {
   description = "List of security groups to join"
-  type        = "list"
+  type        = list
 }
 
 variable "certificate_arn" {
@@ -36,7 +36,7 @@ variable "vpc" {
 
 variable "ip_whitelist" {
   description = "IP CIDR whitelist"
-  type        = "list"
+  type        = list
 
   default = [
     "0.0.0.0/0",
@@ -46,6 +46,7 @@ variable "ip_whitelist" {
 variable "redirect_http_to_https" {
   description = "Enable default behaviour to redirect http to https"
   default     = false
+  type        = bool
 }
 
 variable "idle_timeout_seconds" {

@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "publish_to_topic" {
     ]
 
     resources = [
-      "${aws_sns_topic.topic.arn}",
+      aws_sns_topic.topic.arn,
     ]
   }
 }
