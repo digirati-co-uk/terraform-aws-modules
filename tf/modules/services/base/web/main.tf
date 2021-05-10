@@ -163,6 +163,7 @@ resource "aws_alb_target_group" "service" {
   protocol             = "HTTP"
   vpc_id               = var.vpc
   deregistration_delay = var.deregistration_delay
+  target_type          = var.target_type
 
   health_check {
     path                = var.health_check_path

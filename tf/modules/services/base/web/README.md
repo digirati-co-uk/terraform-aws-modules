@@ -52,6 +52,7 @@ Creates Route53 entry if `create_route53_entry` is `true`.
 | task\_definition\_arn                 | ARN of the ECS Task Definition                       | `any`    | n/a                                |   yes    |
 | vpc                                   | ID of the VPC that the cluster is deployed in        | `any`    | n/a                                |   yes    |
 | zone\_id                              | ID for the Hosted Zone                               | `any`    | n/a                                |   yes    |
+| target\_type                          | ELB TargetGroup target type                          | `string` | "instance"                         |   no     |
 
 ## Outputs
 

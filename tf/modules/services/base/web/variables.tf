@@ -172,3 +172,8 @@ variable "scheduling_strategy" {
   description = "Use REPLICA or DAEMON scheduling strategy"
   default     = "REPLICA"
 }
+
+variable "target_type" {
+  description = "TargetType for ELB TargetGroup"
+  default     = "instance"
+}
