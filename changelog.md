@@ -34,3 +34,7 @@ Update typo in `port_mappings` for services/tasks/quartet
 ## 2.3 2021-05-10
 
 Introduce `ecs/container_definition` and `ecs/task_definition` modules. These will allow more granular control over container and task than is currently in `/services/tasks`.
+
+## 3.0 2021-11-26
+
+Rewrite VPC module. Allows greater control of what is created by having submodules. Avoid need to specify all CIDRs and only supporting 2 subnets.
