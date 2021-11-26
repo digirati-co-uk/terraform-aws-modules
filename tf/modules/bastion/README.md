@@ -1,6 +1,6 @@
 # Bastion module
 
-This is a t2.micro instance that provides SSH access to a private subnet. It will be created with an Elastic IP.
+This is an EC2 instance that provides SSH access to private subnet(s). It will be provisioned with an ASG and will register itself with Route53 on startup.
 
 ## Parameters
 The following parameters are available:

@@ -4,7 +4,7 @@ variable "vpc" {
 
 variable "ip_whitelist" {
   description = "List of CIDR blocks to allow SSH access for"
-  type        = list
+  type        = list(string)
 }
 
 variable "project" {
@@ -30,7 +30,7 @@ variable "key_name" {
 
 variable "subnets" {
   description = "VPC subnets to cover with autoscaling group"
-  type        = list
+  type        = list(string)
 }
 
 variable "dns_zone" {
