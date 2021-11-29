@@ -53,11 +53,6 @@ variable "environment_variables" {
   default     = {}
 }
 
-variable "environment_variables_length" {
-  description = "Length of environment variable map (required)"
-  default     = 0
-}
-
 variable "command" {
   description = "Override for container command"
   type        = list
