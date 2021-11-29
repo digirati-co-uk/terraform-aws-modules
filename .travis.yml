@@ -1,26 +1,26 @@
-sudo: required
-language: python
+# sudo: required
+# language: python
 
-python:
-  - "3.6"
+# python:
+#   - "3.6"
 
-git:
-  submodules:
-    false
+# git:
+#   submodules:
+#     false
 
-before_script:
-  - wget https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_amd64.zip -O /tmp/terraform.zip
-  - unzip /tmp/terraform.zip -d terraform/
-  - export PATH=$PATH:$PWD/terraform/
+# before_script:
+#   - wget https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_amd64.zip -O /tmp/terraform.zip
+#   - unzip /tmp/terraform.zip -d terraform/
+#   - export PATH=$PATH:$PWD/terraform/
 
-before_install:
-  - sudo apt-get update -yqq
-  - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+# before_install:
+#   - sudo apt-get update -yqq
+#   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
 
-install:
-  - pip install pre-commit
-  - pre-commit install
+# install:
+#   - pip install pre-commit
+#   - pre-commit install
 
-script:
-  - cd tf
-  - pre-commit run --all-files --verbose
+# script:
+#   - cd tf
+#   - pre-commit run --all-files --verbose
