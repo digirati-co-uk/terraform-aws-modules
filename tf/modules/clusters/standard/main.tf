@@ -182,6 +182,9 @@ echo "/swap    swap   swap   defaults  0 0" >> /etc/fstab
 
 ${local.dir_config}
 
+echo "Setting up ecs-agent"
+echo ECS_CLUSTER=${aws_ecs_cluster.standard.name} >> /etc/ecs/ecs.config
+
 # restart docker so it can see newly mounted volumes
 service docker restart
 

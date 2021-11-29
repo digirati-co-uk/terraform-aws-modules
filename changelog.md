@@ -40,3 +40,5 @@ Introduce `ecs/container_definition` and `ecs/task_definition` modules. These wi
 Rewrite VPC module. Allows greater control of what is created by having submodules. Avoid need to specify all CIDRs and only supporting 2 subnets.
 
 Remove 'basic' cluster and added 'standard'. Standard has no config for samba, elastic-search or private dockerhub.
+
+Delete 'logging' module.
