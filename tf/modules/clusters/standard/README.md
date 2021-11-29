@@ -42,3 +42,4 @@ The following parameters are available:
 |--------------|-----------------------------|--------|
 | cluster_id   | ARN of the created cluster  | string |
 | cluster_name | Name of the created cluster | string |
+| role_name    | Name of role for cluster    | string |

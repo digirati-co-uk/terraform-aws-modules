@@ -18,7 +18,7 @@ resource "aws_security_group" "mount_target" {
     from_port       = 2049
     to_port         = 2049
     protocol        = "tcp"
-    security_groups = flatten(aws_launch_configuration.borg.security_groups)
+    security_groups = flatten(aws_launch_configuration.standard.security_groups)
   }
 
   egress {

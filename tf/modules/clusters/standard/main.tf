@@ -1,10 +1,10 @@
-# Borg cluster module
+# standard cluster module
 
-resource "aws_ecs_cluster" "borg" {
+resource "aws_ecs_cluster" "standard" {
   name = var.cluster_name
 }
 
-resource "aws_iam_role" "borg" {
+resource "aws_iam_role" "standard" {
   name = var.cluster_name
 
   assume_role_policy = <<EOF
@@ -24,13 +24,13 @@ resource "aws_iam_role" "borg" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "borg_ec2" {
-  role = aws_iam_role.borg.name
+resource "aws_iam_role_policy_attachment" "standard_ec2" {
+  role = aws_iam_role.standard.name
 
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
-resource "aws_iam_policy" "borg_abilities" {
+resource "aws_iam_policy" "standard_abilities" {
   name        = var.cluster_name
   description = "Cluster userdata abilities (route53, s3 access)"
 
@@ -68,10 +68,10 @@ resource "aws_iam_policy" "borg_abilities" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "borg_abilities" {
-  role = aws_iam_role.borg.name
+resource "aws_iam_role_policy_attachment" "standard_abilities" {
+  role = aws_iam_role.standard.name
 
-  policy_arn = aws_iam_policy.borg_abilities.arn
+  policy_arn = aws_iam_policy.standard_abilities.arn
 }
 
 data "aws_vpc" "main" {
@@ -103,9 +103,9 @@ resource "aws_security_group" "cluster" {
   }
 }
 
-resource "aws_iam_instance_profile" "borg" {
+resource "aws_iam_instance_profile" "standard" {
   name = var.cluster_name
-  role = aws_iam_role.borg.name
+  role = aws_iam_role.standard.name
 }
 
 locals {
@@ -127,11 +127,11 @@ chmod -R 775 ${var.mount_point_data_ebs}/efs
 EOFDIRS
 }
 
-resource "aws_launch_configuration" "borg" {
+resource "aws_launch_configuration" "standard" {
   name_prefix          = "${var.cluster_name}-"
   image_id             = var.ami
   instance_type        = var.instance_type
-  iam_instance_profile = aws_iam_instance_profile.borg.name
+  iam_instance_profile = aws_iam_instance_profile.standard.name
   key_name             = var.key_name
 
   security_groups = [aws_security_group.cluster.id]
@@ -222,9 +222,9 @@ EOF
   }
 }
 
-resource "aws_autoscaling_group" "borg" {
+resource "aws_autoscaling_group" "standard" {
   name                 = var.cluster_name
-  launch_configuration = aws_launch_configuration.borg.name
+  launch_configuration = aws_launch_configuration.standard.name
 
   max_size            = var.max_size
   min_size            = var.min_size
