@@ -74,6 +74,35 @@ resource "aws_iam_role_policy_attachment" "borg_abilities" {
   policy_arn = aws_iam_policy.borg_abilities.arn
 }
 
+data "aws_vpc" "main" {
+  id = var.vpc
+}
+
+resource "aws_security_group" "cluster" {
+  name        = var.cluster_name
+  description = "Cluster access"
+  vpc_id      = data.aws_vpc.main.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = [data.aws_vpc.main.cidr_block]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Project   = var.project
+    Terraform = true
+  }
+}
+
 resource "aws_iam_instance_profile" "borg" {
   name = var.cluster_name
   role = aws_iam_role.borg.name
@@ -105,9 +134,7 @@ resource "aws_launch_configuration" "borg" {
   iam_instance_profile = aws_iam_instance_profile.borg.name
   key_name             = var.key_name
 
-  security_groups = [
-    join("", aws_security_group.borg.*.id)
-  ]
+  security_groups = [aws_security_group.cluster.id]
 
   user_data = <<EOF
 #!/bin/bash
