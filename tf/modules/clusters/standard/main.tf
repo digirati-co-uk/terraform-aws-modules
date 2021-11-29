@@ -90,7 +90,7 @@ mkdir -p ${var.mount_point_data_ebs}/efs
 ln -s ${var.mount_point_data_ebs}/scratch /scratch
 ln -s ${var.mount_point_data_ebs}/efs /efs
 
-${makedirs}
+${local.makedirs}
 
 chmod -R 775 ${var.mount_point_data_ebs}/scratch
 chmod -R 775 ${var.mount_point_data_ebs}/efs
