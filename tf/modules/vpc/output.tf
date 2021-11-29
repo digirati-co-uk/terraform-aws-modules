@@ -25,3 +25,7 @@ output "cidr_block_public" {
 output "cidr_block_private" {
   value = local.cidr_block_private
 }
+
+output "nat_public_ip" {
+  value = 
+}

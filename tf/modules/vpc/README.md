@@ -1,6 +1,6 @@
 # VPC module
 
-Provides a single VPC with default 3 public and private subnets.
+Provides a single VPC with default 3 public and private subnets. Also creates s3 + dynamoDB vpc endpoints
 
 ## Parameters
 | Parameter  | Description                         | Type   | Default     |
@@ -20,5 +20,4 @@ Provides a single VPC with default 3 public and private subnets.
 | private_route_table_id | Private subnets routetable id   | string |
 | public_subnets         | IDs of the public subnets       | list   |
 | cidr_block_public      | CIRD block for public subnets   | string |
-| subnet_private_2_id    | ID of the second private subnet | string |
 | public_route_table_id  | Public subnets routetable id    | string |

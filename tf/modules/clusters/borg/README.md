@@ -1,6 +1,6 @@
 # Borg cluster
 
-This is an ECS cluster with a particular volume configuration.
+This is an ECS cluster with a particular volume configuration and sambda configuration.
 
 It provides:
 

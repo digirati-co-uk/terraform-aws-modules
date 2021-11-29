@@ -29,7 +29,7 @@ variable "key_name" {
 
 variable "subnets" {
   description = "List of VPC subnets to spread cluster across"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "vpc" {
@@ -39,21 +39,6 @@ variable "vpc" {
 variable "swap_size_gb" {
   description = "Number of GB to allocate as swap space"
   default     = 32
-}
-
-variable "dockerhub_username" {
-  description = "DockerHub robot username"
-  default     = ""
-}
-
-variable "dockerhub_password" {
-  description = "DockerHub robot password"
-  default     = ""
-}
-
-variable "dockerhub_email" {
-  description = "DockerHub robot email"
-  default     = ""
 }
 
 variable "min_size" {
@@ -73,7 +58,6 @@ variable "root_size" {
 
 variable "bootstrap_objects_bucket" {
   description = "S3 bucket where config is stored"
-  default     = ""
 }
 
 variable "docker_size" {
@@ -100,28 +84,14 @@ variable "data_ebs_size" {
   default     = 100
 }
 
-# VPC Peering section
-
-variable "peered_vpc_cidr" {
-  description = "Optional peered VPC CIDR block"
-  default     = ""
-}
-
-variable "peered_vpc_port_from" {
-  description = "Optional peered VPC port lower range"
-  default     = ""
-}
-
-variable "peered_vpc_port_to" {
-  description = "Optional peered VPC port upper range"
-  default     = ""
-}
-
+# User-data
 variable "additional_config" {
   description = "Additional configuration for User Data"
   default     = ""
 }
 
-variable "enable_elasticsearch" {
-  default = "1"
+variable "scratch_folders" {
+  description = "A list of scratch folders to create"
+  type    = list(string)
+  default = []
 }

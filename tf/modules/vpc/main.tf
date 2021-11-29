@@ -1,10 +1,4 @@
-locals {
-  # Common tags to be assigned to all resources
-  common_tags = {
-    "Project"     = var.project
-    "Terraform"   = true
-  }
-  
+locals { 
   vpc_name = var.name == "" ? var.vpc_name : replace(replace("${var.name}-${var.cidr_block}", "/", "-"), ".", "-")
 
   cidr_block_public  = cidrsubnet(var.cidr_block, 1, 0)
