@@ -84,17 +84,15 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 module "env_vars_main" {
-  source = "../environment-variables/"
+  source = "../env-vars/"
 
-  env_vars        = var.environment_variables_main
-  env_vars_length = var.environment_variables_length_main
+  env_vars = var.environment_variables_main
 }
 
 module "env_vars_sidecar" {
-  source = "../environment-variables/"
+  source = "../env-vars/"
 
-  env_vars        = var.environment_variables_sidecar
-  env_vars_length = var.environment_variables_length_sidecar
+  env_vars = var.environment_variables_sidecar
 }
 
 module "port_mappings" {

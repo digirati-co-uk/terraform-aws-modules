@@ -1,13 +1,7 @@
-data "template_file" "ulimits_name_val_pair" {
-  count = var.ulimits_length
+module "ulimits" {
+  source = "../ulimits/"
 
-  template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
-
-  vars = {
-    key    = element(keys(var.ulimits), count.index)
-    value1 = element(split(":", element(values(var.ulimits), count.index)), 0)
-    value2 = element(split(":", element(values(var.ulimits), count.index)), 1)
-  }
+  ulimits = var.ulimits
 }
 
 locals {
@@ -16,7 +10,7 @@ locals {
   volumes_from   = jsonencode(var.volumes_from)
   port_mappings  = var.port_mappings_length > 0 ? module.port_mappings.port_mappings_string : "[{\"hostPort\": ${var.host_port}, \"containerPort\": ${var.container_port}, \"protocol\": \"tcp\"}]"
   user           = length(var.user) > 0 ? "\"${var.user}\"" : "null"
-  ulimits_string = "[${join(", ", "${data.template_file.ulimits_name_val_pair.*.rendered}")}]"
+  ulimits_string = module.ulimits.ulimits_string
 }
 
 data "template_file" "definition" {

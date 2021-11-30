@@ -74,45 +74,39 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 module "env_vars_main" {
-  source = "../environment-variables/"
+  source = "../env-vars/"
 
-  env_vars        = var.environment_variables_main
-  env_vars_length = var.environment_variables_length_main
+  env_vars = var.environment_variables_main
 }
 
 module "env_vars_sidecar_1" {
-  source = "../environment-variables/"
+  source = "../env-vars/"
 
-  env_vars        = var.environment_variables_sidecar_1
-  env_vars_length = var.environment_variables_length_sidecar_1
+  env_vars = var.environment_variables_sidecar_1
 }
 
 module "env_vars_sidecar_2" {
-  source = "../environment-variables/"
+  source = "../env-vars/"
 
-  env_vars        = var.environment_variables_sidecar_2
-  env_vars_length = var.environment_variables_length_sidecar_2
+  env_vars = var.environment_variables_sidecar_2
 }
 
 module "ulimits_main" {
   source = "../ulimits/"
 
-  ulimits        = var.ulimits_main
-  ulimits_length = var.ulimits_main_length
+  ulimits = var.ulimits_main
 }
 
 module "ulimits_sidecar_1" {
   source = "../ulimits/"
 
-  ulimits        = var.ulimits_sidecar_1
-  ulimits_length = var.ulimits_sidecar_1_length
+  ulimits = var.ulimits_sidecar_1
 }
 
 module "ulimits_sidecar_2" {
   source = "../ulimits/"
 
-  ulimits        = var.ulimits_sidecar_2
-  ulimits_length = var.ulimits_sidecar_2_length
+  ulimits = var.ulimits_sidecar_2
 }
 
 module "port_mappings" {

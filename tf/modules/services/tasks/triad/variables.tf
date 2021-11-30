@@ -103,21 +103,6 @@ variable "environment_variables_sidecar_2" {
   default     = {}
 }
 
-variable "environment_variables_length_main" {
-  description = "Length of environment variable map for main container (required)"
-  default     = 0
-}
-
-variable "environment_variables_length_sidecar_1" {
-  description = "Length of environment variable map for sidecar 1 container (required)"
-  default     = 0
-}
-
-variable "environment_variables_length_sidecar_2" {
-  description = "Length of environment variable map for sidecar 2 container (required)"
-  default     = 0
-}
-
 variable "command_main" {
   description = "Override for main container command"
   type        = list
@@ -196,11 +181,6 @@ variable "ulimits_main" {
   default     = {}
 }
 
-variable "ulimits_main_length" {
-  description = "Length of ulimits map for main container (required)"
-  default     = 0
-}
-
 variable "ulimits_sidecar_1" {
   description = "Map of ulimits for sidecar 1 container"
   type        = map
@@ -211,16 +191,6 @@ variable "ulimits_sidecar_2" {
   description = "Map of ulimits for sidecar 2 container"
   type        = map
   default     = {}
-}
-
-variable "ulimits_sidecar_1_length" {
-  description = "Length of ulimits map for sidecar 1 container (required)"
-  default     = 0
-}
-
-variable "ulimits_sidecar_2_length" {
-  description = "Length of ulimits map for sidecar 2 container (required)"
-  default     = 0
 }
 
 variable "port_mappings" {

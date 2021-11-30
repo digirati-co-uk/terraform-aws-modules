@@ -1,17 +1,14 @@
-# Taken from https://github.com/wellcometrust/terraform-modules
-
-data "template_file" "name_val_pair" {
-  count = var.ulimits_length
-
-  template = "{\"name\": $${jsonencode(key)}, \"hardLimit\": $${value1}, \"softLimit\": $${value2}}"
-
-  vars = {
-    key    = element(keys(var.ulimits), count.index)
-    value1 = element(split(":", element(values(var.ulimits), count.index)), 0)
-    value2 = element(split(":", element(values(var.ulimits), count.index)), 1)
-  }
-}
-
 locals {
-  ulimits_string = "[${join(", ", "${data.template_file.name_val_pair.*.rendered}")}]"
+  ulimits_keys = keys(local.ulimits)
+  sorted_ulimits_keys = sort(local.ulimits_keys)
+
+  vars = [
+    for k in local.sorted_ulimits_keys : {
+      name = k
+      hardLimit = tonumber(split(":", lookup(local.ulimits, k))[0])
+      softLimit = tonumber(split(":", lookup(local.ulimits, k))[1])
+    }
+  ]
+
+  ulimits_string = jsonencode(local.vars)
 }

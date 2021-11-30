@@ -44,3 +44,5 @@ Remove 'basic' cluster and added 'standard'. Standard has no config for samba, e
 Delete 'logging' + 'dns' module as they only created a single resource.
 
 Create "env-vars" module to replace "environment-variable", gradually phase out needing to specify environment-var length in calling modules.
+
+Update "ulimits" and "port-mappings" to no longer require length to be set.
