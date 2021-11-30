@@ -128,6 +128,30 @@ variable "environment_variables_sidecar_3" {
   default     = {}
 }
 
+variable "secret_environment_variables_main" {
+  description = "Map of environment variables for main container"
+  type        = map
+  default     = {}
+}
+
+variable "secret_environment_variables_sidecar_1" {
+  description = "Map of environment variables for sidecar 1 container"
+  type        = map
+  default     = {}
+}
+
+variable "secret_environment_variables_sidecar_2" {
+  description = "Map of environment variables for sidecar 2 container"
+  type        = map
+  default     = {}
+}
+
+variable "secret_environment_variables_sidecar_3" {
+  description = "Map of environment variables for sidecar 3 container"
+  type        = map
+  default     = {}
+}
+
 variable "command_main" {
   description = "Override for main container command"
   type        = list

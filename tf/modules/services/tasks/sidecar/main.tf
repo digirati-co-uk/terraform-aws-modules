@@ -48,6 +48,8 @@ data "template_file" "definition" {
     log_prefix                    = var.log_prefix
     environment_variables_main    = module.env_vars_main.env_vars_string
     environment_variables_sidecar = module.env_vars_sidecar.env_vars_string
+    secrets_main                  = module.secrets_main.secrets_string
+    secrets_sidecar               = module.secrets_sidecar.secrets_string
     container_name_main           = var.container_name_main
     container_name_sidecar        = var.container_name_sidecar
     container_port                = var.container_port
@@ -100,4 +102,18 @@ module "port_mappings" {
 
   port_mappings        = var.port_mappings
   port_mappings_length = var.port_mappings_length
+}
+
+module "secrets_main" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_main
+}
+
+module "secrets_sidecar" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_sidecar
 }

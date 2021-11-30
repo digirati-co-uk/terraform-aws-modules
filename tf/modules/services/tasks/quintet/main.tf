@@ -40,6 +40,11 @@ data "template_file" "definition" {
     environment_variables_sidecar_2 = module.env_vars_sidecar_2.env_vars_string
     environment_variables_sidecar_3 = module.env_vars_sidecar_3.env_vars_string
     environment_variables_sidecar_4 = module.env_vars_sidecar_4.env_vars_string
+    secrets_main                    = module.secrets_main.secrets_string
+    secrets_sidecar_1               = module.secrets_sidecar_1.secrets_string
+    secrets_sidecar_2               = module.secrets_sidecar_2.secrets_string
+    secrets_sidecar_3               = module.secrets_sidecar_3.secrets_string
+    secrets_sidecar_4               = module.secrets_sidecar_4.secrets_string
     container_name_main             = var.container_name_main
     container_name_sidecar_1        = var.container_name_sidecar_1
     container_name_sidecar_2        = var.container_name_sidecar_2
@@ -170,4 +175,39 @@ module "port_mappings" {
 
   port_mappings        = var.port_mappings
   port_mappings_length = var.port_mappings_length
+}
+
+module "secrets_main" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_main
+}
+
+module "secrets_sidecar_1" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_sidecar_1
+}
+
+module "secrets_sidecar_2" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_sidecar_2
+}
+
+module "secrets_sidecar_3" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_sidecar_3
+}
+
+module "secrets_sidecar_4" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables_sidecar_4
 }
