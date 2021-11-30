@@ -41,6 +41,6 @@ Rewrite VPC module. Allows greater control of what is created by having submodul
 
 Remove 'basic' cluster and added 'standard'. Standard has no config for samba, elastic-search or private dockerhub.
 
-Delete 'logging' module.
+Delete 'logging' + 'dns' module as they only created a single resource.
 
-Create "env-vars" module to replace "environment-variable", gradually phase out needing to specify environment-var length.
+Create "env-vars" module to replace "environment-variable", gradually phase out needing to specify environment-var length in calling modules.
