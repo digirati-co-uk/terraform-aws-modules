@@ -53,6 +53,13 @@ variable "environment_variables" {
   default     = {}
 }
 
+variable "secret_environment_variables" {
+  description = "Map of secret environment variables that read from secrets manager"
+  type        = map
+  default     = {}
+}
+
+
 variable "command" {
   description = "Override for container command"
   type        = list

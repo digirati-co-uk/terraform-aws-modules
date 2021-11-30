@@ -22,6 +22,7 @@ data "template_file" "definition" {
     log_group_region      = var.log_group_region
     log_prefix            = var.log_prefix
     environment_variables = module.env_vars.env_vars_string
+    secrets               = module.secrets.secrets_string
     container_name        = var.container_name
     container_port        = var.container_port
     host_port             = var.host_port
@@ -56,4 +57,11 @@ module "port_mappings" {
 
   port_mappings        = var.port_mappings
   port_mappings_length = var.port_mappings_length
+}
+
+module "secrets" {
+  source = "../secrets"
+
+  role_name = aws_iam_role.task.name
+  secrets   = var.secret_environment_variables
 }
