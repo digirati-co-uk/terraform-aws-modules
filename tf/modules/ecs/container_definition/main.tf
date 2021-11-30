@@ -28,5 +28,7 @@ locals {
     logConfiguration = local.filtered_log_configuration
 
     systemControls = var.system_controls
+
+    repositoryCredentials = var.repository_credentials
   }
 }

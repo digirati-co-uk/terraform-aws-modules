@@ -120,3 +120,10 @@ variable "system_controls" {
   }))
   default = []
 }
+
+variable "repository_credentials" {
+  type = object({
+    credentialsParameter = string
+  })
+  default = null
+}
