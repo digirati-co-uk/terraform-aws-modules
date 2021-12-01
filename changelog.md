@@ -35,16 +35,15 @@ Update typo in `port_mappings` for services/tasks/quartet
 
 Introduce `ecs/container_definition` and `ecs/task_definition` modules. These will allow more granular control over container and task than is currently in `/services/tasks`.
 
-## 3.0 2021-11-26
+## 3.0 2021-12-01
 
 Rewrite VPC module. Allows greater control of what is created by having submodules. Avoid need to specify all CIDRs and only supporting 2 subnets.
 
-Remove 'basic' cluster and added 'standard'. Standard has no config for samba, elastic-search or private dockerhub.
+Remove `basic` cluster and added `standard`. Standard has no config for samba, elastic-search or private dockerhub and allows folders created to be specified by caller.
 
-Delete 'logging' + 'dns' module as they only created a single resource.
+Delete `logging` + `dns` module as they only created a single resource.
 
-Create "env-vars" module to replace "environment-variable", gradually phase out needing to specify environment-var length in calling modules.
-
-Update "ulimits" and "port-mappings" to no longer require length to be set.
-
-Allow "secret_environment_variables" to be specified for tasks
+Update `services/tasks/` modules:
+* Create "env-vars" module to replace "environment-variable", gradually phase out needing to specify environment-var length in calling modules.
+* Update "ulimits" and "port-mappings" to no longer require length to be set.
+* Allow "secret_environment_variables" to be specified for tasks. _note - execution tasks are not configured in these modules so this needs extra work_
