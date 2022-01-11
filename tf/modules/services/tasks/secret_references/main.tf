@@ -41,9 +41,11 @@ locals {
   aws_region = data.aws_region.current.name
   account_id = data.aws_caller_identity.current.account_id
 
+  ssm_prefix = "/aws/reference/secretsmanager/"
+
   valuesFrom = {
     for label, secret in local.secret_references : label =>
-    secret["key"] == "" ? data.aws_secretsmanager_secret.for_service[label].arn : "${data.aws_secretsmanager_secret.for_service[label].arn}:${secret["key"]}::"
+    secret["key"] == "" ? "${local.ssm_prefix}${secret["name"]}" : "${data.aws_secretsmanager_secret.for_service[label].arn}:${secret["key"]}::"
   }
 
   arns = {
