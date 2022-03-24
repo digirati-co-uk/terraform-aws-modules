@@ -5,7 +5,7 @@ resource "aws_ecs_cluster" "borg" {
 }
 
 data "template_file" "dockerhub_credentials" {
-  template = "${file("${path.module}/files/s3-objects/bootstrap-objects/dockerhub_credentials.template")}"
+  template = file("${path.module}/files/s3-objects/bootstrap-objects/dockerhub_credentials.template")
 
   vars = {
     cluster_id         = aws_ecs_cluster.borg.name
@@ -16,7 +16,7 @@ data "template_file" "dockerhub_credentials" {
 }
 
 data "template_file" "samba_configuration" {
-  template = "${file("${path.module}/files/s3-objects/bootstrap-objects/borg-smb.conf")}"
+  template = file("${path.module}/files/s3-objects/bootstrap-objects/borg-smb.conf")
 }
 
 resource "aws_s3_bucket_object" "dockerhub_credentials" {

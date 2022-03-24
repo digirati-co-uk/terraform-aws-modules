@@ -47,3 +47,11 @@ Update `services/tasks/` modules:
 * Create "env-vars" module to replace "environment-variable", gradually phase out needing to specify environment-var length in calling modules.
 * Update "ulimits" and "port-mappings" to no longer require length to be set.
 * Allow "secret_environment_variables" to be specified for tasks. _note - execution tasks are not configured in these modules so this needs extra work_
+
+## 3.1 2022-01-11
+
+Fix how secret keys are calculated for secret_reference
+
+## 3.2 2022-03-24
+
+Remove last usages of legacy interpolation syntax

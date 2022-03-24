@@ -39,7 +39,7 @@ locals {
 }
 
 data "template_file" "definition" {
-  template = "${file("${path.module}/files/task_definition.jsontemplate")}"
+  template = file("${path.module}/files/task_definition.jsontemplate")
 
   vars = {
     prefix                        = var.prefix

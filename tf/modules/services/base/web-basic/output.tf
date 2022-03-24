@@ -1,6 +1,6 @@
 output "url" {
   description = "external url"
-  value       = var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"
+  value       = var.hostname == "" ? var.domain : "${var.hostname}.${var.domain}"
 }
 
 output "target_group_arn" {

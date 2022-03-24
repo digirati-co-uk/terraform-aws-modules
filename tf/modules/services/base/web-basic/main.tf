@@ -52,18 +52,18 @@ resource "aws_alb_listener_rule" "http" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_alb_target_group.service.arn}"
+    target_group_arn = aws_alb_target_group.service.arn
   }
 
   condition {
     host_header {
-      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
+      values = [var.hostname == "" ? var.domain : "${var.hostname}.${var.domain}"]
     }
   }
 
   condition {
     path_pattern {
-      values = ["${element(var.path_patterns, count.index)}"]
+      values = [element(var.path_patterns, count.index)]
     }
   }
 
@@ -84,13 +84,13 @@ resource "aws_alb_listener_rule" "https" {
 
   condition {
     host_header {
-      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
+      values = [var.hostname == "" ? var.domain : "${var.hostname}.${var.domain}"]
     }
   }
 
   condition {
     path_pattern {
-      values = ["${element(var.path_patterns, count.index)}"]
+      values = [element(var.path_patterns, count.index)]
     }
   }
 

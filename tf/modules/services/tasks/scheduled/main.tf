@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "events_access_ecs" {
     condition {
       test     = "StringLike"
       variable = "ecs:cluster"
-      values   = ["${var.cluster_arn}"]
+      values   = [var.cluster_arn]
     }
   }
 }

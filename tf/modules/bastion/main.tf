@@ -84,8 +84,8 @@ resource "aws_launch_configuration" "bastion" {
   key_name             = var.key_name
 
   security_groups = [
-    "${data.aws_security_group.default.id}",
-    "${aws_security_group.bastion.id}",
+    data.aws_security_group.default.id,
+    aws_security_group.bastion.id,
   ]
 
   user_data = <<EOF

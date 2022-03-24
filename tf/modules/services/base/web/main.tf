@@ -229,13 +229,13 @@ resource "aws_alb_listener_rule" "http" {
 
   condition {
     host_header {
-      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
+      values = [var.hostname == "" ? var.domain : "${var.hostname}.${var.domain}"]
     }
   }
 
   condition {
     path_pattern {
-      values = ["${element(var.path_patterns, count.index)}"]
+      values = [element(var.path_patterns, count.index)]
     }
   }
 
@@ -258,13 +258,13 @@ resource "aws_alb_listener_rule" "https" {
 
   condition {
     host_header {
-      values = [var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"]
+      values = [var.hostname == "" ? var.domain : "${var.hostname}.${var.domain}"]
     }
   }
 
   condition {
     path_pattern {
-      values = ["${element(var.path_patterns, count.index)}"]
+      values = [element(var.path_patterns, count.index)]
     }
   }
 
@@ -282,7 +282,7 @@ resource "aws_alb_listener_rule" "https" {
 resource "aws_route53_record" "service" {
   count   = var.create_route53_entry ? 1 : 0
   zone_id = var.zone_id
-  name    = var.hostname == "" ? "${var.domain}" : "${var.hostname}.${var.domain}"
+  name    = var.hostname == "" ? var.domain : "${var.hostname}.${var.domain}"
   type    = "A"
 
   alias {

@@ -31,7 +31,7 @@ module "backup_task" {
   cpu_reservation    = 0
   memory_reservation = 128
 
-  docker_image = "${var.backup_database_s3_docker_image}"
+  docker_image = var.backup_database_s3_docker_image
 
   mount_points = [
     {
