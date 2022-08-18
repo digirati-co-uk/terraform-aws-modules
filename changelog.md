@@ -55,3 +55,7 @@ Fix how secret keys are calculated for secret_reference
 ## 3.2 2022-03-24
 
 Remove last usages of legacy interpolation syntax
+
+## 3.3 2022-08-18
+
+Add `min_size` and `max_size` to bastion module. This will allow setting to 0 to have a default 'off' bastion host.

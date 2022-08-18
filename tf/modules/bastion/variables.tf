@@ -40,3 +40,13 @@ variable "dns_zone" {
 variable "domain" {
   description = "Apex domain to use (e.g. dlcs.io)"
 }
+
+variable "min_size" {
+  description = "Minimum number of instances for the cluster"
+  default     = 1
+}
+
+variable "max_size" {
+  description = "Maximum number of instances for the cluster"
+  default     = 1
+}

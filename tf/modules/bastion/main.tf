@@ -134,8 +134,8 @@ resource "aws_autoscaling_group" "bastion" {
   name                 = "${var.prefix}-bastion"
   launch_configuration = aws_launch_configuration.bastion.name
 
-  max_size            = "1"
-  min_size            = "1"
+  min_size            = var.min_size
+  max_size            = var.max_size
   vpc_zone_identifier = flatten(var.subnets)
 
   default_cooldown = 0

@@ -17,6 +17,8 @@ The following parameters are available:
 | subnet        | VPC subnet to launch in                            | string |          |
 | dns_zone      | DNS Hosted Zone ID to create bastion record within | string |          |
 | domain        | Apex domain to use (e.g. dlcs.io)                  | string |          |
+| min_size      | Minimum number of instances                        | number | 1        |
+| max_size      | Maximum number of instances                        | number | 1        |
 
 ## Outputs
 
