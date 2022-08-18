@@ -1,55 +1,27 @@
 output "vpc_id" {
-  value = "${aws_vpc.main.id}"
+  value = module.vpc.vpc_id
 }
 
-output "subnet_public_1_id" {
-  value = "${aws_subnet.public_1.id}"
+output "private_subnets" {
+  value = module.vpc.private_subnets
 }
 
-output "subnet_public_2_id" {
-  value = "${aws_subnet.public_2.id}"
+output "public_subnets" {
+  value = module.vpc.public_subnets
 }
 
-output "subnet_private_1_id" {
-  value = "${aws_subnet.private_1.id}"
+output "public_route_table_id" {
+  value = module.vpc.public_route_table_id
 }
 
-output "subnet_private_2_id" {
-  value = "${aws_subnet.private_2.id}"
+output "private_route_table_id" {
+  value = module.vpc.private_route_table_id
 }
 
-output "route_table_public_1_id" {
-  value = "${aws_route_table.public_1.id}"
+output "cidr_block_public" {
+  value = local.cidr_block_public
 }
 
-output "route_table_public_2_id" {
-  value = "${aws_route_table.public_2.id}"
-}
-
-output "route_table_private_1_id" {
-  value = "${aws_route_table.private_1.id}"
-}
-
-output "route_table_private_2_id" {
-  value = "${aws_route_table.private_2.id}"
-}
-
-output "subnet_public_1_az" {
-  value = "${var.subnet_public_1_az}"
-}
-
-output "subnet_public_2_az" {
-  value = "${var.subnet_public_2_az}"
-}
-
-output "subnet_private_1_az" {
-  value = "${var.subnet_private_1_az}"
-}
-
-output "subnet_private_2_az" {
-  value = "${var.subnet_private_2_az}"
-}
-
-output "nat_public_ip" {
-  value = "${aws_nat_gateway.gw.public_ip}"
+output "cidr_block_private" {
+  value = local.cidr_block_private
 }

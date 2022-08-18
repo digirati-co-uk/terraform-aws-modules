@@ -1,20 +1,20 @@
 # Bastion module
 
 data "aws_security_group" "default" {
-  vpc_id = "${var.vpc}"
+  vpc_id = var.vpc
   name   = "default"
 }
 
 resource "aws_security_group" "bastion" {
   name        = "${var.prefix}-bastion"
   description = "SSH access"
-  vpc_id      = "${var.vpc}"
+  vpc_id      = var.vpc
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.ip_whitelist}"]
+    cidr_blocks = flatten(var.ip_whitelist)
   }
 
   egress {
@@ -24,13 +24,13 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
-    "Project" = "${var.project}"
+  tags = {
+    Project = var.project
   }
 }
 
 data "aws_iam_policy_document" "assume_role_policy_ec2" {
-  statement = {
+  statement {
     actions = [
       "sts:AssumeRole",
     ]
@@ -44,11 +44,11 @@ data "aws_iam_policy_document" "assume_role_policy_ec2" {
 
 resource "aws_iam_role" "bastion" {
   name               = "${var.prefix}-bastion"
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy_ec2.json}"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy_ec2.json
 }
 
 data "aws_iam_policy_document" "bastion_abilities" {
-  statement = {
+  statement {
     actions = [
       "route53:GetHostedZone",
       "route53:ListResourceRecordSets",
@@ -63,29 +63,29 @@ data "aws_iam_policy_document" "bastion_abilities" {
 resource "aws_iam_policy" "bastion_abilities" {
   name        = "${var.prefix}-bastion-abilities"
   description = "Bastion userdata abilities (route53)"
-  policy      = "${data.aws_iam_policy_document.bastion_abilities.json}"
+  policy      = data.aws_iam_policy_document.bastion_abilities.json
 }
 
 resource "aws_iam_role_policy_attachment" "bastion_abilities" {
-  role       = "${aws_iam_role.bastion.name}"
-  policy_arn = "${aws_iam_policy.bastion_abilities.arn}"
+  role       = aws_iam_role.bastion.name
+  policy_arn = aws_iam_policy.bastion_abilities.arn
 }
 
 resource "aws_iam_instance_profile" "bastion" {
   name = "${var.prefix}-bastion"
-  role = "${aws_iam_role.bastion.name}"
+  role = aws_iam_role.bastion.name
 }
 
 resource "aws_launch_configuration" "bastion" {
   name_prefix          = "${var.prefix}-bastion-"
-  image_id             = "${var.ami}"
-  instance_type        = "${var.instance_type}"
-  iam_instance_profile = "${aws_iam_instance_profile.bastion.name}"
-  key_name             = "${var.key_name}"
+  image_id             = var.ami
+  instance_type        = var.instance_type
+  iam_instance_profile = aws_iam_instance_profile.bastion.name
+  key_name             = var.key_name
 
   security_groups = [
-    "${data.aws_security_group.default.id}",
-    "${aws_security_group.bastion.id}",
+    data.aws_security_group.default.id,
+    aws_security_group.bastion.id,
   ]
 
   user_data = <<EOF
@@ -132,11 +132,11 @@ EOF
 
 resource "aws_autoscaling_group" "bastion" {
   name                 = "${var.prefix}-bastion"
-  launch_configuration = "${aws_launch_configuration.bastion.name}"
+  launch_configuration = aws_launch_configuration.bastion.name
 
   max_size            = "1"
   min_size            = "1"
-  vpc_zone_identifier = ["${var.subnets}"]
+  vpc_zone_identifier = flatten(var.subnets)
 
   default_cooldown = 0
 
@@ -152,7 +152,7 @@ resource "aws_autoscaling_group" "bastion" {
 
   tag {
     key                 = "Project"
-    value               = "${var.project}"
+    value               = var.project
     propagate_at_launch = true
   }
 }

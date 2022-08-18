@@ -7,6 +7,7 @@
     "mountPoints": ${mount_points},
     "volumesFrom": ${volumes_from},
     "environment": ${environment_variables},
+    "secrets": ${secrets},
     "image": "${docker_image}",
     "user": ${user},
     "logConfiguration": {

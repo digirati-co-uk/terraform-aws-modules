@@ -48,8 +48,6 @@ Using Terraform 0.11.8
 
 ### wildcard-alb
 
-## logging
-
 ## messaging
 
 ### sns
@@ -66,6 +64,6 @@ Using Terraform 0.11.8
 
 #### base
 
-#### environment-variables
+#### env-vars
 
 ## vpc

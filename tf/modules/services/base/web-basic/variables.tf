@@ -12,7 +12,7 @@ variable "cluster_id" {
 
 variable "subnets" {
   description = "List of subnets to load balance"
-  type        = "list"
+  type        = list
 }
 
 variable "vpc" {
@@ -30,7 +30,7 @@ variable "domain" {
 
 variable "path_patterns" {
   description = "Path patterns to match in ALB"
-  type        = "list"
+  type        = list
 
   default = [
     "/*",
