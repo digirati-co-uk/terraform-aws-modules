@@ -59,3 +59,7 @@ Remove last usages of legacy interpolation syntax
 ## 3.3 2022-08-18
 
 Add `min_size` and `max_size` to bastion module. This will allow setting to 0 to have a default 'off' bastion host.
+
+## 3.4 XXX
+
+Add `/ecs/ec2_capacity_provider` and `/ecs/web` modules.
