@@ -39,9 +39,40 @@ resource "aws_ecs_service" "service" {
     container_port   = var.container_port
   }
 
-  launch_type = "EC2"
+  # Specifying both a launch type and capacity provider strategy is not supported
+  launch_type = length(var.capacity_provider_strategies) > 0 ? null : "EC2"
 
   scheduling_strategy = var.scheduling_strategy
+
+  dynamic "capacity_provider_strategy" {
+    for_each = var.capacity_provider_strategies
+    iterator = strategy
+
+    content {
+      capacity_provider = strategy.value["capacity_provider"]
+      weight            = strategy.value["weight"]
+    }
+  }
+
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategies
+    iterator = strategy
+
+    content {
+      type  = strategy.value["type"]
+      field = strategy.value["field"]
+    }
+  }
+
+  dynamic "placement_constraints" {
+    for_each = var.placement_constraints
+    iterator = constraint
+
+    content {
+      type       = constraint.value["type"]
+      expression = constraint.value["expression"]
+    }
+  }
 
   depends_on = [
     aws_iam_role_policy.service
@@ -68,7 +99,7 @@ data "aws_iam_policy_document" "assume_ecs_role" {
 
 resource "aws_iam_role" "service" {
   name               = "${var.name}-service-role"
-  assume_role_policy = aws_iam_policy_document.assume_ecs_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_ecs_role.json
 }
 
 data "aws_iam_policy_document" "service_abilities" {
@@ -91,5 +122,5 @@ data "aws_iam_policy_document" "service_abilities" {
 resource "aws_iam_role_policy" "service" {
   name   = "${var.name}-service-role-policy"
   role   = aws_iam_role.service.name
-  policy = aws_iam_policy_document.service_abilities.json
+  policy = data.aws_iam_policy_document.service_abilities.json
 }

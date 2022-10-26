@@ -37,7 +37,8 @@ resource "aws_ecs_service" "service" {
     container_port   = var.container_port
   }
 
-  launch_type = "FARGATE"
+  # Specifying both a launch type and capacity provider strategy is not supported
+  launch_type = var.use_fargate_spot ? null : "FARGATE"
 
   scheduling_strategy = var.scheduling_strategy
 
@@ -45,6 +46,35 @@ resource "aws_ecs_service" "service" {
     subnets          = var.subnets
     security_groups  = var.security_group_ids
     assign_public_ip = false
+  }
+
+  dynamic "capacity_provider_strategy" {
+    for_each = var.use_fargate_spot ? [{}] : []
+
+    content {
+      capacity_provider = "FARGATE_SPOT"
+      weight            = 1
+    }
+  }
+
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategies
+    iterator = strategy
+
+    content {
+      type  = strategy.value["type"]
+      field = strategy.value["field"]
+    }
+  }
+
+  dynamic "placement_constraints" {
+    for_each = var.placement_constraints
+    iterator = constraint
+
+    content {
+      type       = constraint.value["type"]
+      expression = constraint.value["expression"]
+    }
   }
 
   tags = {

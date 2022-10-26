@@ -127,3 +127,27 @@ variable "target_type" {
   description = "TargetType for ELB TargetGroup"
   default     = "instance"
 }
+
+variable "capacity_provider_strategies" {
+  type = list(object({
+    capacity_provider = string
+    weight            = number
+  }))
+  default = []
+}
+
+variable "ordered_placement_strategies" {
+  type = list(object({
+    type  = string
+    field = string
+  }))
+  default = []
+}
+
+variable "placement_constraints" {
+  type = list(object({
+    type       = string
+    expression = string
+  }))
+  default = []
+}

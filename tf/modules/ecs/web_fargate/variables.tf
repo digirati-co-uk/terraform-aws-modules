@@ -138,3 +138,24 @@ variable "security_group_ids" {
   type        = list(any)
   default     = []
 }
+
+variable "use_fargate_spot" {
+  description = "Whether to use FARGATE_SPOT capacity provider"
+  default     = false
+}
+
+variable "ordered_placement_strategies" {
+  type = list(object({
+    type  = string
+    field = string
+  }))
+  default = []
+}
+
+variable "placement_constraints" {
+  type = list(object({
+    type       = string
+    expression = string
+  }))
+  default = []
+}

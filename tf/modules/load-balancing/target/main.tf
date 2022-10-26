@@ -15,18 +15,14 @@ resource "aws_security_group" "web" {
     from_port = 80
     to_port   = 80
     protocol  = "tcp"
-    cidr_blocks = [
-      flatten(var.ip_whitelist)
-    ]
+    cidr_blocks = var.ip_whitelist
   }
 
   ingress {
     from_port = 443
     to_port   = 443
     protocol  = "tcp"
-    cidr_blocks = [
-      flatten(var.ip_whitelist)
-    ]
+    cidr_blocks = var.ip_whitelist
   }
 
   # outbound internet access

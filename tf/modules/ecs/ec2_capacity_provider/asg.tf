@@ -99,8 +99,8 @@ locals {
   set_cluster = "echo ECS_CLUSTER=${var.cluster_name} >> /etc/ecs/ecs.config"
 
   user_data = <<EOF
-  #!/bin/bash
+#!/bin/bash
 
-  ${var.additional_user_data == "" ? local.set_cluster : format("%s\n%s", local.set_cluster, var.additional_user_data)}
+${var.additional_user_data == "" ? local.set_cluster : format("%s\n%s", local.set_cluster, var.additional_user_data)}
 EOF
 }
