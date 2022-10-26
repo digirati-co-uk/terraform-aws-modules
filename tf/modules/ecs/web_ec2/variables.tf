@@ -10,11 +10,6 @@ variable "cluster_id" {
   description = "ECS cluster to deploy into"
 }
 
-variable "subnets" {
-  description = "List of subnets to load balance"
-  type        = list
-}
-
 variable "vpc" {
   description = "ID of the VPC that the cluster is deployed in"
 }
@@ -29,7 +24,7 @@ variable "domain" {
 
 variable "path_patterns" {
   description = "Path patterns to match in ALB"
-  type        = list
+  type        = list(any)
 
   default = [
     "/*",
@@ -42,7 +37,7 @@ variable "zone_id" {
 
 variable "ip_whitelist" {
   description = "List of CIDR blocks to allow web access for"
-  type        = list
+  type        = list(any)
   default     = ["0.0.0.0/0"]
 }
 
@@ -51,23 +46,13 @@ variable "load_balancer_arn" {
   default     = ""
 }
 
-variable "load_balancer_fqdn" {
-  description = "Optional FQDN of ALB to attach to"
-  default     = ""
-}
-
-variable "load_balancer_zone_id" {
-  description = "Optional Zone ID of ALB to attach to"
-  default     = ""
-}
-
-variable "service_number_https" {
-  description = "Priority number for the service's ALB HTTPS listener"
+variable "priority" {
+  description = "Priority number for the LB listener rule"
   default     = "0"
 }
 
-variable "load_balancer_https_listener_arn" {
-  description = "Optional ARN of the ALB HTTPS Listener to attach to"
+variable "listener_arn" {
+  description = "Optional ARN of the ALB Listener to attach to"
   default     = ""
 }
 
@@ -138,18 +123,7 @@ variable "scheduling_strategy" {
   default     = "REPLICA"
 }
 
-variable "launch_type" {
-  description = "Use EC2, FARGATE or EXTERNAL scheduling strategy"
-  default     = "EC2"
-}
-
 variable "target_type" {
   description = "TargetType for ELB TargetGroup"
   default     = "instance"
-}
-
-variable "security_group_ids" {
-  description = "List of security groups for network configuration"
-  type        = list
-  default     = []
 }
