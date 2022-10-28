@@ -123,11 +123,6 @@ variable "scheduling_strategy" {
   default     = "REPLICA"
 }
 
-variable "target_type" {
-  description = "TargetType for ELB TargetGroup"
-  default     = "instance"
-}
-
 variable "capacity_provider_strategies" {
   type = list(object({
     capacity_provider = string

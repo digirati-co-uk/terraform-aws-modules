@@ -20,7 +20,7 @@ module "target" {
   health_check_unhealthy_threshold = var.health_check_unhealthy_threshold
   health_check_interval            = var.health_check_interval
   deregistration_delay             = var.deregistration_delay
-  target_type                      = var.target_type
+  target_type                      = "ip"
 }
 
 resource "aws_ecs_service" "service" {

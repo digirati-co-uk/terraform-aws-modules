@@ -128,11 +128,6 @@ variable "scheduling_strategy" {
   default     = "REPLICA"
 }
 
-variable "target_type" {
-  description = "TargetType for ELB TargetGroup"
-  default     = "instance"
-}
-
 variable "security_group_ids" {
   description = "List of security groups for network configuration"
   type        = list(any)
