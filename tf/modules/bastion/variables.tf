@@ -41,6 +41,11 @@ variable "domain" {
   description = "Apex domain to use (e.g. dlcs.io)"
 }
 
+variable "hostname" {
+  description = "Hostname to register bastion record with. Prepended to domain"
+  default     = "bastion"
+}
+
 variable "min_size" {
   description = "Minimum number of instances for the cluster"
   default     = 1
