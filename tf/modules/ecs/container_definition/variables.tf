@@ -127,3 +127,8 @@ variable "repository_credentials" {
   })
   default = null
 }
+
+variable "links" {
+  type = list(string)
+  default = []
+}

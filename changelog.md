@@ -67,3 +67,7 @@ Add `/ecs/ec2_capacity_provider`, `/ecs/web_fargate` and `/ecs/web_ec2` modules.
 Added `/load-balancing/target` module use from above `/web_*` modules.
 
 Allow 'hostname' to be specified in bastion module.
+
+## 3.5 2022-10-31
+
+Add `links` parameter to container_definition module
