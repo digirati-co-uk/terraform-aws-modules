@@ -71,3 +71,7 @@ Allow 'hostname' to be specified in bastion module.
 ## 3.5 2022-10-31
 
 Add `links` parameter to container_definition module
+
+## 3.6 2022-10-31
+
+`hostname` and `zone_id` are optional for ecs/web_* modules.

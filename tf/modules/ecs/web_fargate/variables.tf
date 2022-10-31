@@ -21,6 +21,7 @@ variable "vpc" {
 
 variable "hostname" {
   description = "Hostname to register in Route53"
+  default     = ""
 }
 
 variable "domain" {
@@ -38,6 +39,7 @@ variable "path_patterns" {
 
 variable "zone_id" {
   description = "ID for the Hosted Zone"
+  default     = ""
 }
 
 variable "ip_whitelist" {
