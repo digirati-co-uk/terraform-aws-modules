@@ -75,3 +75,7 @@ Add `links` parameter to container_definition module
 ## 3.6 2022-10-31
 
 `hostname` and `zone_id` are optional for ecs/web_* modules.
+
+## 3.7 2022-11-02
+
+Allow data volume to be specified for `/ecs/ec2_capacity_provider`

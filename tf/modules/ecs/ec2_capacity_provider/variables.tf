@@ -39,11 +39,25 @@ variable "ami_id" {
 }
 
 variable "ebs_size_gb" {
-  type    = number
-  default = 25
+  description = "Size of /dev/xvdcz volume used by docker"
+  type        = number
+  default     = 25
 }
 
 variable "ebs_volume_type" {
+  description = "Type of /dev/xvdcz volume used by docker"
+  type    = string
+  default = "gp2"
+}
+
+variable "data_size_gb" {
+  description = "Size of additional data volume, mounted as /dev/xvdf"
+  type        = number
+  default     = 0
+}
+
+variable "data_volume_type" {
+  description = "Size of additional data volume, mounted as /dev/xvdf"
   type    = string
   default = "gp2"
 }
