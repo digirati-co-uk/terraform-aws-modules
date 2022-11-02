@@ -78,4 +78,6 @@ Add `links` parameter to container_definition module
 
 ## 3.7 2022-11-02
 
-Allow data volume to be specified for `/ecs/ec2_capacity_provider`
+Allow data volume to be specified for `/ecs/ec2_capacity_provider`.
+
+Add `ephemeral_storage` to `/ecs/task_definition`.

@@ -15,8 +15,9 @@ resource "aws_ecs_task_definition" "task" {
 
   requires_compatibilities = var.launch_types
 
-  cpu    = var.cpu
-  memory = var.memory
+  cpu               = var.cpu
+  memory            = var.memory
+  ephemeral_storage = var.ephemeral_storage
 
   # Unused here, but must be set to prevent churn
   tags = {}
