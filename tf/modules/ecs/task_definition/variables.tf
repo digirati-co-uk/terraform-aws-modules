@@ -29,7 +29,7 @@ variable "memory" {
 
 variable "ephemeral_storage" {
   type    = number
-  default = null
+  default = 0
 }
 
 variable "volumes" {
