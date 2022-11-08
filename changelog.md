@@ -85,3 +85,5 @@ Add `ephemeral_storage` to `/ecs/task_definition`.
 ## 3.8 2022-11-08
 
 Add `/ecs/autoscaling/scheduled` module.
+
+Removed `services/base/worker` and `services/base/web-basic` modules.
