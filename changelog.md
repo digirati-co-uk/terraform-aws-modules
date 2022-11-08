@@ -82,6 +82,6 @@ Allow data volume to be specified for `/ecs/ec2_capacity_provider`.
 
 Add `ephemeral_storage` to `/ecs/task_definition`.
 
-## 3.8 2022-11-
+## 3.8 2022-11-08
 
 Add `/ecs/autoscaling/scheduled` module.
