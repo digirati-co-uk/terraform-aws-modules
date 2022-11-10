@@ -77,6 +77,13 @@ resource "aws_ecs_service" "service" {
     }
   }
 
+  lifecycle {
+    # managed by scaling policy
+    ignore_changes = [
+      desired_count
+    ]
+  }
+
   tags = {
     Project = var.project
   }

@@ -87,3 +87,7 @@ Add `ephemeral_storage` to `/ecs/task_definition`.
 Add `/ecs/autoscaling/scheduled` module.
 
 Removed `services/base/worker` and `services/base/web-basic` modules.
+
+## 3.9 2022-11-10
+
+Ignore changes to `desired_count` for web_fargate and web_ecs.
