@@ -1,6 +1,8 @@
 # Borg cluster
 
-This is an ECS cluster with a particular volume configuration and sambda configuration.
+> Avoid using this module. Prefer standard. This it creates DLCS-specific folders and contains unnecessary modifications (e.g. for ElasticSearch + Samba etc)
+
+Borg cluster hosts have EFS- and EBS-backed storage and are designed to be general-specialists (e.g. they have kernel modifications for ElasticSearch, run Samba, and have a few standard folders available).
 
 It provides:
 

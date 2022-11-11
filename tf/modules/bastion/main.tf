@@ -99,7 +99,7 @@ yum remove ecs-init
 
 # Route53 update
 LOCALIP=$(curl -s "http://169.254.169.254/latest/meta-data/public-ipv4")
-DOMAIN="bastion.${var.domain}"
+DOMAIN="${var.hostname}.${var.domain}"
 HOSTEDZONEID="${var.dns_zone}"
 cat > /tmp/route53-record.txt <<EOFCAT
 {

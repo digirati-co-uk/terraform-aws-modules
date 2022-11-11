@@ -10,17 +10,12 @@ variable "cluster_id" {
   description = "ECS cluster to deploy into"
 }
 
-variable "subnets" {
-  description = "List of subnets to load balance"
-  type        = list
-}
-
 variable "vpc" {
   description = "ID of the VPC that the cluster is deployed in"
 }
 
 variable "hostname" {
-  description = "(Optional) Hostname to register in Route53"
+  description = "Hostname to register in Route53"
   default     = ""
 }
 
@@ -30,7 +25,7 @@ variable "domain" {
 
 variable "path_patterns" {
   description = "Path patterns to match in ALB"
-  type        = list
+  type        = list(any)
 
   default = [
     "/*",
@@ -38,38 +33,28 @@ variable "path_patterns" {
 }
 
 variable "zone_id" {
-  description = "ID for the Route53 Hosted Zone"
-}
-
-variable "load_balancer_arn" {
-  description = "ARN of ALB to attach to"
-}
-
-variable "load_balancer_fqdn" {
-  description = "FQDN of ALB to attach to"
-}
-
-variable "load_balancer_zone_id" {
-  description = "Zone ID of ALB to attach to"
-}
-
-variable "service_number_http" {
-  description = "Priority number for the service's ALB HTTP listener"
-  default     = "0"
-}
-
-variable "service_number_https" {
-  description = "Priority number for the service's ALB HTTPS listener"
-  default     = "0"
-}
-
-variable "load_balancer_http_listener_arn" {
-  description = "Optional ARN of the ALB HTTP Listener to attach to"
+  description = "ID for the Hosted Zone"
   default     = ""
 }
 
-variable "load_balancer_https_listener_arn" {
-  description = "Optional ARN of the ALB HTTPS Listener to attach to"
+variable "ip_whitelist" {
+  description = "List of CIDR blocks to allow web access for"
+  type        = list(any)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "load_balancer_arn" {
+  description = "Optional ARN of ALB to attach to"
+  default     = ""
+}
+
+variable "priority" {
+  description = "Priority number for the LB listener rule"
+  default     = "0"
+}
+
+variable "listener_arn" {
+  description = "Optional ARN of the ALB Listener to attach to"
   default     = ""
 }
 
@@ -130,7 +115,36 @@ variable "health_check_grace_period_seconds" {
   default     = 0
 }
 
+variable "create_route53_entry" {
+  description = "Whether to create a Route53 entry for the service"
+  default     = true
+}
+
 variable "scheduling_strategy" {
   description = "Use REPLICA or DAEMON scheduling strategy"
   default     = "REPLICA"
+}
+
+variable "capacity_provider_strategies" {
+  type = list(object({
+    capacity_provider = string
+    weight            = number
+  }))
+  default = []
+}
+
+variable "ordered_placement_strategies" {
+  type = list(object({
+    type  = string
+    field = string
+  }))
+  default = []
+}
+
+variable "placement_constraints" {
+  type = list(object({
+    type       = string
+    expression = string
+  }))
+  default = []
 }

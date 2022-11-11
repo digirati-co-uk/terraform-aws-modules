@@ -22,6 +22,7 @@ locals {
     user         = var.user
     dependsOn    = var.depends
     tags         = var.tags
+    links        = var.links
 
     volumesFrom = var.volumes_from
 

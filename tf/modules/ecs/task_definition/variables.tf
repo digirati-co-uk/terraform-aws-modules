@@ -27,6 +27,11 @@ variable "memory" {
   default = null
 }
 
+variable "ephemeral_storage" {
+  type    = number
+  default = 0
+}
+
 variable "volumes" {
   type = list(object({
     name      = string

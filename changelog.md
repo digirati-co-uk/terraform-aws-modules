@@ -59,3 +59,35 @@ Remove last usages of legacy interpolation syntax
 ## 3.3 2022-08-18
 
 Add `min_size` and `max_size` to bastion module. This will allow setting to 0 to have a default 'off' bastion host.
+
+## 3.4 2022-10-28
+
+Add `/ecs/ec2_capacity_provider`, `/ecs/web_fargate` and `/ecs/web_ec2` modules.
+
+Added `/load-balancing/target` module use from above `/web_*` modules.
+
+Allow 'hostname' to be specified in bastion module.
+
+## 3.5 2022-10-31
+
+Add `links` parameter to container_definition module
+
+## 3.6 2022-10-31
+
+`hostname` and `zone_id` are optional for ecs/web_* modules.
+
+## 3.7 2022-11-02
+
+Allow data volume to be specified for `/ecs/ec2_capacity_provider`.
+
+Add `ephemeral_storage` to `/ecs/task_definition`.
+
+## 3.8 2022-11-08
+
+Add `/ecs/autoscaling/scheduled` module.
+
+Removed `services/base/worker` and `services/base/web-basic` modules.
+
+## 3.9 2022-11-10
+
+Ignore changes to `desired_count` for web_fargate and web_ecs.
