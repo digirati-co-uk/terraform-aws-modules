@@ -91,3 +91,7 @@ Removed `services/base/worker` and `services/base/web-basic` modules.
 ## 3.9 2022-11-10
 
 Ignore changes to `desired_count` for web_fargate and web_ecs.
+
+## 3.10 2022-12-06
+
+Fix SQS module to use topic_arn for `aws:SourceArn` condition, rather than topic_name
