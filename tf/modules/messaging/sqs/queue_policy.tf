@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "sns_write_to_queue" {
       variable = "aws:SourceArn"
 
       values = [
-        var.topic_name
+        local.topic_arn
       ]
     }
   }
