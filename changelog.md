@@ -95,3 +95,7 @@ Ignore changes to `desired_count` for web_fargate and web_ecs.
 ## 3.10 2022-12-06
 
 Fix SQS module to use topic_arn for `aws:SourceArn` condition, rather than topic_name
+
+## 3.11 2023-01-12
+
+Update SQS module to allow setting of `raw_message_delivery` on SNS subscription.
