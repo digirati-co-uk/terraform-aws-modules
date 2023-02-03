@@ -130,10 +130,6 @@ resource "aws_security_group" "web" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Project = var.project
-  }
 }
 
 #############################
@@ -151,10 +147,6 @@ resource "aws_alb" "service" {
     join("", aws_security_group.web.*.id),
     data.aws_security_group.default.id,
   ]
-
-  tags = {
-    Project = var.project
-  }
 }
 
 resource "aws_alb_target_group" "service" {

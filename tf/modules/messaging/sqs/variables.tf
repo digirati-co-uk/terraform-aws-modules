@@ -2,10 +2,6 @@ locals {
   topic_arn = format("arn:aws:sns:%s:%s:%s", var.region, var.account_id, var.topic_name)
 }
 
-variable "project" {
-  description = "Project value for tags"
-}
-
 variable "queue_name" {
   description = "Name of the SQS queue to create"
 }

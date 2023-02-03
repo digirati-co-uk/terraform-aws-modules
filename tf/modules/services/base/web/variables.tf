@@ -2,10 +2,6 @@ variable "name" {
   description = "Service name"
 }
 
-variable "project" {
-  description = "Project tag value"
-}
-
 variable "cluster_id" {
   description = "ECS cluster to deploy into"
 }

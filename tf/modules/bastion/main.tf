@@ -23,10 +23,6 @@ resource "aws_security_group" "bastion" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Project = var.project
-  }
 }
 
 data "aws_iam_policy_document" "assume_role_policy_ec2" {

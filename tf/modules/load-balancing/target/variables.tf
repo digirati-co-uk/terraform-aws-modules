@@ -2,10 +2,6 @@ variable "name" {
   description = "Name of target group"
 }
 
-variable "project" {
-  description = "Project tag value"
-}
-
 variable "vpc" {
   description = "ID of the VPC that the ALB is deployed in"
 }

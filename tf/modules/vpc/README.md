@@ -9,7 +9,6 @@ Provides a single VPC with default 3 public and private subnets. Also creates s3
 | vpc_name   | Name of VPC                         | string |             |
 | region     | AWS region                          | string |             |
 | cidr_block | VPC CIDR block                      | string | 10.0.0.0/16 |
-| project    | "Project" tag to apply to resources | string |             |
 
 ## Outputs
 | Parameter              | Description                     | Type   |

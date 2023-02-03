@@ -12,7 +12,6 @@ This module creates the following resources:
 | Name                             | Description                                                                      | Default       |
 |----------------------------------|----------------------------------------------------------------------------------|---------------|
 | name                             | Name of target group                                                             |               |
-| project                          | Project tag value                                                                |               |
 | vpc                              | Id of the VPC that LB is in                                                      |               |
 | hostname                         | Optional hostname, prepended to `domain`, for `host_header` rule                 | ""            |
 | domain                           | Hostname for LB rule                                                             |               |

@@ -9,16 +9,8 @@ resource "aws_sqs_queue" "q" {
   receive_wait_time_seconds  = var.receive_wait_time_seconds
 
   redrive_policy = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.dlq.arn}\",\"maxReceiveCount\":${var.max_receive_count}}"
-
-  tags = {
-    "Project" = var.project
-  }
 }
 
 resource "aws_sqs_queue" "dlq" {
   name = "${var.queue_name}_dlq"
-
-  tags = {
-    "Project" = var.project
-  }
 }

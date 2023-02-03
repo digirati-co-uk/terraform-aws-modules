@@ -99,3 +99,7 @@ Fix SQS module to use topic_arn for `aws:SourceArn` condition, rather than topic
 ## 3.11 2023-01-12
 
 Update SQS module to allow setting of `raw_message_delivery` on SNS subscription.
+
+## 3.12 2023-02-03
+
+Remove "Project" tag from everywhere with exception of ASG creation. Expectation is that `default_tags` will be used to set project from calling modules

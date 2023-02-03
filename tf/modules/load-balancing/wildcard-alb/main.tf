@@ -30,10 +30,6 @@ resource "aws_security_group" "web" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Project = var.project
-  }
 }
 
 #######
@@ -53,10 +49,6 @@ resource "aws_alb" "lb" {
   )
 
   idle_timeout = var.idle_timeout_seconds
-
-  tags = {
-    Project = var.project
-  }
 }
 
 resource "aws_alb_target_group" "default" {

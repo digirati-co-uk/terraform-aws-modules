@@ -44,7 +44,6 @@ Creates Route53 entry if `create_route53_entry` is `true`.
 | load\_balancer\_zone\_id              | Optional Zone ID of ALB to attach to                 | `string` | `""`                               |    no    |
 | name                                  | Service name                                         | `any`    | n/a                                |   yes    |
 | path\_patterns                        | Path patterns to match in ALB                        | `list`   | <pre>[<br>  "/*"<br>]</pre>        |    no    |
-| project                               | Project tag value                                    | `any`    | n/a                                |   yes    |
 | scheduling\_strategy                  | Use REPLICA or DAEMON scheduling strategy            | `string` | `"REPLICA"`                        |    no    |
 | service\_number\_http                 | Priority number for the service's ALB HTTP listener  | `string` | `"0"`                              |    no    |
 | service\_number\_https                | Priority number for the service's ALB HTTPS listener | `string` | `"0"`                              |    no    |

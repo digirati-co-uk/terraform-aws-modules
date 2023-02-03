@@ -96,11 +96,6 @@ resource "aws_security_group" "cluster" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Project   = var.project
-    Terraform = true
-  }
 }
 
 resource "aws_iam_instance_profile" "standard" {
