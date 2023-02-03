@@ -31,5 +31,7 @@ locals {
     systemControls = var.system_controls
 
     repositoryCredentials = var.repository_credentials
+
+    resourceRequirements = var.resource_requirements
   }
 }
