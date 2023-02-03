@@ -1,5 +1,4 @@
 # terraform-aws-modules
-[![Build Status](https://travis-ci.org/digirati-co-uk/terraform-aws-modules.svg?branch=master)](https://travis-ci.org/digirati-co-uk/terraform-aws-modules)
 
 A collection of Terraform modules for AWS.
 
