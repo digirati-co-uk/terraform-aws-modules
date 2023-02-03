@@ -4,7 +4,6 @@ resource "aws_efs_file_system" "data" {
   tags = {
     Name        = var.cluster_name
     Environment = var.prefix
-    Project     = var.project
     ManagedBy   = "Terraform"
   }
 }
@@ -26,10 +25,6 @@ resource "aws_security_group" "mount_target" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Project = var.project
   }
 }
 

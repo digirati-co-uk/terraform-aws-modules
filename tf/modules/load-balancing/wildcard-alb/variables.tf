@@ -2,10 +2,6 @@ variable "prefix" {
   description = "Prefix for AWS resources"
 }
 
-variable "project" {
-  description = "Project name for tag values"
-}
-
 variable "name" {
   description = "Suffix for load balancer appliance"
 }

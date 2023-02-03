@@ -1,7 +1,3 @@
-variable "project" {
-  description = "Project tag value"
-}
-
 variable "prefix" {
   description = "Prefix for AWS resources"
 }

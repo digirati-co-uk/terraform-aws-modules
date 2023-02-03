@@ -2,7 +2,6 @@ module "target" {
   source = "../../load-balancing/target"
 
   name                             = var.name
-  project                          = var.project
   vpc                              = var.vpc
   hostname                         = var.hostname
   domain                           = var.domain
@@ -82,9 +81,5 @@ resource "aws_ecs_service" "service" {
     ignore_changes = [
       desired_count
     ]
-  }
-
-  tags = {
-    Project = var.project
   }
 }

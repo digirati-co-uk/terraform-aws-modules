@@ -132,3 +132,11 @@ variable "links" {
   type = list(string)
   default = []
 }
+
+variable "resource_requirements" {
+  type = list(object({
+    type  = string
+    value = string
+  }))
+  default = []
+}

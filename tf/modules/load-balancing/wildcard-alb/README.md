@@ -5,7 +5,6 @@ This module will provide an Application Load Balancer that specifically expects 
 ## Parameters
 | Name                   | Description                                         | Type   | Default                   |
 |------------------------|-----------------------------------------------------|--------|---------------------------|
-| project                | Project name for tag values                         | string |                           |
 | prefix                 | Prefix for AWS resources                            | string |                           |
 | name                   | Suffix for load balancer appliance                  | string |                           |
 | subnets                | List of subnets to associate load balancer with     | list   |                           |

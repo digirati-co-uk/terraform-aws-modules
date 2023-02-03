@@ -32,10 +32,6 @@ resource "aws_security_group" "web" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Project = var.project
-  }
 }
 
 #############################
@@ -57,10 +53,6 @@ resource "aws_alb_target_group" "service" {
     unhealthy_threshold = var.health_check_unhealthy_threshold
     interval            = var.health_check_interval
     matcher             = var.health_check_matcher
-  }
-
-  tags = {
-    Project = var.project
   }
 }
 
@@ -89,10 +81,6 @@ resource "aws_alb_listener_rule" "http" {
     ignore_changes = [
       priority
     ]
-  }
-  
-  tags = {
-    Project = var.project
   }
 }
 
