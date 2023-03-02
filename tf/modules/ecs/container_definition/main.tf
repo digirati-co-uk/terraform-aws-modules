@@ -15,6 +15,7 @@ locals {
 
     environment = local.final_environment
     secrets     = local.final_secrets
+    ulimits     = local.final_ulimits
 
     mountPoints  = var.mount_points
     portMappings = var.port_mappings

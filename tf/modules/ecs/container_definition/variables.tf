@@ -140,3 +140,8 @@ variable "resource_requirements" {
   }))
   default = []
 }
+
+variable "ulimits" {
+  type    = map(string)
+  default = {}
+}
