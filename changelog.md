@@ -105,3 +105,14 @@ Update SQS module to allow setting of `raw_message_delivery` on SNS subscription
 Remove "Project" tag from everywhere with exception of ASG creation. Expectation is that `default_tags` will be used to set project from calling modules.
 
 Add "resourceRequirements" to ecs/container_definition.
+
+## 3.13 2023-03-02
+
+Add "ulimits" variable to ECS container_definition module. Provided as a map:
+
+```
+ulimits = {
+  "name"   = "softLimit:hardLimit"
+  "nofile" = "32768:65536"
+}
+```
