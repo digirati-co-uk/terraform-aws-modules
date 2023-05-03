@@ -57,7 +57,7 @@ resource "aws_launch_template" "launch_template" {
   }
 
   iam_instance_profile {
-    arn = aws_iam_instance_profile.instance_profile.arn
+    arn = module.iam.instance_profile_arn
   }
 }
 
@@ -79,4 +79,9 @@ locals {
 
 ${var.additional_user_data == "" ? local.set_cluster : format("%s\n%s", local.set_cluster, var.additional_user_data)}
 EOF
+}
+
+module "iam" {
+  source = "./iam"
+  name   = var.name
 }
