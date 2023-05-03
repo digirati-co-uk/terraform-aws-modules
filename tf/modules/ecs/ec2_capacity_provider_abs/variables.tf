@@ -1,0 +1,86 @@
+variable "name" {
+  type = string
+}
+
+variable "max_instances" {
+  type    = number
+  default = 1
+}
+
+variable "instance_requirements" {
+  description = "The attribute requirements for the type of instances to be considered"
+  type        = any
+  default     = {}
+}
+
+variable "mixed_instances_policy" {
+  description = "Configuration block containing settings to define launch targets for Auto Scaling groups"
+  type        = any
+  default     = {}
+}
+
+variable "cluster_name" {
+  type = string
+}
+
+variable "security_group_ids" {
+  type = list(string)
+}
+
+variable "subnets" {
+  type = list(string)
+}
+
+variable "assign_public_ips" {
+  type    = bool
+  default = false
+}
+
+variable "ami_id" {
+  type    = string
+  default = null // Uses the latest ECS-optimised AMI by default
+}
+
+variable "ebs_size_gb" {
+  description = "Size of /dev/xvdcz volume used by docker"
+  type        = number
+  default     = 25
+}
+
+variable "ebs_volume_type" {
+  description = "Type of /dev/xvdcz volume used by docker"
+  type        = string
+  default     = "gp2"
+}
+
+variable "data_size_gb" {
+  description = "Size of additional data volume, mounted as /dev/xvdf"
+  type        = number
+  default     = 0
+}
+
+variable "data_volume_type" {
+  description = "Size of additional data volume, mounted as /dev/xvdf"
+  type        = string
+  default     = "gp2"
+}
+
+variable "scaling_action_cooldown" {
+  type    = number
+  default = 120
+}
+
+variable "additional_user_data" {
+  description = "Additional user_data script to run when creating instances. Default will set cluster name in ecs config"
+  type        = string
+  default     = null
+}
+
+variable "managed_termination_protection" {
+  type    = string
+  default = "DISABLED"
+}
+
+variable "key_name" {
+  description = "EC2 key pair name to use"
+}
