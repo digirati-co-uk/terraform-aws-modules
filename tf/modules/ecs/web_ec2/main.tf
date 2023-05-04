@@ -50,6 +50,7 @@ resource "aws_ecs_service" "service" {
     content {
       capacity_provider = strategy.value["capacity_provider"]
       weight            = strategy.value["weight"]
+      base              = try(strategy.value["base"], null)
     }
   }
 

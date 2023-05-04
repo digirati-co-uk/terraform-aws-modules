@@ -122,10 +122,7 @@ variable "scheduling_strategy" {
 }
 
 variable "capacity_provider_strategies" {
-  type = list(object({
-    capacity_provider = string
-    weight            = number
-  }))
+  type = list(any)
   default = []
 }
 

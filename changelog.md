@@ -120,3 +120,7 @@ ulimits = {
 ## 3.14 2023-05-03
 
 Add `/ecs/ec2_capacity_provider_abs` module for creating ECS capacity provider with attribute based instance selection.
+
+## 3.15 2023-05-04
+
+Allow `base` to be set for capacity provider strategy in web_ec2 ecs module.
