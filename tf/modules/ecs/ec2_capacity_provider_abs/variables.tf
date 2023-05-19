@@ -41,14 +41,14 @@ variable "ami_id" {
   default = null // Uses the latest ECS-optimised AMI by default
 }
 
-variable "ebs_size_gb" {
-  description = "Size of /dev/xvdcz volume used by docker"
+variable "root_size_gb" {
+  description = "Size of root volume (/dev/xvda) volume used by os + docker"
   type        = number
   default     = 25
 }
 
-variable "ebs_volume_type" {
-  description = "Type of /dev/xvdcz volume used by docker"
+variable "root_volume_type" {
+  description = "Type of root volume (/dev/xvda) volume used by os + docker"
   type        = string
   default     = "gp2"
 }
