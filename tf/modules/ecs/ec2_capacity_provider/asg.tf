@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "asg" {
   default_cooldown    = var.scaling_action_cooldown
   vpc_zone_identifier = var.subnets
 
-  min_size                  = 0
+  min_size                  = var.min_instances
   health_check_type         = "EC2"
   health_check_grace_period = 180
 

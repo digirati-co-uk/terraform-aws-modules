@@ -2,6 +2,11 @@ variable "name" {
   type = string
 }
 
+variable "min_instances" {
+  type    = number
+  default = 0
+}
+
 variable "max_instances" {
   type    = number
   default = 1
