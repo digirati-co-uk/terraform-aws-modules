@@ -125,6 +125,6 @@ Add `/ecs/ec2_capacity_provider_abs` module for creating ECS capacity provider w
 
 Allow `base` to be set for capacity provider strategy in web_ec2 ecs module.
 
-## 3.15 2023-05-19
+## 3.16 2023-05-19
 
 Alter device_names use for capacity providers. Latest AMI's used 1 volume (`/dev/xvda`) for both OS and Docker, rather than previous approach of Docker having a separate volume.
