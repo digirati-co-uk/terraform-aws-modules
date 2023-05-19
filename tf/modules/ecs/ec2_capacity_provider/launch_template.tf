@@ -7,18 +7,18 @@ resource "aws_launch_template" "launch_template" {
   update_default_version = true
   key_name               = var.key_name
 
-  ebs_optimized = var.ebs_size_gb > 0
+  ebs_optimized = var.root_size_gb > 0
 
   dynamic "block_device_mappings" {
-    for_each = var.ebs_size_gb > 0 ? [{}] : []
+    for_each = var.root_size_gb > 0 ? [{}] : []
 
     content {
-      // The instance volume used by Docker
-      device_name = "/dev/xvdcz"
+      // Root volume used by OS + Docker
+      device_name = "/dev/xvda"
 
       ebs {
-        volume_size           = var.ebs_size_gb
-        volume_type           = var.ebs_volume_type
+        volume_size           = var.root_size_gb
+        volume_type           = var.root_volume_type
         delete_on_termination = true
       }
     }
@@ -28,7 +28,7 @@ resource "aws_launch_template" "launch_template" {
     for_each = var.data_size_gb > 0 ? [{}] : []
 
     content {
-      // The instance volume used by Docker
+      // additional volume 
       device_name = "/dev/xvdf"
 
       ebs {
