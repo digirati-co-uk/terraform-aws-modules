@@ -132,3 +132,9 @@ Alter device_names use for capacity providers. Latest AMI's used 1 volume (`/dev
 ## 3.17 2023-05-19
 
 Allow `min_size` to set for capacity provider ASG
+
+## 3.18 2023-06-06
+
+Add `/vpc/legacy` module. This was removed in `3.0` in favour of much more flexible vpc module. 
+
+Re-adding to allow estates that already use it to leverage `default_tags` without TF always detecting changes.
