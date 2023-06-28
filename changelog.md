@@ -138,3 +138,7 @@ Allow `min_size` to set for capacity provider ASG
 Add `/vpc/legacy` module. This was removed in `3.0` in favour of much more flexible vpc module. 
 
 Re-adding to allow estates that already use it to leverage `default_tags` without TF always detecting changes.
+
+## 3.19 2023-06-28
+
+Output `instance_role_name` from `/ecs/ec2_capacity_provider*` modules - this will allow adding further permissions as required.
