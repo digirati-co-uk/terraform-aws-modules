@@ -52,3 +52,8 @@ variable "raw_message_delivery" {
   description = "Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property)"
   default     = false
 }
+
+variable "filter_policy" {
+  description = "Sets up a filter policy for an SNS topic"
+  default = ""
+}
