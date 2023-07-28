@@ -3,4 +3,5 @@ resource "aws_sns_topic_subscription" "sns_topic" {
   topic_arn            = local.topic_arn
   endpoint             = aws_sqs_queue.q.arn
   raw_message_delivery = var.raw_message_delivery
+  filter_policy        = var.filter_policy
 }

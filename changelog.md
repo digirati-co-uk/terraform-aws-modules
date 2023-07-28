@@ -142,3 +142,7 @@ Re-adding to allow estates that already use it to leverage `default_tags` withou
 ## 3.19 2023-06-28
 
 Output `instance_role_name` from `/ecs/ec2_capacity_provider*` modules - this will allow adding further permissions as required.
+
+## 3.20 2023-07-28
+
+Adding in a `filter_policy` variable to the `sqs` module that allows a filter policy to be set on an SNS subscription to a queue
