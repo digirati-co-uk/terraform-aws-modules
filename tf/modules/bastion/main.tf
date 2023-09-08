@@ -1,10 +1,5 @@
 # Bastion module
 
-data "aws_security_group" "default" {
-  vpc_id = var.vpc
-  name   = "default"
-}
-
 resource "aws_security_group" "bastion" {
   name        = "${var.prefix}-bastion"
   description = "SSH access"
@@ -72,17 +67,20 @@ resource "aws_iam_instance_profile" "bastion" {
   role = aws_iam_role.bastion.name
 }
 
-resource "aws_launch_configuration" "bastion" {
+resource "aws_launch_template" "bastion" {
   name_prefix          = "${var.prefix}-bastion-"
-  image_id             = var.ami
+  image_id             = var.ami == null ? data.aws_ami.amazon_linux_2023.id : var.ami
   instance_type        = var.instance_type
-  iam_instance_profile = aws_iam_instance_profile.bastion.name
+  iam_instance_profile {
+   name = aws_iam_instance_profile.bastion.name
+  }
+
   key_name             = var.key_name
 
-  security_groups = [
-    data.aws_security_group.default.id,
-    aws_security_group.bastion.id,
-  ]
+  vpc_security_group_ids = concat(
+    [aws_security_group.bastion.id],
+    var.additional_security_groups
+  )
 
   user_data = <<EOF
 #!/bin/bash
@@ -91,10 +89,10 @@ yum update -q -y
 
 # install jq
 yum install -q -y jq
-yum remove ecs-init
 
 # Route53 update
-LOCALIP=$(curl -s "http://169.254.169.254/latest/meta-data/public-ipv4")
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+LOCALIP=$(curl -s "http://169.254.169.254/latest/meta-data/public-ipv4" -H "X-aws-ec2-metadata-token: $TOKEN")
 DOMAIN="${var.hostname}.${var.domain}"
 HOSTEDZONEID="${var.dns_zone}"
 cat > /tmp/route53-record.txt <<EOFCAT
@@ -128,7 +126,7 @@ EOF
 
 resource "aws_autoscaling_group" "bastion" {
   name                 = "${var.prefix}-bastion"
-  launch_configuration = aws_launch_configuration.bastion.name
+  launch_configuration = aws_launch_template.bastion.name
 
   min_size            = var.min_size
   max_size            = var.max_size
@@ -145,10 +143,14 @@ resource "aws_autoscaling_group" "bastion" {
     value               = "${var.prefix}-bastion"
     propagate_at_launch = true
   }
+}
 
-  tag {
-    key                 = "Project"
-    value               = var.project
-    propagate_at_launch = true
+data "aws_ami" "amazon_linux_2023" {
+  owners      = ["amazon"]
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 }
