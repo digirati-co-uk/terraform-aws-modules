@@ -7,21 +7,18 @@ variable "ip_whitelist" {
   type        = list(string)
 }
 
-variable "project" {
-  description = "Project name for tag values"
-}
-
 variable "prefix" {
   description = "Prefix for AWS resources"
 }
 
 variable "instance_type" {
   description = "EC2 instance type"
-  default     = "t2.micro"
+  default     = "t3a.micro"
 }
 
 variable "ami" {
-  description = "AMI to use (should be ECS optimised x64)"
+  description = "AMI to use, defaults to latest amazon linux 2023 if not provided"
+  default     = ""
 }
 
 variable "key_name" {
@@ -54,4 +51,9 @@ variable "min_size" {
 variable "max_size" {
   description = "Maximum number of instances for the cluster"
   default     = 1
+}
+
+variable "additional_security_groups" {
+  description = "Additional security groups to assign to Bastion host"
+  default     = []
 }
