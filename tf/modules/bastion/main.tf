@@ -82,7 +82,7 @@ resource "aws_launch_template" "bastion" {
     var.additional_security_groups
   )
 
-  user_data = <<EOF
+  user_data = base64encode(<<EOF
 #!/bin/bash
 
 yum update -q -y
@@ -118,6 +118,7 @@ EOFCAT
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/route53-record.txt
 
 EOF
+)
 
   lifecycle {
     create_before_destroy = true
@@ -126,13 +127,29 @@ EOF
 
 resource "aws_autoscaling_group" "bastion" {
   name                 = "${var.prefix}-bastion"
-  launch_configuration = aws_launch_template.bastion.name
-
   min_size            = var.min_size
   max_size            = var.max_size
+  default_cooldown = 0
   vpc_zone_identifier = flatten(var.subnets)
 
-  default_cooldown = 0
+  health_check_type         = "EC2"
+  health_check_grace_period = 180
+
+  launch_template {
+    id      = aws_launch_template.bastion.id
+    version = aws_launch_template.bastion.latest_version
+  }
+
+  enabled_metrics = [
+    "GroupMinSize",
+    "GroupMaxSize",
+    "GroupDesiredCapacity",
+    "GroupInServiceInstances",
+    "GroupPendingInstances",
+    "GroupStandbyInstances",
+    "GroupTerminatingInstances",
+    "GroupTotalInstances"
+  ]
 
   lifecycle {
     create_before_destroy = true

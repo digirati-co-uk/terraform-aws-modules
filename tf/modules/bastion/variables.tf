@@ -18,7 +18,7 @@ variable "instance_type" {
 
 variable "ami" {
   description = "AMI to use, defaults to latest amazon linux 2023 if not provided"
-  default     = ""
+  default     = null
 }
 
 variable "key_name" {
