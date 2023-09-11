@@ -146,3 +146,16 @@ Output `instance_role_name` from `/ecs/ec2_capacity_provider*` modules - this wi
 ## 3.20 2023-07-28
 
 Adding in a `filter_policy` variable to the `sqs` module that allows a filter policy to be set on an SNS subscription to a queue
+
+## 3.21 2023-09-11
+
+Updates to `bastion` module:
+* Remove use of default SG
+* Default to `t3a.micro` instance
+* Default to Amazon Linux 2023 ami if not specified
+* Update to use IMDSv2 for getting public IP
+* Switch from launch-configuration to launch-template
+* Output bastion role
+
+Updates to `vpc` module:
+* Remove deprecated syntax in `aws_eip`
