@@ -159,3 +159,7 @@ Updates to `bastion` module:
 
 Updates to `vpc` module:
 * Remove deprecated syntax in `aws_eip`
+
+## 3.22 2023-10-26
+
+Update load-balancer module to output id of attached security group

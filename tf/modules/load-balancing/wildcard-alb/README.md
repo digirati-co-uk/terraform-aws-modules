@@ -4,7 +4,7 @@ This module will provide an Application Load Balancer that specifically expects 
 
 ## Parameters
 | Name                   | Description                                         | Type   | Default                   |
-|------------------------|-----------------------------------------------------|--------|---------------------------|
+| ---------------------- | --------------------------------------------------- | ------ | ------------------------- |
 | prefix                 | Prefix for AWS resources                            | string |                           |
 | name                   | Suffix for load balancer appliance                  | string |                           |
 | subnets                | List of subnets to associate load balancer with     | list   |                           |
@@ -16,10 +16,11 @@ This module will provide an Application Load Balancer that specifically expects 
 | redirect_http_to_https | Enable default behaviour to redirect http to https  | string | false                     |
 
 ## Outputs
-| Name                  | Description                         |
-|-----------------------|-------------------------------------|
-| lb_arn                | ARN of load balancer                |
-| lb_fqdn               | FQDN of load balancer               |
-| lb_zone_id            | Zone ID of load balancer            |
-| lb_http_listener_arn  | ARN of load balancer HTTP listener  |
-| lb_https_listener_arn | ARN of load balancer HTTPS listener |
+| Name                  | Description                                  |
+| --------------------- | -------------------------------------------- |
+| lb_arn                | ARN of load balancer                         |
+| lb_fqdn               | FQDN of load balancer                        |
+| lb_zone_id            | Zone ID of load balancer                     |
+| lb_http_listener_arn  | ARN of load balancer HTTP listener           |
+| lb_https_listener_arn | ARN of load balancer HTTPS listener          |
+| web_security_group_id | Id of SG for load balancer (allows 80 + 443) |

@@ -22,3 +22,8 @@ output "lb_https_listener_arn" {
   description = "ARN of load balancer HTTPS listener"
   value       = aws_alb_listener.https.arn
 }
+
+output "web_security_group_id" {
+  description = "Id of security group attached to LB"
+  value       = aws_security_group.web.id
+}
