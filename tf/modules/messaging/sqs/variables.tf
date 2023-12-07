@@ -60,5 +60,5 @@ variable "filter_policy" {
 
 variable "filter_policy_scope" {
   description = "sets whether to use a filter policy on the attributes or the message body"
-  default = ""
+  default = "MessageAttributes"
 }
