@@ -57,3 +57,8 @@ variable "filter_policy" {
   description = "Sets up a filter policy for an SNS topic"
   default = ""
 }
+
+variable "filter_policy_scope" {
+  description = "sets whether to use a filter policy on the attributes or the message body"
+  default = ""
+}
