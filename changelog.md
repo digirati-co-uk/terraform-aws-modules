@@ -163,3 +163,7 @@ Updates to `vpc` module:
 ## 3.22 2023-10-26
 
 Update load-balancer module to output id of attached security group
+
+## 3.23 2023-12-07
+
+Update to add `filter_policy_scope` to sns
