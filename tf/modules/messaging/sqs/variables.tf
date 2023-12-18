@@ -55,10 +55,14 @@ variable "raw_message_delivery" {
 
 variable "filter_policy" {
   description = "Sets up a filter policy for an SNS topic"
-  default = ""
+  default     = ""
 }
 
 variable "filter_policy_scope" {
   description = "sets whether to use a filter policy on the attributes or the message body"
-  default = "MessageAttributes"
+  default     = null
+  validation {
+    condition     = var.filter_policy_scope == null ? true : contains(["MessageAttributes", "MessageBody"], var.filter_policy_scope)
+    error_message = "filter_policy_scope must be 'MessageAttributes' or 'MessageBody'"
+  }
 }
