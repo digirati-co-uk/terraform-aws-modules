@@ -167,3 +167,7 @@ Update load-balancer module to output id of attached security group
 ## 3.23 2023-12-07
 
 Update to add `filter_policy_scope` to sns
+
+## 3.24 2023-12-20
+
+Allow retention to be specified for DLQ in SQS module
