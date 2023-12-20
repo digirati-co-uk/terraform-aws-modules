@@ -20,6 +20,11 @@ variable "message_retention_seconds" {
   default     = 1209600
 }
 
+variable "message_retention_seconds_dlq" {
+  description = "The number of seconds that SQS DLQ retains a message"
+  default     = 1209600
+}
+
 variable "max_message_size" {
   description = "Maximum message size allowed by SQS, in bytes"
   default     = 262144
