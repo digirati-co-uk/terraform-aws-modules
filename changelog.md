@@ -171,3 +171,7 @@ Update to add `filter_policy_scope` to sns
 ## 3.24 2023-12-20
 
 Allow retention to be specified for DLQ in SQS module
+
+## 3.25 2024-01-17
+
+Update `wildcard-alb` module to optionall add `access_logs`.

@@ -48,6 +48,16 @@ resource "aws_alb" "lb" {
     ]
   )
 
+  dynamic "access_logs" {
+    for_each = var.access_logs_bucket != "" ? [{}] : []
+
+    content {
+      bucket  = var.access_logs_bucket
+      prefix  = var.access_logs_prefix
+      enabled = true
+    }
+  }
+
   idle_timeout = var.idle_timeout_seconds
 }
 

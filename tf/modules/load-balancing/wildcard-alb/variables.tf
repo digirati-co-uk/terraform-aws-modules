@@ -8,12 +8,12 @@ variable "name" {
 
 variable "subnets" {
   description = "List of subnets to associate load balancer with"
-  type        = list
+  type        = list(any)
 }
 
 variable "security_groups" {
   description = "List of security groups to join"
-  type        = list
+  type        = list(any)
 }
 
 variable "certificate_arn" {
@@ -32,7 +32,7 @@ variable "vpc" {
 
 variable "ip_whitelist" {
   description = "IP CIDR whitelist"
-  type        = list
+  type        = list(any)
 
   default = [
     "0.0.0.0/0",
@@ -48,4 +48,16 @@ variable "redirect_http_to_https" {
 variable "idle_timeout_seconds" {
   description = "Load Balancer idle timeout (seconds)"
   default     = "60"
+}
+
+variable "access_logs_bucket" {
+  description = "Name of bucket where access_logs will be stored (optional)"
+  default     = ""
+  type        = string
+}
+
+variable "access_logs_prefix" {
+  description = "Prefix where access_logs will be stored (optional - ignored if access_logs_bucket empty)"
+  default     = null
+  type        = string
 }
