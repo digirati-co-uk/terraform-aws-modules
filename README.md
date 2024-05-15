@@ -24,7 +24,7 @@ An EC2 host launched by an ASG that registers itself with Route53 on startup. Pr
 
 ## clusters
 
-Modules for ECS cluster EC2 host configurations. 
+Modules for ECS cluster EC2 host configurations.
 
 ### borg
 
@@ -38,7 +38,7 @@ Create a EC2 host with EFS + EBS backed storage
 
 ## ecs
 
-ECS specific modules (a number of the other, older, modules are ECS specific and should be moved).
+ECS specific modules (a number of the other, older, modules are ECS specific and should be removed).
 
 ### autoscaling/scheduled
 
@@ -51,6 +51,10 @@ Helpers to construct container_definition object for use in tasks.
 ### ec2_capacity_provider
 
 Create launch template, autoscaling group and capacity provider for EC2 ECS host.
+
+### ec2_capacity_provider_abs
+
+Similar to above but uses attribute based instance selection rather than specifying an instance type.
 
 ### task_definition
 
@@ -89,6 +93,8 @@ Create an SQS queue subscriped to an SNS topic with a DLQ.
 ## services
 
 Modules for ECS services
+
+> Do not use these - prefer ecs/* modules instead as they allow for better composition
 
 ### base/web
 
