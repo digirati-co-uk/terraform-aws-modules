@@ -92,3 +92,13 @@ variable "target_type" {
   description = "TargetType for ELB TargetGroup"
   default     = "instance"
 }
+
+variable "stickiness_enabled" {
+  description = "whether stickiness should be enabled or not"
+  default     = false
+}
+
+variable "stickiness_cookie_name" {
+  description = "name of the cookie used for stickiness"
+  default     = ""
+}

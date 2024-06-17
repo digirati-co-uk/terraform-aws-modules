@@ -46,6 +46,12 @@ resource "aws_alb_target_group" "service" {
   deregistration_delay = var.deregistration_delay
   target_type          = var.target_type
 
+  stickiness {
+    enabled            = var.stickiness_enabled
+    type               = "app_cookie"
+    name               = var.stickiness_cookie_name
+  }
+
   health_check {
     path                = var.health_check_path
     timeout             = var.health_check_timeout
