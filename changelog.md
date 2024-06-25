@@ -175,3 +175,15 @@ Allow retention to be specified for DLQ in SQS module
 ## 3.25 2024-01-17
 
 Update `wildcard-alb` module to optionall add `access_logs`.
+
+## 3.26 2024-06-17
+
+Allow stickiness to be specified for `ecs/web_ec2` and `load-balancing/target`
+
+## 3.27 2024-06-18
+
+Bugfix for above - correct variable name
+
+## 3.28 2024-06-25
+
+Add default_tags to ASG resources for `ecs/ec2_capacity_provider` and `ecs/ec2_capacity_provider_abs`, as per this [workaround](https://github.com/hashicorp/terraform-provider-aws/issues/32328#issuecomment-2107223882)
