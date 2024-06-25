@@ -1,3 +1,9 @@
+data "aws_default_tags" "default_tags" {}
+
+locals {
+  asg_resources_to_tag = ["instance", "volume", "network-interface"]
+}
+
 resource "aws_launch_template" "launch_template" {
   name                   = "${var.name}_launch_template"
   image_id               = var.ami_id == null ? data.aws_ami.ecs_optimized.id : var.ami_id
@@ -136,6 +142,16 @@ resource "aws_launch_template" "launch_template" {
 
   iam_instance_profile {
     arn = module.iam.instance_profile_arn
+  }
+
+  dynamic "tag_specifications" {
+    for_each = {
+      for type in local.asg_resources_to_tag : type => data.aws_default_tags.default_tags
+    }
+    content {
+      resource_type = tag_specifications.key
+      tags          = tag_specifications.value.tags
+    }
   }
 }
 
