@@ -21,7 +21,7 @@ module "target" {
   deregistration_delay             = var.deregistration_delay
   target_type                      = "instance"
   stickiness_enabled               = var.load_balancer_stickiness_enabled
-  stickiness_cookie_name           = var.stickiness_cookie_duration
+  stickiness_cookie_duration           = var.stickiness_cookie_duration
 }
 
 # Service
