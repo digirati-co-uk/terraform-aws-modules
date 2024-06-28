@@ -48,8 +48,8 @@ resource "aws_alb_target_group" "service" {
 
   stickiness {
     enabled            = var.stickiness_enabled
-    type               = "app_cookie"
-    cookie_name        = var.stickiness_cookie_name
+    type               = "lb_cookie"
+    cookie_duration    = var.stickiness_cookie_duration
   }
 
   health_check {

@@ -20,6 +20,8 @@ module "target" {
   health_check_interval            = var.health_check_interval
   deregistration_delay             = var.deregistration_delay
   target_type                      = "ip"
+  stickiness_enabled               = var.load_balancer_stickiness_enabled
+  stickiness_cookie_name           = var.stickiness_cookie_duration
 }
 
 resource "aws_ecs_service" "service" {

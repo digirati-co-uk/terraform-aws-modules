@@ -152,3 +152,13 @@ variable "placement_constraints" {
   }))
   default = []
 }
+
+variable "load_balancer_stickiness_enabled" {
+  description = "Whether stickiness should be enabled or not"
+  default     = false
+}
+
+variable "stickiness_cookie_duration" {
+  description = "Name of the cookie used for stickiness"
+  default     = 86400 # 1 day
+}

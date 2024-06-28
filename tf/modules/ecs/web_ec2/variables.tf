@@ -147,7 +147,7 @@ variable "load_balancer_stickiness_enabled" {
   default     = false
 }
 
-variable "stickiness_cookie_name" {
+variable "stickiness_cookie_duration" {
   description = "Name of the cookie used for stickiness"
-  default     = ""
+  default     = 86400 # 1 day
 }
