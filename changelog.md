@@ -190,4 +190,4 @@ Add default_tags to ASG resources for `ecs/ec2_capacity_provider` and `ecs/ec2_c
 
 ## 3.29 2024-06-28
 
-Update stickiness to use `lb_cookie` over `app_cookie` and extend to `web_fargate`
+Update stickiness to allow for choosing whether to use `lb_cookie` or `app_cookie` and extend to web_fargate
