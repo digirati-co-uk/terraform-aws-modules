@@ -19,9 +19,11 @@ module "target" {
   health_check_unhealthy_threshold = var.health_check_unhealthy_threshold
   health_check_interval            = var.health_check_interval
   deregistration_delay             = var.deregistration_delay
-  stickiness_enabled               = var.load_balancer_stickiness_enabled
-  stickiness_cookie_name           = var.stickiness_cookie_name # required if stickiness is enabled
   target_type                      = "instance"
+  stickiness_enabled               = var.load_balancer_stickiness_enabled
+  stickiness_type                  = var.stickiness_type
+  stickiness_cookie_duration       = var.stickiness_cookie_duration
+  stickiness_cookie_name           = var.stickiness_cookie_name
 }
 
 # Service

@@ -98,7 +98,14 @@ variable "stickiness_enabled" {
   default     = false
 }
 
+variable "stickiness_cookie_duration" {
+  description = "duration of the stickiness cookie.  Only used in the lb_cookie type"
+}
+
+variable "stickiness_type" {
+  description = "The type of stickiness cookie. Can be lb_cookie or app_cookie"
+}
+
 variable "stickiness_cookie_name" {
-  description = "Name of the cookie used for stickiness"
-  default     = ""
+  description = "Name of the cookie used for stickiness. Only required for the app_cookie type"
 }

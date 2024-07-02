@@ -147,7 +147,17 @@ variable "load_balancer_stickiness_enabled" {
   default     = false
 }
 
+variable "stickiness_cookie_duration" {
+  description = "duration of the stickiness cookie.  Only used in the lb_cookie type"
+  default     = 86400 # 1 day
+}
+
+variable "stickiness_type" {
+  description = "The type of stickiness cookie. Can be lb_cookie or app_cookie"
+  default     = ""
+}
+
 variable "stickiness_cookie_name" {
-  description = "Name of the cookie used for stickiness"
+  description = "Name of the cookie used for stickiness. Only required for the app_cookie type"
   default     = ""
 }
