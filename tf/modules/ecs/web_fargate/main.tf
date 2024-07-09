@@ -1,27 +1,29 @@
 module "target" {
   source = "../../load-balancing/target"
 
-  name                             = var.name
-  vpc                              = var.vpc
-  hostname                         = var.hostname
-  domain                           = var.domain
-  path_patterns                    = var.path_patterns
-  zone_id                          = var.zone_id
-  create_route53_entry             = var.create_route53_entry
-  ip_whitelist                     = var.ip_whitelist
-  load_balancer_arn                = var.load_balancer_arn
-  listener_arn                     = var.listener_arn
-  priority                         = var.priority
-  health_check_matcher             = var.health_check_matcher
-  health_check_path                = var.health_check_path
-  health_check_timeout             = var.health_check_timeout
-  health_check_healthy_threshold   = var.health_check_healthy_threshold
-  health_check_unhealthy_threshold = var.health_check_unhealthy_threshold
-  health_check_interval            = var.health_check_interval
-  deregistration_delay             = var.deregistration_delay
-  target_type                      = "ip"
-  stickiness_enabled               = var.load_balancer_stickiness_enabled
-  stickiness_cookie_duration       = var.stickiness_cookie_duration
+  name                              = var.name
+  vpc                               = var.vpc
+  hostname                          = var.hostname
+  domain                            = var.domain
+  path_patterns                     = var.path_patterns
+  zone_id                           = var.zone_id
+  create_route53_entry              = var.create_route53_entry
+  ip_whitelist                      = var.ip_whitelist
+  load_balancer_arn                 = var.load_balancer_arn
+  listener_arn                      = var.listener_arn
+  priority                          = var.priority
+  health_check_matcher              = var.health_check_matcher
+  health_check_path                 = var.health_check_path
+  health_check_timeout              = var.health_check_timeout
+  health_check_healthy_threshold    = var.health_check_healthy_threshold
+  health_check_unhealthy_threshold  = var.health_check_unhealthy_threshold
+  health_check_interval             = var.health_check_interval
+  deregistration_delay              = var.deregistration_delay
+  target_type                       = "ip"
+  stickiness_enabled                = var.load_balancer_stickiness_enabled
+  stickiness_cookie_duration        = var.stickiness_cookie_duration
+  load_balancing_algorithm          = var.load_balancing_algorithm
+  load_balancing_anomaly_mitigation = var.load_balancing_anomaly_mitigation
 }
 
 resource "aws_ecs_service" "service" {
@@ -31,6 +33,9 @@ resource "aws_ecs_service" "service" {
   desired_count   = var.desired_count
 
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+
+  deployment_maximum_percent         = var.deployment_max_percent
+  deployment_minimum_healthy_percent = var.deployment_min_healthy_percent
 
   load_balancer {
     target_group_arn = module.target.target_group_arn

@@ -190,4 +190,10 @@ Add default_tags to ASG resources for `ecs/ec2_capacity_provider` and `ecs/ec2_c
 
 ## 3.29 2024-06-28
 
-Update stickiness to allow for choosing whether to use `lb_cookie` or `app_cookie` and extend to web_fargate
+Update stickiness to allow for choosing whether to use `lb_cookie` or `app_cookie` and extend to `ecs/web_fargate`
+
+## 3.30 2024-07-09
+
+Allow deployment min/max percent to be set for ECS services in `ecs/web_fargate` and `ecs/web_ec2`.
+
+Allow load-balancing algorithm to be controlled in `load-balancing/target` (extended to `ecs/web_fargate` and `ecs/web_ec2`)

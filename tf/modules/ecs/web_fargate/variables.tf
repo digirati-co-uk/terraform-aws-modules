@@ -172,3 +172,23 @@ variable "stickiness_cookie_name" {
   description = "Name of the cookie used for stickiness. Only required for the app_cookie type"
   default     = ""
 }
+
+variable "deployment_max_percent" {
+  description = "Upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment"
+  default     = 200
+}
+
+variable "deployment_min_healthy_percent" {
+  description = "Lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment"
+  default     = 100
+}
+
+variable "load_balancing_algorithm" {
+  description = "Determines how the load balancer selects targets when routing requests"
+  default     = "round_robin"
+}
+
+variable "load_balancing_anomaly_mitigation" {
+  description = "Determines whether to enable target anomaly mitigation. Target anomaly mitigation is only supported if load_balancing_algorithm='weighted_random'"
+  default     = "off"
+}
