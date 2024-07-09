@@ -46,6 +46,9 @@ resource "aws_alb_target_group" "service" {
   deregistration_delay = var.deregistration_delay
   target_type          = var.target_type
 
+  load_balancing_algorithm_type     = var.load_balancing_algorithm
+  load_balancing_anomaly_mitigation = var.load_balancing_anomaly_mitigation
+
   dynamic "stickiness" {
     for_each = var.stickiness_enabled == false ? [] : [1]
     content {

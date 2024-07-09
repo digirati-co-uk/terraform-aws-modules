@@ -8,7 +8,7 @@ variable "vpc" {
 
 variable "hostname" {
   description = "Optional hostname, prepended to domain, for host_header rule"
-  default = ""
+  default     = ""
 }
 
 variable "domain" {
@@ -99,13 +99,35 @@ variable "stickiness_enabled" {
 }
 
 variable "stickiness_cookie_duration" {
-  description = "duration of the stickiness cookie.  Only used in the lb_cookie type"
+  description = "Duration of the stickiness cookie.  Only used in the lb_cookie type"
+  default     = 86400 # 1 day
 }
 
 variable "stickiness_type" {
   description = "The type of stickiness cookie. Can be lb_cookie or app_cookie"
+  default     = ""
 }
 
 variable "stickiness_cookie_name" {
   description = "Name of the cookie used for stickiness. Only required for the app_cookie type"
+  default     = ""
+}
+
+variable "load_balancing_algorithm" {
+  description = "Determines how the load balancer selects targets when routing requests"
+  default     = "round_robin"
+  validation {
+    condition     = contains(["round_robin", "least_outstanding_requests", "weighted_random"], var.load_balancing_algorithm)
+    error_message = "load_balancing_algorithm must be 'round_robin', 'least_outstanding_requests' or 'weighted_random'"
+  }
+}
+
+variable "load_balancing_anomaly_mitigation" {
+  description = "Determines whether to enable target anomaly mitigation. Target anomaly mitigation is only supported if load_balancing_algorithm='weighted_random'"
+  default     = "off"
+
+  validation {
+    condition     = contains(["on", "off"], var.load_balancing_anomaly_mitigation)
+    error_message = "load_balancing_anomaly_mitigation must be 'on' or 'off'"
+  }
 }
