@@ -197,3 +197,7 @@ Update stickiness to allow for choosing whether to use `lb_cookie` or `app_cooki
 Allow deployment min/max percent to be set for ECS services in `ecs/web_fargate` and `ecs/web_ec2`.
 
 Allow load-balancing algorithm to be controlled in `load-balancing/target` (extended to `ecs/web_fargate` and `ecs/web_ec2`)
+
+## 3.31 2024-07-17
+
+Add `data/alb` and `data/cloudfront` modules.

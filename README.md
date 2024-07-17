@@ -36,6 +36,18 @@ Create a EC2 host with EFS + EBS backed storage. Designed to be general-speciali
 
 Create a EC2 host with EFS + EBS backed storage
 
+## data
+
+Modules for AWS Athena / AWS Glue
+
+### alb
+
+Sets up AWS Glue table for ALB logs
+
+### cloudfront
+
+Sets up AWS Glue table for CloudFront logs
+
 ## ecs
 
 ECS specific modules (a number of the other, older, modules are ECS specific and should be removed).
