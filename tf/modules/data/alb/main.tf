@@ -25,12 +25,6 @@ resource "aws_glue_catalog_table" "lb_logs" {
     input_format      = "org.apache.hadoop.mapred.TextInputFormat"
     output_format     = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 
-    skewed_info {
-      skewed_column_names               = []
-      skewed_column_value_location_maps = {}
-      skewed_column_values              = []
-    }
-
     ser_de_info {
       serialization_library = "org.apache.hadoop.hive.serde2.RegexSerDe"
 
