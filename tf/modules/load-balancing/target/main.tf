@@ -50,7 +50,7 @@ resource "aws_alb_target_group" "service" {
   load_balancing_anomaly_mitigation = var.load_balancing_anomaly_mitigation
 
   dynamic "stickiness" {
-    for_each = var.stickiness_enabled == false ? [] : [{}]
+    for_each = var.stickiness_enabled == null ? [] : [{}]
     content {
       enabled            = var.stickiness_enabled
       type               = var.stickiness_type
