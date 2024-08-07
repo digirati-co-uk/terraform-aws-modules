@@ -49,14 +49,11 @@ resource "aws_alb_target_group" "service" {
   load_balancing_algorithm_type     = var.load_balancing_algorithm
   load_balancing_anomaly_mitigation = var.load_balancing_anomaly_mitigation
 
-  dynamic "stickiness" {
-    for_each = var.stickiness_enabled == false ? [] : [1]
-    content {
+  stickiness {
       enabled            = var.stickiness_enabled
       type               = var.stickiness_type
       cookie_duration    = var.stickiness_cookie_duration
       cookie_name        = var.stickiness_cookie_name
-    }
   }
 
   health_check {
