@@ -144,7 +144,7 @@ variable "placement_constraints" {
 
 variable "load_balancer_stickiness_enabled" {
   description = "Whether stickiness should be enabled or not"
-  default     = null
+  default     = false
 }
 
 variable "stickiness_cookie_duration" {

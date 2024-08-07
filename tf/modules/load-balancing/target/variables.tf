@@ -95,7 +95,7 @@ variable "target_type" {
 
 variable "stickiness_enabled" {
   description = "Whether stickiness should be enabled or not"
-  default     = null
+  default     = false
 }
 
 variable "stickiness_cookie_duration" {
