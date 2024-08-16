@@ -1,4 +1,8 @@
-# Bastion module
+data "aws_default_tags" "default_tags" {}
+
+locals {
+  asg_resources_to_tag = ["instance", "volume", "network-interface"]
+}
 
 resource "aws_security_group" "bastion" {
   name        = "${var.prefix}-bastion"
@@ -68,19 +72,29 @@ resource "aws_iam_instance_profile" "bastion" {
 }
 
 resource "aws_launch_template" "bastion" {
-  name_prefix          = "${var.prefix}-bastion-"
-  image_id             = var.ami == null ? data.aws_ami.amazon_linux_2023.id : var.ami
-  instance_type        = var.instance_type
+  name_prefix   = "${var.prefix}-bastion-"
+  image_id      = var.ami == null ? data.aws_ami.amazon_linux_2023.id : var.ami
+  instance_type = var.instance_type
   iam_instance_profile {
-   name = aws_iam_instance_profile.bastion.name
+    name = aws_iam_instance_profile.bastion.name
   }
 
-  key_name             = var.key_name
+  key_name = var.key_name
 
   vpc_security_group_ids = concat(
     [aws_security_group.bastion.id],
     var.additional_security_groups
   )
+
+  dynamic "tag_specifications" {
+    for_each = {
+      for type in local.asg_resources_to_tag : type => data.aws_default_tags.default_tags
+    }
+    content {
+      resource_type = tag_specifications.key
+      tags          = tag_specifications.value.tags
+    }
+  }
 
   user_data = base64encode(<<EOF
 #!/bin/bash
@@ -118,7 +132,7 @@ EOFCAT
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/route53-record.txt
 
 EOF
-)
+  )
 
   lifecycle {
     create_before_destroy = true
@@ -126,10 +140,10 @@ EOF
 }
 
 resource "aws_autoscaling_group" "bastion" {
-  name                 = "${var.prefix}-bastion"
+  name                = "${var.prefix}-bastion"
   min_size            = var.min_size
   max_size            = var.max_size
-  default_cooldown = 0
+  default_cooldown    = 0
   vpc_zone_identifier = flatten(var.subnets)
 
   health_check_type         = "EC2"
