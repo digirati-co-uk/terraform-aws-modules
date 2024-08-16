@@ -201,3 +201,11 @@ Allow load-balancing algorithm to be controlled in `load-balancing/target` (exte
 ## 3.31 2024-07-17
 
 Add `data/alb` and `data/cloudfront` modules.
+
+## 3.32 2024-08-07
+
+Fix issue in  `load-balancing/target`, `ecs/web_fargate` and `ecs/web_ec2` that prevented stickiness being removed.
+
+## 3.33 2024-08-16
+
+Add default_tags to ASG resources for `bastion`, same as was done for capacity-providers in v3.28
