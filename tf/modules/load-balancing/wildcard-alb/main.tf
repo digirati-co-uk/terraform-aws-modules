@@ -58,7 +58,9 @@ resource "aws_alb" "lb" {
     }
   }
 
-  idle_timeout = var.idle_timeout_seconds
+  idle_timeout               = var.idle_timeout_seconds
+  drop_invalid_header_fields = var.drop_invalid_headers
+  enable_deletion_protection = var.enable_deletion_protection
 }
 
 resource "aws_alb_target_group" "default" {
