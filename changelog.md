@@ -209,3 +209,13 @@ Fix issue in  `load-balancing/target`, `ecs/web_fargate` and `ecs/web_ec2` that 
 ## 3.33 2024-08-16
 
 Add default_tags to ASG resources for `bastion`, same as was done for capacity-providers in v3.28
+
+## 3.34 2024-08-23
+
+Various updates, driven by changes to conform to SecurityHub standards:
+
+* `bastion` - add `associate_public_ip_address = true` to avoid confusion if new `vpc.map_public_ips_on_launch` is set to `false`
+* `ecs/container_definition` - added `read_only_filesystem` var
+* `load-balancing/wildcard-alb` - added `drop_invalid_headers` and `enable_deletion_protection` vars
+* `s3/ssl-only` - new module to generate bucket policy for denying non-SSL traffic _single resource only - generally not ideal but saves boiler plate_
+* `vpc` - module now accepts `map_public_ips_on_launch` to opt out of auto-assigning for public subnets
