@@ -61,3 +61,15 @@ variable "access_logs_prefix" {
   default     = null
   type        = string
 }
+
+variable "drop_invalid_headers" {
+  description = "Whether HTTP headers with header fields that are not valid are removed by the load balancer. ELB requires that message header names contain only alphanumeric characters and hyphens"
+  default     = null
+  type        = bool
+}
+
+variable "enable_deletion_protection" {
+  description = "If true, deletion of the load balancer will be disabled via the AWS API"
+  default     = null
+  type        = bool
+}
