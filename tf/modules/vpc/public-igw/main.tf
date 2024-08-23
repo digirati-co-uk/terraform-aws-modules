@@ -4,7 +4,8 @@ module "subnets" {
 
   vpc_id = var.vpc_id
 
-  map_public_ips_on_launch = "true"
+  map_public_ips_on_launch = var.map_public_ips_on_launch
+  availability             = "public"
 
   az_count = var.az_count
 

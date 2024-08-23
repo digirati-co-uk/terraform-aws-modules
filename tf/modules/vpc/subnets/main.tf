@@ -1,7 +1,7 @@
 data "aws_availability_zones" "zones" {}
 
 locals {
-  availability = var.map_public_ips_on_launch ? "public" : "private"
+  availability = var.availability == "" ? var.map_public_ips_on_launch ? "public" : "private" : var.availability
 
   az_count = length(data.aws_availability_zones.zones.names)
   az_names = data.aws_availability_zones.zones.names

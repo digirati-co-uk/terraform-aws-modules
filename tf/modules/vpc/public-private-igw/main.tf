@@ -17,6 +17,8 @@ module "public_subnets" {
 
   cidr_block         = var.cidr_block_public
   cidrsubnet_newbits = var.cidrsubnet_newbits_public
+  
+  map_public_ips_on_launch = var.map_public_ips_on_launch
 
   az_count = var.public_az_count
 }

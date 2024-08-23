@@ -79,12 +79,15 @@ resource "aws_launch_template" "bastion" {
     name = aws_iam_instance_profile.bastion.name
   }
 
-  key_name = var.key_name
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups = concat(
+      [aws_security_group.bastion.id],
+      var.additional_security_groups
+    )
+  }
 
-  vpc_security_group_ids = concat(
-    [aws_security_group.bastion.id],
-    var.additional_security_groups
-  )
+  key_name = var.key_name
 
   dynamic "tag_specifications" {
     for_each = {

@@ -1,4 +1,4 @@
-locals { 
+locals {
   vpc_name = var.name == "" ? var.vpc_name : replace(replace("${var.name}-${var.cidr_block}", "/", "-"), ".", "-")
 
   cidr_block_public  = cidrsubnet(var.cidr_block, 1, 0)
@@ -10,7 +10,8 @@ module "vpc" {
 
   name = local.vpc_name
 
-  cidr_block_vpc = var.cidr_block
+  cidr_block_vpc           = var.cidr_block
+  map_public_ips_on_launch = var.map_public_ips_on_launch
 
   public_az_count           = 3
   cidr_block_public         = local.cidr_block_public

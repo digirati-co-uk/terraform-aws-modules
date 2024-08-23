@@ -10,3 +10,7 @@ variable "cidrsubnet_newbits" {}
 variable "map_public_ips_on_launch" {
   default = false
 }
+
+variable "availability" {
+  default = ""
+}
