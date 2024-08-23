@@ -18,3 +18,8 @@ variable "enable_dns_support" {
 variable "enable_dns_hostnames" {
   default = true
 }
+
+variable "map_public_ips_on_launch" {
+  description = "Whether to map public ips on instances launched in public subnets"
+  default     = true
+}
