@@ -21,6 +21,11 @@ variable "log_configuration" {
   default = null
 }
 
+variable "read_only_filesystem" {
+  description = "When this parameter is true, the container is given read-only access to its root file system."
+  default     = null
+}
+
 variable "mount_points" {
   type = list(object({
     containerPath = string
@@ -129,7 +134,7 @@ variable "repository_credentials" {
 }
 
 variable "links" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 

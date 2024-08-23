@@ -13,9 +13,10 @@ locals {
 
     memoryReservation = var.memory_reservation
 
-    environment = local.final_environment
-    secrets     = local.final_secrets
-    ulimits     = local.final_ulimits
+    environment      = local.final_environment
+    secrets          = local.final_secrets
+    ulimits          = local.final_ulimits
+    logConfiguration = local.filtered_log_configuration
 
     mountPoints  = var.mount_points
     portMappings = var.port_mappings
@@ -24,15 +25,11 @@ locals {
     dependsOn    = var.depends
     tags         = var.tags
     links        = var.links
+    volumesFrom  = var.volumes_from
 
-    volumesFrom = var.volumes_from
-
-    logConfiguration = local.filtered_log_configuration
-
-    systemControls = var.system_controls
-
-    repositoryCredentials = var.repository_credentials
-
-    resourceRequirements = var.resource_requirements
+    systemControls         = var.system_controls
+    readonlyRootFilesystem = var.read_only_filesystem
+    repositoryCredentials  = var.repository_credentials
+    resourceRequirements   = var.resource_requirements
   }
 }
