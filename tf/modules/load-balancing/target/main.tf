@@ -63,6 +63,7 @@ resource "aws_alb_target_group" "service" {
     unhealthy_threshold = var.health_check_unhealthy_threshold
     interval            = var.health_check_interval
     matcher             = var.health_check_matcher
+    port                = var.health_check_port
   }
 }
 
