@@ -18,6 +18,7 @@ module "target" {
   health_check_healthy_threshold    = var.health_check_healthy_threshold
   health_check_unhealthy_threshold  = var.health_check_unhealthy_threshold
   health_check_interval             = var.health_check_interval
+  health_check_port                 = var.health_check_port
   deregistration_delay              = var.deregistration_delay
   target_type                       = "ip"
   stickiness_enabled                = var.load_balancer_stickiness_enabled

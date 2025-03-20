@@ -219,3 +219,7 @@ Various updates, driven by changes to conform to SecurityHub standards:
 * `load-balancing/wildcard-alb` - added `drop_invalid_headers` and `enable_deletion_protection` vars
 * `s3/ssl-only` - new module to generate bucket policy for denying non-SSL traffic _single resource only - generally not ideal but saves boiler plate_
 * `vpc` - module now accepts `map_public_ips_on_launch` to opt out of auto-assigning for public subnets
+
+## 3.35 2025-03-20
+
+`ecs/web_fargate` and `ecs/web_ec2` and `load-balancing/target` modules gain `health_check_port` var.

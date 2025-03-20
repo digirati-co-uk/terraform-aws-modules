@@ -81,6 +81,11 @@ variable "health_check_matcher" {
   default     = "200,404"
 }
 
+variable "health_check_port" {
+  description = "Port to test HTTP status for health check"
+  default     = "traffic-port"
+}
+
 variable "health_check_path" {
   description = "Path to test HTTP status for health check"
   default     = "/"
