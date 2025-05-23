@@ -73,3 +73,9 @@ variable "enable_deletion_protection" {
   default     = null
   type        = bool
 }
+
+variable "client_keep_alive" {
+  description = "client keep alive value, in seconds. The valid range is 60-604800 seconds. The default is 3600 seconds"
+  default     = 3600
+  type        = number 
+}
