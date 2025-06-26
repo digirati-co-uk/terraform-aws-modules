@@ -223,3 +223,7 @@ Various updates, driven by changes to conform to SecurityHub standards:
 ## 3.35 2025-03-20
 
 `ecs/web_fargate` and `ecs/web_ec2` and `load-balancing/target` modules gain `health_check_port` var.
+
+## 3.36 2025-06-26
+
+`load-balancing/wildcard-alb` module gains `client_keep_alive` var.
