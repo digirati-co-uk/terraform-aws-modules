@@ -76,7 +76,7 @@ resource "aws_route" "public_2_internet_access" {
 }
 
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 
   tags = {
     "Name"    = "${var.prefix}-nat"

@@ -227,3 +227,7 @@ Various updates, driven by changes to conform to SecurityHub standards:
 ## 3.36 2025-06-26
 
 `load-balancing/wildcard-alb` module gains `client_keep_alive` var.
+
+## 3.37 2025-10-17
+
+Fix `legacy/vpc` module for later versions of TF. `vpc = true` is now deprecated in favour of `domain = "vpc"`. Non functional change.
