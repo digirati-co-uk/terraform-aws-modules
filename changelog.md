@@ -231,3 +231,7 @@ Various updates, driven by changes to conform to SecurityHub standards:
 ## 3.37 2025-10-17
 
 Fix `legacy/vpc` module for later versions of TF. `vpc = true` is now deprecated in favour of `domain = "vpc"`. Non functional change.
+
+## 3.38 2025-10-28
+
+Update secretse modules. `data.aws_region.*.name` is deprecated, updated to use `.region` attribute
