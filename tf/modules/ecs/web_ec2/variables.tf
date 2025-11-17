@@ -186,3 +186,8 @@ variable "deployment_min_healthy_percent" {
   description = "Lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment"
   default     = 100
 }
+
+variable "force_new_deployment" {
+  description = "Enable to force a new task deployment of the service"
+  default     = false
+}

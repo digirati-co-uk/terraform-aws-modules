@@ -234,4 +234,10 @@ Fix `legacy/vpc` module for later versions of TF. `vpc = true` is now deprecated
 
 ## 3.38 2025-10-28
 
-Update secretse modules. `data.aws_region.*.name` is deprecated, updated to use `.region` attribute
+Update secrets modules. `data.aws_region.*.name` is deprecated, updated to use `.region` attribute
+
+## 3.39 2025-11-17
+
+Allow `force_new_deployment` for `ecs/web_fargate` and `ecs/web_ec2` modules. 
+
+Required for certain changes (e.g. capacity_provider)

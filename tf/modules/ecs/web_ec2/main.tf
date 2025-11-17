@@ -53,6 +53,8 @@ resource "aws_ecs_service" "service" {
 
   scheduling_strategy = var.scheduling_strategy
 
+  force_new_deployment = var.force_new_deployment
+
   dynamic "capacity_provider_strategy" {
     for_each = var.capacity_provider_strategies
     iterator = strategy
