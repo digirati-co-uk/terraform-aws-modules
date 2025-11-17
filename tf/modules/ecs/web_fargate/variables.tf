@@ -197,3 +197,8 @@ variable "load_balancing_anomaly_mitigation" {
   description = "Determines whether to enable target anomaly mitigation. Target anomaly mitigation is only supported if load_balancing_algorithm='weighted_random'"
   default     = "off"
 }
+
+variable "force_new_deployment" {
+  description = "Enable to force a new task deployment of the service"
+  default     = false
+}

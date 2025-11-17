@@ -49,6 +49,8 @@ resource "aws_ecs_service" "service" {
 
   scheduling_strategy = var.scheduling_strategy
 
+  force_new_deployment = var.force_new_deployment
+
   network_configuration {
     subnets          = var.subnets
     security_groups  = var.security_group_ids
