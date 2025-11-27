@@ -188,3 +188,21 @@ data "aws_ami" "amazon_linux_2023" {
     values = ["al2023-ami-2023.*-x86_64"]
   }
 }
+
+resource "aws_autoscaling_schedule" "bastion_stop" {
+  scheduled_action_name  = "${var.prefix}-bastion-stop"
+  min_size               = 0
+  max_size               = var.max_size
+  desired_capacity       = 0
+  autoscaling_group_name = aws_autoscaling_group.bastion.name
+  recurrence             = var.cron_stop
+}
+
+resource "aws_autoscaling_schedule" "bastion_start" {
+  scheduled_action_name  = "${var.prefix}-bastion-start"
+  min_size               = var.min_size
+  max_size               = var.max_size
+  desired_capacity       = var.min_size
+  autoscaling_group_name = aws_autoscaling_group.bastion.name
+  recurrence             = var.cron_start
+}

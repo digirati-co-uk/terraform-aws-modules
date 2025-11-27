@@ -241,3 +241,9 @@ Update secrets modules. `data.aws_region.*.name` is deprecated, updated to use `
 Allow `force_new_deployment` for `ecs/web_fargate` and `ecs/web_ec2` modules. 
 
 Required for certain changes (e.g. capacity_provider)
+
+## 3.40 2025-11-27
+
+`bastion` module autoscaling. Default shutsdown Bastion host for 30mins on first of month.
+
+Most uses of Bastion module will use AMI data-source so applies could have updated the launch-template without affecting instance. Minimum monthly restart ensures we're on latest

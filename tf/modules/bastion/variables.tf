@@ -57,3 +57,13 @@ variable "additional_security_groups" {
   description = "Additional security groups to assign to Bastion host"
   default     = []
 }
+
+variable "cron_stop" {
+  description = "Cron expression when to scale Bastion host in"
+  default     = "0 1 1 * *"
+}
+
+variable "cron_start" {
+  description = "Cron expression when to scale Bastion host out"
+  default     = "30 1 1 * *"
+}

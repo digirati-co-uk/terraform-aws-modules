@@ -22,6 +22,12 @@ The following parameters are available:
 | min_size                   | Minimum number of instances                                   | number | 1             |
 | max_size                   | Maximum number of instances                                   | number | 1             |
 | additional_security_groups | Additional security groups to assign                          | list   | []            |
+| cron_stop                  | cron schedule for when to stop Bastion host                   | string | 0 1 1 * *"    |
+| cron_start                 | cron schedule for when to start Bastion host                  | string | 30 1 1 * *"   |
+
+> [!NOTE]
+> The default cron schedule will restart the Bastion host once per month
+> This will ensure it is routinely updated (e.g. to use updated AMI that has been applied)
 
 ## Outputs
 
