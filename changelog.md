@@ -247,3 +247,9 @@ Required for certain changes (e.g. capacity_provider)
 `bastion` module autoscaling. Default shutsdown Bastion host for 30mins on first of month.
 
 Most uses of Bastion module will use AMI data-source so applies could have updated the launch-template without affecting instance. Minimum monthly restart ensures we're on latest
+
+## 3.41 2025-12-10
+
+`/services/tasks/scheduled` module gains `var.network_configuration`.
+
+Allows control of [ecs_target > network_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target#network_configuration-1) element to allow for scheduled FARGATE services
