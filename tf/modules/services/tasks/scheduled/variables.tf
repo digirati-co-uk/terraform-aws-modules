@@ -30,3 +30,15 @@ variable "desired_count" {
 variable "task_definition_arn" {
   description = "Task Definition ARN"
 }
+
+variable "network_configuration" {
+  description = "Details of network configuration. Required for awsvpc network mode (ie launch_type is FARGATE)"
+
+  type = object({
+    subnets          = list(string)
+    security_groups  = list(string)
+    assign_public_ip = bool
+  })
+
+  default = null
+}

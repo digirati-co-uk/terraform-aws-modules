@@ -56,5 +56,14 @@ resource "aws_cloudwatch_event_target" "event_target" {
   ecs_target {
     task_count          = var.desired_count
     task_definition_arn = var.task_definition_arn
+
+    dynamic "network_configuration" {
+      for_each = var.network_configuration == null ? [] : [{}]
+      content {
+        subnets          = var.network_configuration.subnets
+        security_groups  = var.network_configuration.security_groups
+        assign_public_ip = var.network_configuration.assign_public_ip
+      }
+    }
   }
 }
