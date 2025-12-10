@@ -250,6 +250,6 @@ Most uses of Bastion module will use AMI data-source so applies could have updat
 
 ## 3.41 2025-12-10
 
-`/services/tasks/scheduled` module gains `var.network_configuration`.
+`/services/tasks/scheduled` module gains `var.network_configuration`, `var.launch_type` and additional required IAM permissions.
 
 Allows control of [ecs_target > network_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target#network_configuration-1) element to allow for scheduled FARGATE services

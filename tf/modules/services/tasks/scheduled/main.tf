@@ -21,8 +21,10 @@ resource "aws_iam_role" "scheduled_task" {
   assume_role_policy = data.aws_iam_policy_document.cloudwatch_event_assume_role.json
 }
 
+# see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/CWE_IAM_role.html
 data "aws_iam_policy_document" "events_access_ecs" {
   statement {
+    sid       = "RunSpecificTask"
     effect    = "Allow"
     actions   = ["ecs:RunTask"]
     resources = ["arn:aws:ecs:${var.region}:${var.account_id}:task-definition/${var.family}:*"]
@@ -31,6 +33,32 @@ data "aws_iam_policy_document" "events_access_ecs" {
       test     = "StringLike"
       variable = "ecs:cluster"
       values   = [var.cluster_arn]
+    }
+  }
+
+  statement {
+    sid       = "PassRole"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "iam:PassedToService"
+      values   = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+
+  statement {
+    sid       = "TagEcsResource"
+    effect    = "Allow"
+    actions   = ["ecs:TagResource"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "ecs:CreateAction"
+      values   = ["RunTask"]
     }
   }
 }
@@ -56,6 +84,7 @@ resource "aws_cloudwatch_event_target" "event_target" {
   ecs_target {
     task_count          = var.desired_count
     task_definition_arn = var.task_definition_arn
+    launch_type         = var.launch_type
 
     dynamic "network_configuration" {
       for_each = var.network_configuration == null ? [] : [{}]

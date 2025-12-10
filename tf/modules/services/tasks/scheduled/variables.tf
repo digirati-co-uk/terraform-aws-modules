@@ -31,6 +31,12 @@ variable "task_definition_arn" {
   description = "Task Definition ARN"
 }
 
+variable "launch_type" {
+  description = "Task Definition ARN"
+  type        = string
+  default     = null
+}
+
 variable "network_configuration" {
   description = "Details of network configuration. Required for awsvpc network mode (ie launch_type is FARGATE)"
 
