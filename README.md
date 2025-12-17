@@ -48,6 +48,10 @@ Sets up AWS Glue table for ALB logs
 
 Sets up AWS Glue table for CloudFront logs
 
+### waf
+
+Sets up AWS Glue table for WAF logs
+
 ## ecs
 
 ECS specific modules (a number of the other, older, modules are ECS specific and should be removed).
