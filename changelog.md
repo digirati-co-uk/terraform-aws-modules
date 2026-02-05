@@ -257,3 +257,13 @@ Allows control of [ecs_target > network_configuration](https://registry.terrafor
 ## 3.42 2025-12-17
 
 Add `data/waf` module for querying WAF logs via Athena.
+
+## 3.42 2025-12-17
+
+Add `data/waf` module for querying WAF logs via Athena.
+
+## 3.43 2026-02-05
+
+- EBS volume support for ECS task_definition module
+  - Added `ebs_volumes` variable to configure EBS volumes with encryption, IOPS, throughput, and other settings
+  - Supports gp3 volumes by default with optional configuration for other volume types

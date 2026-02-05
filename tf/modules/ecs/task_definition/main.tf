@@ -50,6 +50,30 @@ resource "aws_ecs_task_definition" "task" {
     }
   }
 
+  dynamic "volume" {
+    for_each = var.ebs_volumes
+
+    content {
+      name = volume.value["name"]
+
+      dynamic "ebs_volume_configuration" {
+        for_each = volume.value.ebs_volume_configuration != null ? [volume.value.ebs_volume_configuration] : []
+
+        content {
+          encrypted        = ebs_volume_configuration.value.encrypted
+          iops             = ebs_volume_configuration.value.iops
+          size_in_gib      = ebs_volume_configuration.value.size_in_gib
+          snapshot_id      = ebs_volume_configuration.value.snapshot_id
+          throughput       = ebs_volume_configuration.value.throughput
+          volume_type      = ebs_volume_configuration.value.volume_type
+          kms_key_id       = ebs_volume_configuration.value.kms_key_id
+          file_system_type = ebs_volume_configuration.value.file_system_type
+          role_arn         = ebs_volume_configuration.value.role_arn
+        }
+      }
+    }
+  }
+
   dynamic "placement_constraints" {
     for_each = var.placement_constraints
 
