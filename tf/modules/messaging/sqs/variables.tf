@@ -1,5 +1,8 @@
 locals {
-  topic_arn = format("arn:aws:sns:%s:%s:%s", var.region, var.account_id, var.topic_name)
+  # Build topic ARNs from name to avoid dependency headaches
+  topic_arn             = format("arn:aws:sns:%s:%s:%s", var.region, var.account_id, var.topic_name)
+  additional_topic_arns = [for name in var.additional_topic_names : format("arn:aws:sns:%s:%s:%s", var.region, var.account_id, name)]
+  all_topic_arns        = concat([local.topic_arn], local.additional_topic_arns)
 }
 
 variable "queue_name" {
@@ -8,6 +11,12 @@ variable "queue_name" {
 
 variable "topic_name" {
   description = "Topic name for the SNS topic to subscribe the queue to"
+}
+
+variable "additional_topic_names" {
+  description = "Additional SNS topic names to also subscribe this queue to"
+  type        = list(string)
+  default     = []
 }
 
 variable "visibility_timeout_seconds" {

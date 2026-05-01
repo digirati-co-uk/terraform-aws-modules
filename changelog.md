@@ -257,3 +257,9 @@ Allows control of [ecs_target > network_configuration](https://registry.terrafor
 ## 3.42 2025-12-17
 
 Add `data/waf` module for querying WAF logs via Athena.
+
+## 3.43 2026-05-01
+
+Add `additional_topic_names` var to `/messaging/sqs`. 
+
+This is optional and allows consumers to provide further topic names to subsribe to queue.
