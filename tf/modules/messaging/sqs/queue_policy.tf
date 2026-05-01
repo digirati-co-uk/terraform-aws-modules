@@ -20,9 +20,7 @@ data "aws_iam_policy_document" "sns_write_to_queue" {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
 
-      values = [
-        local.topic_arn
-      ]
+      values = local.all_topic_arns
     }
   }
 }
