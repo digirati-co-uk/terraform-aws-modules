@@ -263,3 +263,7 @@ Add `data/waf` module for querying WAF logs via Athena.
 Add `additional_topic_names` var to `/messaging/sqs`. 
 
 This is optional and allows consumers to provide further topic names to subsribe to queue.
+
+## 3.44 2026-05-12
+
+`ecs/ec2_capacity_provider` and `ecs/ec2_capacity_provider_abs` output ASG arn.

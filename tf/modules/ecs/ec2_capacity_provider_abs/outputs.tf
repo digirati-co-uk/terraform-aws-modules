@@ -5,3 +5,7 @@ output "name" {
 output "instance_role_name" {
   value = module.iam.instance_role_name
 }
+
+output "asg_arn" {
+  value = aws_autoscaling_group.asg.arn
+}
