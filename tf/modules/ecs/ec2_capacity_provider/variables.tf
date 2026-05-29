@@ -39,8 +39,9 @@ variable "assign_public_ips" {
 }
 
 variable "ami_id" {
-  type    = string
-  default = null // Uses the latest ECS-optimised AMI by default
+  description = "AMI ID to use for ECS instances. Defaults to the latest ECS-optimised Amazon Linux 2023 (x86_64) via SSM Parameter Store"
+  type        = string
+  default     = "resolve:ssm:/aws/service/ecs/optimized-ami/amazon-linux-2023/recommended/image_id"
 }
 
 variable "root_size_gb" {
@@ -63,8 +64,8 @@ variable "data_size_gb" {
 
 variable "data_volume_type" {
   description = "Size of additional data volume, mounted as /dev/xvdf"
-  type    = string
-  default = "gp2"
+  type        = string
+  default     = "gp2"
 }
 
 variable "scaling_action_cooldown" {

@@ -7,7 +7,7 @@ locals {
 resource "aws_launch_template" "launch_template" {
   name                   = "${var.name}_launch_template"
   instance_type          = var.instance_type
-  image_id               = var.ami_id == null ? data.aws_ami.ecs_optimized.id : var.ami_id
+  image_id               = var.ami_id
   vpc_security_group_ids = var.security_group_ids
   user_data              = base64encode(local.user_data)
   update_default_version = true
@@ -74,16 +74,6 @@ resource "aws_launch_template" "launch_template" {
       resource_type = tag_specifications.key
       tags          = tag_specifications.value.tags
     }
-  }
-}
-
-data "aws_ami" "ecs_optimized" {
-  owners      = ["amazon"]
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-ecs-hvm-*-x86_64-ebs"]
   }
 }
 
