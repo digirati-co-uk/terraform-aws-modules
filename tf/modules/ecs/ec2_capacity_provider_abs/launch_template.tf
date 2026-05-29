@@ -1,12 +1,18 @@
 data "aws_default_tags" "default_tags" {}
 
+data "aws_ssm_parameter" "ecs_ami" {
+  count = var.ami_id == "" ? 1 : 0
+  name  = "/aws/service/ecs/optimized-ami/amazon-linux-2023/recommended/image_id"
+}
+
 locals {
   asg_resources_to_tag = ["instance", "volume", "network-interface"]
+  resolved_ami_id      = var.ami_id != "" ? var.ami_id : data.aws_ssm_parameter.ecs_ami[0].value
 }
 
 resource "aws_launch_template" "launch_template" {
   name                   = "${var.name}_launch_template"
-  image_id               = var.ami_id
+  image_id               = local.resolved_ami_id
   vpc_security_group_ids = var.security_group_ids
   user_data              = base64encode(local.user_data)
   update_default_version = true
