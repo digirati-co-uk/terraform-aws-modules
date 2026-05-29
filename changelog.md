@@ -272,8 +272,12 @@ This is optional and allows consumers to provide further topic names to subsribe
 
 `ecs/ec2_capacity_provider`, `ecs/ec2_capacity_provider_abs` and `bastion` default AMI updated to AmazonLinux 2023.
 
-Also changes from using `data "aws_ami"` to using `"resolve:ssm:*` style syntax. This means that on startup 
-the ASG will read the latest AMI from that location, there's no need to apply TF to update the latest image.
+`ecs/ec2_capacity_provider` and `bastion` changes from using `data "aws_ami"` to using `"resolve:ssm:*` style syntax.
+This means that on startup the ASG will read the latest AMI from that location, there's no need to apply TF to update 
+the latest image.
+
+`ecs/ec2_capacity_provider_abs` continues to lookup AMI as it uses a `mixed_instances_policy`, this is a constraint
+of AWS as it needs to evaluate the AMI to find appropriate types so needs to know up front.
 
 > [!WARNING]
 > User-data may need changing as this uses AL2023 and previous used and AL2.

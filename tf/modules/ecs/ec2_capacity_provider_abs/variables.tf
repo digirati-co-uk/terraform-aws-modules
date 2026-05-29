@@ -42,9 +42,9 @@ variable "assign_public_ips" {
 }
 
 variable "ami_id" {
-  description = "AMI ID to use for ECS instances. Defaults to the latest ECS-optimised Amazon Linux 2023 (x86_64) via SSM Parameter Store"
+  description = "AMI ID to use for ECS instances. Defaults to the latest ECS-optimised Amazon Linux 2023 (x86_64) via SSM Parameter Store lookup"
   type        = string
-  default     = "resolve:ssm:/aws/service/ecs/optimized-ami/amazon-linux-2023/recommended/image_id"
+  default     = ""
 }
 
 variable "root_size_gb" {
