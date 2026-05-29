@@ -270,7 +270,7 @@ This is optional and allows consumers to provide further topic names to subsribe
 
 ## 3.45 2026-05-29
 
-`ecs/ec2_capacity_provider` and `ecs/ec2_capacity_provider_abs` default AMI updated to AmazonLinux 2023.
+`ecs/ec2_capacity_provider`, `ecs/ec2_capacity_provider_abs` and `bastion` default AMI updated to AmazonLinux 2023.
 
 Also changes from using `data "aws_ami"` to using `"resolve:ssm:*` style syntax. This means that on startup 
 the ASG will read the latest AMI from that location, there's no need to apply TF to update the latest image.

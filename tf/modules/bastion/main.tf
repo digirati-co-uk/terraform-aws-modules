@@ -73,7 +73,7 @@ resource "aws_iam_instance_profile" "bastion" {
 
 resource "aws_launch_template" "bastion" {
   name_prefix   = "${var.prefix}-bastion-"
-  image_id      = var.ami == null ? data.aws_ami.amazon_linux_2023.id : var.ami
+  image_id      = var.ami
   instance_type = var.instance_type
   iam_instance_profile {
     name = aws_iam_instance_profile.bastion.name
@@ -176,16 +176,6 @@ resource "aws_autoscaling_group" "bastion" {
     key                 = "Name"
     value               = "${var.prefix}-bastion"
     propagate_at_launch = true
-  }
-}
-
-data "aws_ami" "amazon_linux_2023" {
-  owners      = ["amazon"]
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["al2023-ami-2023.*-x86_64"]
   }
 }
 

@@ -17,8 +17,8 @@ variable "instance_type" {
 }
 
 variable "ami" {
-  description = "AMI to use, defaults to latest amazon linux 2023 if not provided"
-  default     = null
+  description = "AMI ID to use for the bastion instance. Defaults to the latest Amazon Linux 2023 (x86_64) via SSM Parameter Store."
+  default     = "resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
 }
 
 variable "key_name" {
