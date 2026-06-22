@@ -19,6 +19,11 @@ resource "aws_glue_catalog_table" "lb_logs" {
     "transient_lastDdlTime"        = "1717767997"
   }
 
+  partition_keys {
+    name = "day"
+    type = "string"
+  }
+
   storage_descriptor {
     location          = var.loadbalancer_logs_location
     number_of_buckets = -1

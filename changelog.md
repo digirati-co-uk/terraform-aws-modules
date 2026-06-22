@@ -283,3 +283,7 @@ of AWS as it needs to evaluate the AMI to find appropriate types so needs to kno
 > User-data may need changing as this uses AL2023 and previous used and AL2.
 >
 > https://docs.aws.amazon.com/AmazonECS/latest/developerguide/al2-to-al2023-ami-transition.html
+
+## 3.46 2026-06-22
+
+Add missing `partition_key` element for `data/alb` module.
