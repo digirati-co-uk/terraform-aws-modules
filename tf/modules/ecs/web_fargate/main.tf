@@ -33,6 +33,8 @@ resource "aws_ecs_service" "service" {
   task_definition = var.task_definition_arn
   desired_count   = var.desired_count
 
+  propagate_tags = var.propagate_tags
+
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   deployment_maximum_percent         = var.deployment_max_percent

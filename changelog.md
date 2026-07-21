@@ -287,3 +287,9 @@ of AWS as it needs to evaluate the AMI to find appropriate types so needs to kno
 ## 3.46 2026-06-22
 
 Add missing `partition_key` element for `data/alb` module.
+
+## 3.47 2026-07-21
+
+Add `propagate_tags` for `ecs/web_fargate` and `ecs/web_ec2` modules. 
+
+Defaults to `SERVICE`, meaning that any tags assigned to service is applied to running tasks.
