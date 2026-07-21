@@ -37,6 +37,8 @@ resource "aws_ecs_service" "service" {
   desired_count   = var.desired_count
   iam_role        = aws_iam_role.service.id
 
+  propagate_tags = var.propagate_tags
+
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   deployment_maximum_percent         = var.deployment_max_percent

@@ -191,3 +191,8 @@ variable "force_new_deployment" {
   description = "Enable to force a new task deployment of the service"
   default     = false
 }
+
+variable "propagate_tags" {
+  description = "Whether to propagate tags from the service or task definition to the running tasks. Valid values are SERVICE, TASK_DEFINITION or NONE"
+  default     = "SERVICE"
+}
