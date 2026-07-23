@@ -52,7 +52,7 @@ variable "efs_volumes" {
 variable "placement_constraints" {
   type = list(object({
     type       = string
-    expression = string
+    expression = optional(string)
   }))
   default = []
 }

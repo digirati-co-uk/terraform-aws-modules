@@ -293,3 +293,9 @@ Add missing `partition_key` element for `data/alb` module.
 Add `propagate_tags` for `ecs/web_fargate` and `ecs/web_ec2` modules. 
 
 Defaults to `SERVICE`, meaning that any tags assigned to service is applied to running tasks.
+
+## 3.48 2026-07-23
+
+Make `placement_constraints.expression` optional for `ecs/web_fargate` and `ecs/web_ec2` modules.
+
+When using `type = "distinctInstance"`, expression is optional.

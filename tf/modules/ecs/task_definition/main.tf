@@ -52,10 +52,11 @@ resource "aws_ecs_task_definition" "task" {
 
   dynamic "placement_constraints" {
     for_each = var.placement_constraints
+    iterator = constraint
 
     content {
-      type       = placement_constraints.value["type"]
-      expression = placement_constraints.value["expression"]
+      type       = constraint.value["type"]
+      expression = lookup(constraint.value, "expression", null)
     }
   }
 }

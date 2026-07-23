@@ -84,7 +84,7 @@ resource "aws_ecs_service" "service" {
 
     content {
       type       = constraint.value["type"]
-      expression = constraint.value["expression"]
+      expression = lookup(constraint.value, "expression", null)
     }
   }
 
