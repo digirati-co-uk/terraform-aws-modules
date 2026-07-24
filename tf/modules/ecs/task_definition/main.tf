@@ -26,9 +26,6 @@ resource "aws_ecs_task_definition" "task" {
     }
   }
 
-  # Unused here, but must be set to prevent churn
-  tags = {}
-
   dynamic "volume" {
     for_each = var.volumes
 
