@@ -58,6 +58,21 @@ variable "additional_security_groups" {
   default     = []
 }
 
+variable "host_key_ssm_path" {
+  description = "SSM Parameter Store path prefix where the persistent SSH host key is stored. Defaults to /<prefix>/bastion/host-keys"
+  default     = null
+}
+
+variable "host_key_kms_key_id" {
+  description = "ARN of KMS key used to encrypt the stored SSH host key. Defaults to the SSM managed key (alias/aws/ssm)"
+  default     = null
+  validation {
+    # must be an ARN as it is used as an IAM policy Resource, which rejects key ids and aliases
+    condition     = var.host_key_kms_key_id == null ? true : startswith(var.host_key_kms_key_id, "arn:")
+    error_message = "host_key_kms_key_id must be a KMS key ARN, not a key id or alias"
+  }
+}
+
 variable "cron_stop" {
   description = "Cron expression when to scale Bastion host in"
   default     = "0 1 1 * *"
