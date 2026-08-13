@@ -299,3 +299,13 @@ Defaults to `SERVICE`, meaning that any tags assigned to service is applied to r
 Make `placement_constraints.expression` optional for `ecs/web_fargate` and `ecs/web_ec2` modules.
 
 When using `type = "distinctInstance"`, expression is optional.
+
+## 3.49 2026-08-13
+
+`bastion` now keeps a stable SSH host key across instance replacements.
+
+On first boot the host generates an `ed25519` host key and stores it in SSM Parameter Store as a
+`SecureString`; on every later boot it restores that key.
+
+> [!WARNING]
+> Any production environments should use a KMS CMK rather than default, see [Bastion readme.md](./tf/modules/bastion/README.md)

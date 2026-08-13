@@ -5,3 +5,8 @@ output "bastion_security_group" {
 output "role" {
   value = aws_iam_role.bastion.name
 }
+
+output "host_key_ssm_parameter" {
+  description = "SSM parameter holding SSH host key"
+  value       = local.host_key_param
+}
