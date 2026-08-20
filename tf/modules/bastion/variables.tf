@@ -60,16 +60,19 @@ variable "additional_security_groups" {
 
 variable "host_key_ssm_path" {
   description = "SSM Parameter Store path prefix where the persistent SSH host key is stored. Defaults to /<prefix>/bastion/host-keys"
+  type        = string
   default     = null
 }
 
 variable "host_key_kms_key_id" {
   description = "ARN of KMS key used to encrypt the stored SSH host key. Defaults to the SSM managed key (alias/aws/ssm)"
+  type        = string
   default     = null
   validation {
-    # must be an ARN as it is used as an IAM policy Resource, which rejects key ids and aliases
-    condition     = var.host_key_kms_key_id == null ? true : startswith(var.host_key_kms_key_id, "arn:")
-    error_message = "host_key_kms_key_id must be a KMS key ARN, not a key id or alias"
+    # Must be a key ARN as it is used as an IAM policy Resource. Key ids are rejected there, and so
+    # are alias ARNs - KMS never matches an alias in a Resource.
+    condition     = var.host_key_kms_key_id == null ? true : can(regex("^arn:aws[a-z-]*:kms:[a-z0-9-]+:[0-9]{12}:key/", var.host_key_kms_key_id))
+    error_message = "host_key_kms_key_id must be a KMS key ARN (arn:<partition>:kms:<region>:<account>:key/<key-id>). Key ids and aliases are not supported, including alias ARNs, as KMS ignores aliases in an IAM policy Resource."
   }
 }
 
