@@ -11,10 +11,8 @@ locals {
   host_key_kms_arg  = var.host_key_kms_key_id == null ? "" : "--key-id ${var.host_key_kms_key_id}"
 
   # SSM parameter ARNs concatenate the leading "/" of the parameter name
-  host_key_param_arns = [
-    for name in [local.host_key_param, "${local.host_key_param}.pub"] :
-    "arn:aws:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter${name}"
-  ]
+  host_key_param_arn  = "arn:aws:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter${local.host_key_param}"
+  host_key_param_arns = [local.host_key_param_arn, "${local.host_key_param_arn}.pub"]
 }
 
 resource "aws_security_group" "bastion" {
@@ -87,12 +85,27 @@ data "aws_iam_policy_document" "bastion_abilities" {
     # For convenience only, use host_key_kms_key_id to a CMK to get a real boundary here
     resources = var.host_key_kms_key_id == null ? ["*"] : [var.host_key_kms_key_id]
 
+    # Both conditions bound the "*" resource above, so they are only needed on that branch - with
+    # a CMK the key itself is the boundary. SSM sets PARAMETER_ARN as the KMS encryption context
+    # for SecureString parameters, which stops "*" from granting decrypt on every other
+    # SecureString in the account (this role is usually also given AmazonSSMManagedInstanceCore,
+    # which allows ssm:GetParameter on *)
     dynamic "condition" {
-      for_each = var.host_key_kms_key_id == null ? [1] : []
+      for_each = var.host_key_kms_key_id != null ? [] : [
+        {
+          variable = "kms:ViaService"
+          values   = ["ssm.${data.aws_region.current.region}.amazonaws.com"]
+        },
+        {
+          variable = "kms:EncryptionContext:PARAMETER_ARN"
+          values   = [local.host_key_param_arn]
+        },
+      ]
+
       content {
         test     = "StringEquals"
-        variable = "kms:ViaService"
-        values   = ["ssm.${data.aws_region.current.region}.amazonaws.com"]
+        variable = condition.value.variable
+        values   = condition.value.values
       }
     }
   }
