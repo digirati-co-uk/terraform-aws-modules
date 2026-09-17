@@ -309,3 +309,7 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 
 > [!WARNING]
 > Any production environments should use a KMS CMK rather than default, see [Bastion readme.md](./tf/modules/bastion/README.md)
+
+## 3.50 2026-09-17
+
+Allow tasks to assume their own role, along with permissions for session tags.
