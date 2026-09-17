@@ -1,7 +1,9 @@
 resource "aws_iam_role" "task_role" {
   name               = "${var.task_name}_task_role"
-  assume_role_policy = data.aws_iam_policy_document.assume_ecs_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_task_role.json
 }
+
+data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "assume_ecs_role" {
   statement {
@@ -12,6 +14,28 @@ data "aws_iam_policy_document" "assume_ecs_role" {
     principals {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "assume_task_role" {
+  source_policy_documents = [data.aws_iam_policy_document.assume_ecs_role.json]
+
+  # Self-referencing trust: allows the task role to assume itself in order to
+  # obtain a session tagged via sts:TagSession.
+  dynamic "statement" {
+    for_each = var.enable_self_assume_role ? [1] : []
+
+    content {
+      actions = [
+        "sts:AssumeRole",
+        "sts:TagSession",
+      ]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.task_name}_task_role"]
+      }
     }
   }
 }

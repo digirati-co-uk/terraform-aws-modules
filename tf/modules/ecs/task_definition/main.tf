@@ -1,7 +1,8 @@
 module "task_role" {
   source = "./iam_role"
 
-  task_name = var.task_name
+  task_name               = var.task_name
+  enable_self_assume_role = var.enable_self_assume_role
 }
 
 resource "aws_ecs_task_definition" "task" {
