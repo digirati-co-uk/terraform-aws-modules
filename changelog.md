@@ -309,3 +309,10 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 
 > [!WARNING]
 > Any production environments should use a KMS CMK rather than default, see [Bastion readme.md](./tf/modules/bastion/README.md)
+	
+## 3.50 2026-09-28
+
+`ecs/task_definition` gains `assume_role_override_policy_documents` var to allow control over task roles assume_role_policy. 
+
+> [!NOTE]
+> Default policy gains a `sid`, which will show up as a change on module update for task role and task execution role.

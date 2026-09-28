@@ -56,3 +56,9 @@ variable "placement_constraints" {
   }))
   default = []
 }
+
+variable "assume_role_override_policy_documents" {
+  description = "Optional override policy documents for task assume_role_policy. Default sid is 'TaskAssumeRole'"
+  type        = list(string)
+  default     = null
+}

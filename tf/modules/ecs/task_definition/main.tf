@@ -1,7 +1,8 @@
 module "task_role" {
   source = "./iam_role"
 
-  task_name = var.task_name
+  task_name                             = var.task_name
+  assume_role_override_policy_documents = var.assume_role_override_policy_documents
 }
 
 resource "aws_ecs_task_definition" "task" {
