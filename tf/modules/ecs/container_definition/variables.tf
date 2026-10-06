@@ -108,6 +108,11 @@ variable "image" {
   type = string
 }
 
+variable "entrypoint" {
+  default = null
+  type    = list(string)
+}
+
 variable "command" {
   default = null
   type    = list(string)
