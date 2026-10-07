@@ -3,10 +3,11 @@ locals {
   filtered_container_definition = { for k, v in local.container_definition : k => v if v != null }
 
   container_definition = {
-    essential = var.essential
-    name      = var.name
-    image     = var.image
-    command   = var.command
+    essential  = var.essential
+    name       = var.name
+    image      = var.image
+    entryPoint = var.entrypoint
+    command    = var.command
 
     cpu    = var.cpu
     memory = var.memory
