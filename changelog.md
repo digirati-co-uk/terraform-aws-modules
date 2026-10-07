@@ -316,3 +316,7 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 
 > [!NOTE]
 > Default policy gains a `sid`, which will show up as a change on module update for task role and task execution role.
+
+## 3.51 2026-10-07
+
+`ecs/container_definition` gains `entrypoint` var, setting `entryPoint` on the container definition, to allow use of an alternative entrypoint. 
