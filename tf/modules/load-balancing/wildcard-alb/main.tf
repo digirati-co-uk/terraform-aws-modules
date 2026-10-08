@@ -37,7 +37,8 @@ resource "aws_security_group" "web" {
 #######
 
 resource "aws_alb" "lb" {
-  name = "${var.prefix}-${var.name}"
+  name     = "${var.prefix}-${var.name}"
+  internal = var.internal
 
   subnets = var.subnets
 
@@ -98,6 +99,13 @@ resource "aws_alb_listener" "http" {
 resource "aws_alb_listener" "http_redirect" {
   count = var.redirect_http_to_https ? 1 : 0
 
+  lifecycle {
+    precondition {
+      condition     = var.create_https_listener
+      error_message = "redirect_http_to_https requires create_https_listener = true"
+    }
+  }
+
   load_balancer_arn = aws_alb.lb.id
   port              = 80
   protocol          = "HTTP"
@@ -114,6 +122,15 @@ resource "aws_alb_listener" "http_redirect" {
 }
 
 resource "aws_alb_listener" "https" {
+  count = var.create_https_listener ? 1 : 0
+
+  lifecycle {
+    precondition {
+      condition     = var.certificate_arn != ""
+      error_message = "certificate_arn is required when create_https_listener = true"
+    }
+  }
+
   load_balancer_arn = aws_alb.lb.id
   port              = 443
   protocol          = "HTTPS"
@@ -125,4 +142,10 @@ resource "aws_alb_listener" "https" {
     target_group_arn = aws_alb_target_group.default.id
     type             = "forward"
   }
+}
+
+# https listener became conditional (count) in v3.52 - avoid destroy/recreate of existing listeners
+moved {
+  from = aws_alb_listener.https
+  to   = aws_alb_listener.https[0]
 }

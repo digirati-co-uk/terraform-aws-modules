@@ -320,3 +320,14 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 ## 3.51 2026-10-07
 
 `ecs/container_definition` gains `entrypoint` var, setting `entryPoint` on the container definition, to allow use of an alternative entrypoint. 
+
+## 3.52 2026-10-08
+
+`load-balancing/wildcard-alb`:
+* gains `internal` var (default `false`) to create an internal load balancer. Changing this forces replacement of the load balancer.
+* gains `create_https_listener` var (default `true`). If `false` no HTTPS listener is created, `certificate_arn` is not required and `lb_https_listener_arn` output is empty. Cannot be `false` if `redirect_http_to_https` is `true`.
+
+> [!NOTE]
+> `aws_alb_listener.https` is now created with `count`. A `moved` block is included so existing listeners are moved in state to `aws_alb_listener.https[0]` rather than being recreated.
+
+`ecs/web_ec2` and `ecs/web_fargate` gain `additional_target_group_arns` var to register service with additional target groups, e.g. to serve from multiple load balancers. Adding/removing a target group triggers a new ECS deployment.

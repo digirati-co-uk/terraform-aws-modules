@@ -1,3 +1,15 @@
+variable "internal" {
+  description = "If true the load balancer is internal (private IPs only), otherwise internet-facing. Changing this replaces the load balancer"
+  default     = false
+  type        = bool
+}
+
+variable "create_https_listener" {
+  description = "Whether to create the HTTPS listener. If false, certificate_arn is not required and lb_https_listener_arn output is empty"
+  default     = true
+  type        = bool
+}
+
 variable "prefix" {
   description = "Prefix for AWS resources"
 }

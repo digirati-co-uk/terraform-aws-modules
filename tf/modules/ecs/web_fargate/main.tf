@@ -46,6 +46,16 @@ resource "aws_ecs_service" "service" {
     container_port   = var.container_port
   }
 
+  dynamic "load_balancer" {
+    for_each = var.additional_target_group_arns
+
+    content {
+      target_group_arn = load_balancer.value
+      container_name   = var.container_name
+      container_port   = var.container_port
+    }
+  }
+
   # Specifying both a launch type and capacity provider strategy is not supported
   launch_type = var.use_fargate_spot ? null : "FARGATE"
 
