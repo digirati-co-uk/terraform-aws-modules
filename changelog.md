@@ -332,3 +332,5 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 > `aws_alb_listener.https` is now created with `count`. A `moved` block is included so existing listeners are moved in state to `aws_alb_listener.https[0]` rather than being recreated.
 
 `ecs/web_ec2` and `ecs/web_fargate` gain `additional_target_group_arns` var to register service with additional target groups, e.g. to serve from multiple load balancers. Adding/removing a target group triggers a new ECS deployment.
+
+`ecs/web_ec2` ignores changes to `iam_role` on the ECS service. When load balancers are updated in-place ECS switches the service to the `AWSServiceRoleForECS` service-linked role, and as `iam_role` forces replacement this would otherwise destroy and recreate the service.

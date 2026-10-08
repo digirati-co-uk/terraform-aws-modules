@@ -99,9 +99,12 @@ resource "aws_ecs_service" "service" {
   }
 
   lifecycle {
-    # managed by scaling policy
     ignore_changes = [
-      desired_count
+      # managed by scaling policy
+      desired_count,
+      # ECS switches the service to its service-linked role when load balancers are updated in-place, and
+      # iam_role forces replacement - ignore to avoid destroying service
+      iam_role,
     ]
   }
 
