@@ -7,20 +7,28 @@ resource "aws_security_group" "web" {
   description = "Web access for ALB"
   vpc_id      = var.vpc
 
-  # HTTP access from anywhere
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = var.ip_whitelist
+  # HTTP access from whitelist (none if ip_whitelist empty)
+  dynamic "ingress" {
+    for_each = length(var.ip_whitelist) > 0 ? [80] : []
+
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = var.ip_whitelist
+    }
   }
 
-  # HTTPS access from anywhere
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = var.ip_whitelist
+  # HTTPS access from whitelist (none if ip_whitelist empty or no https listener)
+  dynamic "ingress" {
+    for_each = length(var.ip_whitelist) > 0 && var.create_https_listener ? [443] : []
+
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = var.ip_whitelist
+    }
   }
 
   # outbound internet access
@@ -37,7 +45,8 @@ resource "aws_security_group" "web" {
 #######
 
 resource "aws_alb" "lb" {
-  name = "${var.prefix}-${var.name}"
+  name     = "${var.prefix}-${var.name}"
+  internal = var.internal
 
   subnets = var.subnets
 
@@ -98,6 +107,13 @@ resource "aws_alb_listener" "http" {
 resource "aws_alb_listener" "http_redirect" {
   count = var.redirect_http_to_https ? 1 : 0
 
+  lifecycle {
+    precondition {
+      condition     = var.create_https_listener
+      error_message = "redirect_http_to_https requires create_https_listener = true"
+    }
+  }
+
   load_balancer_arn = aws_alb.lb.id
   port              = 80
   protocol          = "HTTP"
@@ -114,6 +130,15 @@ resource "aws_alb_listener" "http_redirect" {
 }
 
 resource "aws_alb_listener" "https" {
+  count = var.create_https_listener ? 1 : 0
+
+  lifecycle {
+    precondition {
+      condition     = var.certificate_arn != ""
+      error_message = "certificate_arn is required when create_https_listener = true"
+    }
+  }
+
   load_balancer_arn = aws_alb.lb.id
   port              = 443
   protocol          = "HTTPS"
@@ -125,4 +150,10 @@ resource "aws_alb_listener" "https" {
     target_group_arn = aws_alb_target_group.default.id
     type             = "forward"
   }
+}
+
+# https listener became conditional (count) in v3.52 - avoid destroy/recreate of existing listeners
+moved {
+  from = aws_alb_listener.https
+  to   = aws_alb_listener.https[0]
 }

@@ -50,6 +50,16 @@ resource "aws_ecs_service" "service" {
     container_port   = var.container_port
   }
 
+  dynamic "load_balancer" {
+    for_each = var.additional_target_group_arns
+
+    content {
+      target_group_arn = load_balancer.value
+      container_name   = var.container_name
+      container_port   = var.container_port
+    }
+  }
+
   # Specifying both a launch type and capacity provider strategy is not supported
   launch_type = length(var.capacity_provider_strategies) > 0 ? null : "EC2"
 
@@ -89,9 +99,12 @@ resource "aws_ecs_service" "service" {
   }
 
   lifecycle {
-    # managed by scaling policy
     ignore_changes = [
-      desired_count
+      # managed by scaling policy
+      desired_count,
+      # ECS switches the service to its service-linked role when load balancers are updated in-place, and
+      # iam_role forces replacement - ignore to avoid destroying service
+      iam_role,
     ]
   }
 
