@@ -7,20 +7,28 @@ resource "aws_security_group" "web" {
   description = "Web access for ALB"
   vpc_id      = var.vpc
 
-  # HTTP access from anywhere
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = var.ip_whitelist
+  # HTTP access from whitelist (none if ip_whitelist empty)
+  dynamic "ingress" {
+    for_each = length(var.ip_whitelist) > 0 ? [80] : []
+
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = var.ip_whitelist
+    }
   }
 
-  # HTTPS access from anywhere
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = var.ip_whitelist
+  # HTTPS access from whitelist (none if ip_whitelist empty or no https listener)
+  dynamic "ingress" {
+    for_each = length(var.ip_whitelist) > 0 && var.create_https_listener ? [443] : []
+
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = var.ip_whitelist
+    }
   }
 
   # outbound internet access
