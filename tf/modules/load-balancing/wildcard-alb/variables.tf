@@ -43,7 +43,7 @@ variable "vpc" {
 }
 
 variable "ip_whitelist" {
-  description = "IP CIDR whitelist"
+  description = "IP CIDR whitelist. If empty no CIDR ingress rules are added to the LB security group - access must be granted via security_groups"
   type        = list(any)
 
   default = [

@@ -326,6 +326,7 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 `load-balancing/wildcard-alb`:
 * gains `internal` var (default `false`) to create an internal load balancer. Changing this forces replacement of the load balancer.
 * gains `create_https_listener` var (default `true`). If `false` no HTTPS listener is created, `certificate_arn` is not required and `lb_https_listener_arn` output is empty. Cannot be `false` if `redirect_http_to_https` is `true`.
+* `ip_whitelist` can be an empty list, in which case the LB security group has no ingress rules and access must be granted via `security_groups`. Port 443 ingress is only added if `create_https_listener = true`.
 
 > [!NOTE]
 > `aws_alb_listener.https` is now created with `count`. A `moved` block is included so existing listeners are moved in state to `aws_alb_listener.https[0]` rather than being recreated.

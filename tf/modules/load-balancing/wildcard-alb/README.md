@@ -14,7 +14,7 @@ This module will provide an Application Load Balancer that specifically expects 
 | internal                   | If `true` the load balancer is internal (private IPs only). Replaces LB if changed       | bool   | false                     |
 | elb_ssl_policy             | SSL policy to use on load balancer                                                       | string | ELBSecurityPolicy-2016-08 |
 | vpc                        | ID of the VPC that the load balancer is deployed in                                      | string |                           |
-| ip_whitelist               | IP CIDR whitelist                                                                        | list   | 0.0.0.0/0                 |
+| ip_whitelist               | IP CIDR whitelist. If empty, no CIDR ingress is added (grant access via `security_groups`) | list   | 0.0.0.0/0                 |
 | redirect_http_to_https     | Enable default behaviour to redirect http to https                                       | string | false                     |
 | access_logs_bucket         | Name of bucket where access_logs will be stored (optional)                               | string |                           |
 | access_logs_prefix         | Prefix where access_logs will be stored (optional)                                       | string |                           |
