@@ -9,7 +9,9 @@ This module will provide an Application Load Balancer that specifically expects 
 | name                       | Suffix for load balancer appliance                                                       | string |                           |
 | subnets                    | List of subnets to associate load balancer with                                          | list   |                           |
 | security_groups            | List of security groups to join                                                          | list   |                           |
-| certificate_arn            | ARN of wildcard SSL certificate to use                                                   | string |                           |
+| certificate_arn            | ARN of wildcard SSL certificate to use (required if `create_https_listener`)            | string |                           |
+| create_https_listener      | Whether to create the HTTPS listener                                                     | bool   | true                      |
+| internal                   | If `true` the load balancer is internal (private IPs only). Replaces LB if changed       | bool   | false                     |
 | elb_ssl_policy             | SSL policy to use on load balancer                                                       | string | ELBSecurityPolicy-2016-08 |
 | vpc                        | ID of the VPC that the load balancer is deployed in                                      | string |                           |
 | ip_whitelist               | IP CIDR whitelist                                                                        | list   | 0.0.0.0/0                 |
@@ -26,5 +28,5 @@ This module will provide an Application Load Balancer that specifically expects 
 | lb_fqdn               | FQDN of load balancer                        |
 | lb_zone_id            | Zone ID of load balancer                     |
 | lb_http_listener_arn  | ARN of load balancer HTTP listener           |
-| lb_https_listener_arn | ARN of load balancer HTTPS listener          |
+| lb_https_listener_arn | ARN of load balancer HTTPS listener (empty if `create_https_listener = false`) |
 | web_security_group_id | Id of SG for load balancer (allows 80 + 443) |

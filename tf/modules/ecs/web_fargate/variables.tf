@@ -207,3 +207,9 @@ variable "propagate_tags" {
   description = "Whether to propagate tags from the service or task definition to the running tasks. Valid values are SERVICE, TASK_DEFINITION or NONE"
   default     = "SERVICE"
 }
+
+variable "additional_target_group_arns" {
+  description = "Optional list of additional target group ARNs to register the service with, using same container_name + container_port. Allows a service to be served by multiple load balancers"
+  type        = list(string)
+  default     = []
+}
