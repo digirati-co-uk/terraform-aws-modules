@@ -197,6 +197,12 @@ variable "propagate_tags" {
   default     = "SERVICE"
 }
 
+variable "path_patterns_regex" {
+  description = "Regex path patterns to match in ALB. Mutually exclusive with path_patterns"
+  type        = list(string)
+  default     = []
+}
+
 variable "additional_target_group_arns" {
   description = "Optional list of additional target group ARNs to register the service with, using same container_name + container_port. Allows a service to be served by multiple load balancers"
   type        = list(string)
