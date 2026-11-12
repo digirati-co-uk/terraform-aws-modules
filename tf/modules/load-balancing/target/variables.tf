@@ -24,6 +24,12 @@ variable "path_patterns" {
   ]
 }
 
+variable "path_patterns_regex" {
+  description = "Regex path patterns to match in ALB. Mutually exclusive with path_patterns"
+  type        = list(string)
+  default     = []
+}
+
 variable "zone_id" {
   description = "HostedZone id for creating Route53 rule"
   default     = ""

@@ -6,6 +6,7 @@ module "target" {
   hostname                          = var.hostname
   domain                            = var.domain
   path_patterns                     = var.path_patterns
+  path_patterns_regex               = var.path_patterns_regex
   zone_id                           = var.zone_id
   create_route53_entry              = var.create_route53_entry
   ip_whitelist                      = var.ip_whitelist

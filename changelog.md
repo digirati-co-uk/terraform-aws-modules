@@ -334,3 +334,7 @@ On first boot the host generates an `ed25519` host key and stores it in SSM Para
 `ecs/web_ec2` and `ecs/web_fargate` gain `additional_target_group_arns` var to register service with additional target groups, e.g. to serve from multiple load balancers. Adding/removing a target group triggers a new ECS deployment.
 
 `ecs/web_ec2` ignores changes to `iam_role` on the ECS service. When load balancers are updated in-place ECS switches the service to the `AWSServiceRoleForECS` service-linked role, and as `iam_role` forces replacement this would otherwise destroy and recreate the service.
+
+## 3.53 2026-11-12
+
+`load-balancing/target`, `ecs/web_ec2` and `ecs/web_fargate` gain `path_patterns_regex` var to match listener rule paths with regex (`path_pattern.regex_values`). Mutually exclusive with `path_patterns`; setting both is an error.

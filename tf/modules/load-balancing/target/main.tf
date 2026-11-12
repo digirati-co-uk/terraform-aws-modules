@@ -1,5 +1,5 @@
 data "aws_lb" "lb" {
-  arn  = var.load_balancer_arn
+  arn = var.load_balancer_arn
 }
 
 ##################
@@ -7,21 +7,21 @@ data "aws_lb" "lb" {
 ##################
 
 resource "aws_security_group" "web" {
-   name        = "${var.name}-web"
+  name        = "${var.name}-web"
   description = "Web access for ${var.name}"
   vpc_id      = var.vpc
 
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = var.ip_whitelist
   }
 
   ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "tcp"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = var.ip_whitelist
   }
 
@@ -50,10 +50,10 @@ resource "aws_alb_target_group" "service" {
   load_balancing_anomaly_mitigation = var.load_balancing_anomaly_mitigation
 
   stickiness {
-      enabled            = var.stickiness_enabled
-      type               = var.stickiness_type
-      cookie_duration    = var.stickiness_cookie_duration
-      cookie_name        = var.stickiness_cookie_name
+    enabled         = var.stickiness_enabled
+    type            = var.stickiness_type
+    cookie_duration = var.stickiness_cookie_duration
+    cookie_name     = var.stickiness_cookie_name
   }
 
   health_check {
@@ -84,7 +84,8 @@ resource "aws_alb_listener_rule" "http" {
 
   condition {
     path_pattern {
-      values = var.path_patterns
+      values       = length(var.path_patterns_regex) > 0 ? null : var.path_patterns
+      regex_values = length(var.path_patterns_regex) > 0 ? var.path_patterns_regex : null
     }
   }
 
@@ -92,6 +93,12 @@ resource "aws_alb_listener_rule" "http" {
     ignore_changes = [
       priority
     ]
+
+    precondition {
+      # path_patterns can't be null-defaulted (callers pass their own ["/*"]), so the default means "unset"
+      condition     = length(var.path_patterns_regex) == 0 || var.path_patterns == tolist(["/*"])
+      error_message = "path_patterns and path_patterns_regex are mutually exclusive."
+    }
   }
 }
 
