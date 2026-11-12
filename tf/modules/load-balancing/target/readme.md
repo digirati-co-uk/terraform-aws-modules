@@ -15,7 +15,8 @@ This module creates the following resources:
 | vpc                               | Id of the VPC that LB is in                                                       |               |
 | hostname                          | Optional hostname, prepended to `domain`, for `host_header` rule                  | ""            |
 | domain                            | Hostname for LB rule                                                              |               |
-| path_patterns                     | Path patterns to match in ALB                                                     | ["/*]         |
+| path_patterns                     | Path patterns to match in ALB. Mutually exclusive with `path_patterns_regex` | ["/*]         |
+| path_patterns_regex         | Regex path patterns to match in ALB. Mutually exclusive with `path_patterns`      | []            |
 | zone_id                           | HostedZone id for creating R53 rule. Required if `create_route_53_entry` is true  | ""            |
 | create_route53_entry              | If true a Rotute53 alias record is created for listener                           | true          |
 | ip_whitelist                      | List of CIDR blocks to allow web access for                                       | ["0.0.0.0/0"] |
